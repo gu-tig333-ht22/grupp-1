@@ -1,1 +1,1 @@
-Starten för quiz-appen of d00m!
+Starten för quiz-appen Quizter Pettersson!

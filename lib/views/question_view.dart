@@ -58,7 +58,7 @@ class _CountDownTimerState extends State<CountDownTimer> {
           height: 100,
           ringColor: Colors.grey[300]!,
           ringGradient: null,
-          fillColor: Colors.blue!, //Måste finnas med men används inte.
+          fillColor: Colors.blue!, //Måste finnas med men används inte...
           fillGradient: SweepGradient(
             colors: [Colors.red, Colors.yellow, Colors.green],
             stops: [

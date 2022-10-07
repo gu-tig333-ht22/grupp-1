@@ -1,8 +1,4 @@
-//Beskriver en fråga
-
-//Id, category, correct answer, [incorrect answer], question, difficulty
-
-import 'package:template/views/settings_view.dart';
+//Objektet Question innehåller information som rör en fråga.
 
 class Question {
   late String _id;
@@ -31,7 +27,7 @@ class Question {
     _allAnswersInRandomOrder =
         scrambleAllAnswers(incorrectAnswers, correctAnswer);
   }
-
+  /* Bygger objektet Question från json och returnerar ett färdigt objekt */
   factory Question.fromJson(Map<String, dynamic> json) {
     return Question(
       id: json["id"],
@@ -50,6 +46,8 @@ class Question {
   get allAnswersInRandomOrder => _allAnswersInRandomOrder;
   get difficulty => _difficulty;
 
+  /* Funktion för att sätta samman alla fyra svarsalternativ 
+  till en lista och randomisera ordningen.*/
   List<String> scrambleAllAnswers(
     List<String> incorrectAnswers,
     String correctAnswer,

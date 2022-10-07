@@ -18,7 +18,13 @@ class Player {
   }
 
   void correctAnswer(questionId, newAnswer) {
+    // if (_streakCounter > 3) {
+    //   _score += 2;
+    // } else {
+    //   _score += 1;
+    // }
     _correctAnswers += 1;
+    _streakCounter += 1;
     _playerAnswers[questionId] = newAnswer;
   }
 

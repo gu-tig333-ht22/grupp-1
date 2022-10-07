@@ -3,7 +3,17 @@
 
 class Player {
   late String name;
-  int score = 0;
-  int correctAnswers = 0; // antalet
+  int _score = 0;
+  int streakCounter = 0;
+  int _correctAnswers = 0;
+  Map playerAnswers = {};
 
+  Player({this.name = ""});
+
+  get score => _score;
+  get correctAnswers => _correctAnswers;
+
+  void addCorrectAnswer(questionId, newAnswer) {
+    _correctAnswers += 1;
+  }
 }

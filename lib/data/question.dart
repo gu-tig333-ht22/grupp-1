@@ -6,9 +6,11 @@ class Question {
   late String _id;
   late String _category;
   late String _correctAnswer;
-  late List<String> _incorrectAnswers;
+  late List<String>
+      _incorrectAnswers; // Denna variabeln kommer förmodligen aldrig användas och kan tas bort
   late String _question;
   late String _difficulty;
+  late List<String> _allAnswersInRandomOrder;
 
   Question(
       {required String id,
@@ -23,6 +25,8 @@ class Question {
     _incorrectAnswers = incorrectAnswers;
     _question = question;
     _difficulty = difficulty;
+    _allAnswersInRandomOrder =
+        scrambleAllAnswers(incorrectAnswers, correctAnswer);
   }
 
   factory Question.fromJson(Map<String, dynamic> json) {
@@ -34,5 +38,15 @@ class Question {
       question: json["question"],
       difficulty: json["difficulty"],
     );
+  }
+  List<String> scrambleAllAnswers(
+    List<String> incorrectAnswers,
+    String correctAnswer,
+  ) {
+    List<String> allAnswersInRandomOrder = incorrectAnswers;
+    allAnswersInRandomOrder.add(correctAnswer);
+    allAnswersInRandomOrder.shuffle();
+
+    return allAnswersInRandomOrder;
   }
 }

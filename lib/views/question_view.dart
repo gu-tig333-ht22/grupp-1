@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'dart:math' as math;
 
 class QuestionView extends StatelessWidget {
   @override
@@ -52,20 +53,27 @@ class _CountDownTimerState extends State<CountDownTimer> {
         ),
         SizedBox(height: 15),
         CircularCountDownTimer(
-          duration: 10, //SKA FÅ VÄRDE FRÅN SETTINGS
+          duration: 5, //SKA FÅ VÄRDE FRÅN SETTINGS
           width: 100,
           height: 100,
           ringColor: Colors.grey[300]!,
           ringGradient: null,
-          fillColor: Colors.purpleAccent[100]!,
-          fillGradient: LinearGradient(colors: [
-            Color.fromARGB(255, 61, 247, 107),
-            Color.fromARGB(255, 20, 66, 31)
-          ]),
+          fillColor: Colors.blue!, //Måste finnas med men används inte...
+          fillGradient: SweepGradient(
+            colors: [Colors.red, Colors.yellow, Colors.green],
+            stops: [
+              0.0,
+              0.5,
+              0.9,
+            ],
+            startAngle: 3 * math.pi / 2,
+            endAngle: 7 * math.pi / 2,
+            tileMode: TileMode.repeated,
+          ),
+
           backgroundColor: Color.fromARGB(255, 41, 67, 88),
           backgroundGradient: null,
           strokeWidth: 20.0,
-          strokeCap: StrokeCap.round,
           textStyle: const TextStyle(
               fontSize: 33.0,
               color: Colors.white,

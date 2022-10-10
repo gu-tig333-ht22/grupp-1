@@ -4,17 +4,17 @@ class Question {
   late String _id;
   late String _category;
   late String _correctAnswer;
-  late List<String>
+  late List
       _incorrectAnswers; // Denna variabeln kommer förmodligen aldrig användas och kan tas bort /August
   late String _question;
   late String _difficulty;
-  late List<String> _allAnswersInRandomOrder;
+  late List _allAnswersInRandomOrder;
 
   Question({
     required String id,
     required String category,
     required String correctAnswer,
-    required List<String> incorrectAnswers,
+    required List incorrectAnswers,
     required String question,
     required String difficulty,
   }) {
@@ -29,17 +29,11 @@ class Question {
   }
   /* Bygger objektet Question från json och returnerar ett färdigt objekt */
   factory Question.fromJson(Map<String, dynamic> json) {
-    List temp = json["incorrectAnswers"];
-    List<String> test = [];
-    for (String wa in temp) {
-      test.add(wa);
-    }
     return Question(
       id: json["id"],
       category: json["category"],
       correctAnswer: json["correctAnswer"],
-      incorrectAnswers: test,
-      //incorrectAnswers:json["incorrectAnswers"],
+      incorrectAnswers: json["incorrectAnswers"],
       question: json["question"],
       difficulty: json["difficulty"],
     );
@@ -54,11 +48,11 @@ class Question {
 
   /* Funktion för att sätta samman alla fyra svarsalternativ 
   till en lista och randomisera ordningen.*/
-  List<String> scrambleAllAnswers(
-    List<String> incorrectAnswers,
+  List scrambleAllAnswers(
+    List incorrectAnswers,
     String correctAnswer,
   ) {
-    List<String> allAnswersInRandomOrder = incorrectAnswers;
+    List allAnswersInRandomOrder = incorrectAnswers;
     allAnswersInRandomOrder.add(correctAnswer);
     allAnswersInRandomOrder.shuffle();
 

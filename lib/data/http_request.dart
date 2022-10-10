@@ -5,7 +5,7 @@ import 'question.dart';
 class HttpConection {
   late Settings settings;
   final String url = 'https://the-trivia-api.com/api/questions';
-  // Huge thanks to Will Fry ho created this open API!
+  // Huge thanks to Will Fry who created this open API!
 
   Future<List<Question>> getQuestions({required Settings settings}) async {
     List<Question> questionList = [];
@@ -24,7 +24,8 @@ class HttpConection {
     if (settings.categorys.isEmpty) {
       return "";
     }
-
-    return '&ca';
+    String categories = '&categories=';
+    for (String category in settings.categorys) {}
+    return categories;
   }
 }

@@ -13,10 +13,6 @@ class Settings {
   late String _difficulty;
   late int _timePerQuestion;
 
-  /// # Settings
-  ///
-  /// If selectedCategory is all categorys
-  /// set to empty list.
   Settings(
       {required int numberOfQuestions,
       required List<String> selectedCategorys,

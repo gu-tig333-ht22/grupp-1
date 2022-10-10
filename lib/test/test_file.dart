@@ -1,9 +1,22 @@
+import 'package:flutter/material.dart';
+import 'package:template/components/card.dart';
 import 'package:template/data/question.dart';
 
-Question testQuestion = Question(
+Question testQuestion1 = Question(
     id: '1',
     category: 'Hästar',
     correctAnswer: 'Grön',
-    incorrectAnswers: ['Vit', 'Grå', 'Brun'],
+    incorrectAnswers: [
+      'Vita hästar är jättejättejättejättejättejättejättejättejättefina',
+      'Grå ',
+      'Brun'
+    ],
     question: 'Vilken färg kan hästar INTE ha?',
     difficulty: 'Ganska lätt');
+
+List<Widget> questions = [
+  QuestionCard(testQuestion1),
+  QuestionCard(testQuestion1),
+  QuestionCard(testQuestion1),
+  QuestionCard(testQuestion1),
+];

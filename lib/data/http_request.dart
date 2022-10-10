@@ -12,11 +12,8 @@ class HttpConection {
 
   Future getQuestions({required Settings settings}) async {
     List<Question> questionList = [];
-    String path = "?";
-
-    path += pathToCategorys(settings);
-    path += pathToDifficulty(settings);
-    path += pathToNumberOfQuestions(settings);
+    String path =
+        '?${_pathToCategorys(settings)}${_pathToDifficulty(settings)}${_pathToNumberOfQuestions(settings)}';
 
     http.Response response = await http.get(Uri.parse('$url$path'));
     if (response.statusCode == 200) {
@@ -25,15 +22,14 @@ class HttpConection {
         questionList.add(Question.fromJson(question));
       }
     }
-
     return questionList;
   }
 
-  String pathToDifficulty(Settings settings) {
+  String _pathToDifficulty(Settings settings) {
     return '&difficulty=${settings.difficulty}';
   }
 
-  String pathToCategorys(Settings settings) {
+  String _pathToCategorys(Settings settings) {
     if (settings.categorys.isEmpty) {
       return "";
     }
@@ -44,7 +40,7 @@ class HttpConection {
     return categories;
   }
 
-  String pathToNumberOfQuestions(Settings settings) {
+  String _pathToNumberOfQuestions(Settings settings) {
     if (settings.numberOfQuestions > 0) {
       return '&limit=${settings.numberOfQuestions}';
     }

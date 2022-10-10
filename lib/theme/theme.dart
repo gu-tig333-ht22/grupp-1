@@ -22,8 +22,9 @@ class ThemeColors {
   // Övriga färger
   final questionColor = Color(0xff3A3A3A);
   final white = Color(0xffEAEAEA);
-  final backgroundDark = Color(0xff0A1D2D);
-  final backgroundLight = Color(0xff298298);
+  final backgroundDark = Color.fromARGB(249, 0, 16, 28);
+  final backgrounkdMiddle = Color.fromARGB(248, 0, 41, 72);
+  final backgroundLight = Color.fromARGB(250, 41, 130, 152);
 
   final correctanswerLight = Color(0xffD9FFD2);
   final correctanswerGreen = Color(0xff83D775);
@@ -42,7 +43,7 @@ class ThemeColors {
   final difficultyHard = Color(0xff9C3A3A);
 
   final lightBlue = Color(0xff4E9CBD);
-  final darkGrey = Color(0xff22566C);
+  final darkBlue = Color(0xff22566C);
 
   final slidercircleDark = Color(0xff22566C);
   final slidercirleLight = Color(0xff465E77);
@@ -104,4 +105,35 @@ class ThemeCategories {
         color: Themes.colors.sportLeisure,
         icon: Icons.sports_soccer),
   };
+}
+
+class ScaffoldWithBackground extends StatelessWidget {
+  final Widget child;
+
+  ScaffoldWithBackground({required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: Stack(children: [
+      Container(
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/backgroundimage.jpg'),
+                fit: BoxFit.cover)),
+      ),
+      Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+              Themes.colors.backgroundDark,
+              Themes.colors.backgrounkdMiddle,
+              Themes.colors.backgroundLight
+            ])),
+      ),
+      child
+    ]));
+  }
 }

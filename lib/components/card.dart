@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:template/data/question.dart';
+import 'package:template/theme/theme.dart';
 
 class QuestionCard extends StatelessWidget {
   Question question;
@@ -11,8 +12,9 @@ class QuestionCard extends StatelessWidget {
     var deviceWidth = MediaQuery.of(context).size.width;
     var deviceHeight = MediaQuery.of(context).size.height;
     List<String> options = question.allAnswersInRandomOrder;
-    Color categoryColor = Colors.purple;
+    Color categoryColor = Themes.categories[question.category]!.color;
     Color backgroundColor = Colors.grey.shade200;
+    IconData categoryIcon = Themes.categories[question.category]!.icon;
 
     return Container(
       padding: const EdgeInsets.only(top: 30, bottom: 30, left: 8, right: 8),
@@ -28,7 +30,7 @@ class QuestionCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
-                Icons.dangerous_outlined,
+                categoryIcon,
                 color: categoryColor.withOpacity(0.2),
                 size: 120,
               ),
@@ -56,9 +58,9 @@ class QuestionCard extends StatelessWidget {
 class OptionsRow extends StatelessWidget {
   String option = 'Option is missing.';
   String leadingLetter;
-  Color borderColor;
+  Color categoryColor;
 
-  OptionsRow(this.leadingLetter, this.option, this.borderColor);
+  OptionsRow(this.leadingLetter, this.option, this.categoryColor);
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +78,7 @@ class OptionsRow extends StatelessWidget {
               const EdgeInsets.only(left: 5, right: 5, top: 1, bottom: 1),
           title: Row(children: [
             CircleAvatar(
-              backgroundColor: Colors.purple,
+              backgroundColor: categoryColor,
               radius: 14,
               child: Text(
                 leadingLetter,
@@ -84,7 +86,7 @@ class OptionsRow extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              width: 8,
+              width: 5,
             ),
             Expanded(
               child: Text(

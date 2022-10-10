@@ -4,7 +4,7 @@ import 'package:template/data/question.dart';
 
 Question testQuestion1 = Question(
     id: '1',
-    category: 'Hästar',
+    category: 'Sport & Leisure',
     correctAnswer: 'Grön',
     incorrectAnswers: [
       'Vita hästar är jättejättejättejättejättejättejättejättejättefina',

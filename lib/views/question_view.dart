@@ -5,12 +5,13 @@ import 'package:template/components/card.dart';
 import 'dart:math' as math;
 
 import 'package:template/test/test_file.dart';
+import 'package:template/theme/theme.dart';
 
 class QuestionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
+    return ScaffoldWithBackground(
+      child: Center(
         child: Column(
           children: [
             const SizedBox(height: 60),

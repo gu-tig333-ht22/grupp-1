@@ -29,11 +29,17 @@ class Question {
   }
   /* Bygger objektet Question från json och returnerar ett färdigt objekt */
   factory Question.fromJson(Map<String, dynamic> json) {
+    List temp = json["incorrectAnswers"];
+    List<String> test = [];
+    for (String wa in temp) {
+      test.add(wa);
+    }
     return Question(
       id: json["id"],
       category: json["category"],
       correctAnswer: json["correctAnswer"],
-      incorrectAnswers: json["incorrectAnswers"],
+      incorrectAnswers: test,
+      //incorrectAnswers:json["incorrectAnswers"],
       question: json["question"],
       difficulty: json["difficulty"],
     );

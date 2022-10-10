@@ -25,7 +25,16 @@ class HttpConection {
       return "";
     }
     String categories = '&categories=';
-    for (String category in settings.categorys) {}
+    for (String category in settings.categorys) {
+      categories += ',$category';
+    }
     return categories;
+  }
+
+  String pathToNumberOfQuestions(Settings settings) {
+    if (settings.numberOfQuestions > 0) {
+      return '&limit=${settings.numberOfQuestions}';
+    }
+    return '&limit=10';
   }
 }

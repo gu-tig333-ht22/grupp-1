@@ -33,6 +33,7 @@ class CategoryRow extends StatelessWidget {
   Widget build(BuildContext context) {
     var themesCategory = ThemeCategories();
     List<ThemeCategory> categoryList = themesCategory.listCategories;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -48,23 +49,9 @@ class CategoryRow extends StatelessWidget {
           crossAxisCount: 5,
           children: categoryList
               .map(
-                (category) => categorySelectionBox(
-                  color: category.color,
-                  size: 60,
-                  icon: category.icon,
-                ),
+                (category) => categorySelectionBox(category),
               )
               .toList(),
-          //<Widget>[
-          // categorySelectionBox(
-          //     color: Themes.colors.red,
-          //     size: 28,
-          //     child: Icon(Themes.icons.wrong,
-          //         color: Themes.colors.whiteBackground, size: 20)),
-          // Container(
-          //   padding: const EdgeInsets.all(8),
-          //   color: Colors.teal[100],
-          // ],
         ),
       ],
     );

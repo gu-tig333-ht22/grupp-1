@@ -12,9 +12,9 @@ class QuestionCard extends StatelessWidget {
     var deviceWidth = MediaQuery.of(context).size.width;
     var deviceHeight = MediaQuery.of(context).size.height;
     List<String> options = question.allAnswersInRandomOrder;
-    Color categoryColor = Themes.categories[question.category]!.color;
+    Color categoryColor = Themes.category(question.category).color;
     Color backgroundColor = Colors.grey.shade200;
-    IconData categoryIcon = Themes.categories[question.category]!.icon;
+    IconData categoryIcon = Themes.category(question.category).icon;
 
     return Container(
       padding: const EdgeInsets.only(top: 30, bottom: 30, left: 8, right: 8),

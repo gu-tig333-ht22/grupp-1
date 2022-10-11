@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 class Themes {
-  static Map<String, ThemeCategory> categories = ThemeCategories().categories;
-  static List<String> listCategories = ThemeCategories().listCategories;
   static ThemeColors colors = ThemeColors();
+
+  static ThemeCategory category(String key) {
+    return ThemeCategories()
+        .listCategories
+        .where((category) => category.name == key)
+        .first;
+  }
 }
 
 class ThemeColors {
@@ -56,50 +61,38 @@ class ThemeCategory {
 }
 
 class ThemeCategories {
-  final List<String> listCategories = [
-    'Art & Literature',
-    'Film & TV',
-    'Food & Drink',
-    'General Knowledge',
-    'Geography',
-    'History',
-    'Music',
-    'Science',
-    'Society & Culture',
-    'Sport & Leisure'
-  ];
-  final Map<String, ThemeCategory> categories = {
-    'Art & Literature': ThemeCategory(
+  final List<ThemeCategory> listCategories = [
+    ThemeCategory(
         name: 'Art & Literature',
         color: Themes.colors.artLiterature,
         icon: Icons.color_lens),
-    'Film & TV': ThemeCategory(
+    ThemeCategory(
         name: 'Film & TV', color: Themes.colors.filmTv, icon: Icons.movie),
-    'Food & Drink': ThemeCategory(
+    ThemeCategory(
         name: 'Food & Drink',
         color: Themes.colors.foodDrink,
         icon: Icons.fastfood),
-    'General Knowledge': ThemeCategory(
+    ThemeCategory(
         name: 'General Knowledge',
         color: Themes.colors.generalKnowledge,
         icon: Icons.lightbulb),
-    'Geography': ThemeCategory(
+    ThemeCategory(
         name: 'Geography', color: Themes.colors.geography, icon: Icons.public),
-    'History': ThemeCategory(
+    ThemeCategory(
         name: 'History', color: Themes.colors.history, icon: Icons.music_note),
-    'Music': ThemeCategory(
+    ThemeCategory(
         name: 'Music', color: Themes.colors.music, icon: Icons.castle),
-    'Science': ThemeCategory(
+    ThemeCategory(
         name: 'Science', color: Themes.colors.science, icon: Icons.science),
-    'Society & Culture': ThemeCategory(
+    ThemeCategory(
         name: 'Society & Culture',
         color: Themes.colors.societyCulture,
         icon: Icons.account_balance),
-    'Sport & Leisure': ThemeCategory(
+    ThemeCategory(
         name: 'Sport & Leisure',
         color: Themes.colors.sportLeisure,
         icon: Icons.sports_soccer),
-  };
+  ];
 }
 
 class ScaffoldWithBackground extends StatelessWidget {

@@ -8,11 +8,12 @@ class AnswerView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldWithBackground(
       child: InkWell(
-        onTap: () => Navigator.pop(context),
+        onTap: () => Navigator.pop(
+            context), // SKA TA BORT GJORT KORT UR LISTAN I GAMESESSION
         child: Center(
           child: Column(
             children: [
-              const SizedBox(height: 30),
+              const SizedBox(height: 40),
               Text('Score: 5',
                   style: TextStyle(fontSize: 40, color: ThemeColors().white)),
               const Spacer(),
@@ -39,11 +40,19 @@ class AnswerView extends StatelessWidget {
 
 class AnswerBalls extends StatelessWidget {
   // LOGIK FÖR ATT SKAPA LISTAN SOM VISAS PÅ SKÄRMEN ÄR EJ IMPLEMENTERAD
-  List<dynamic> ballData = [false, false, true, true, false, '6', '7'];
+  List<dynamic> ballData = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ];
 
   @override
   Widget build(BuildContext context) {
-    //var deviceWidth = MediaQuery.of(context).size.width;
+    var deviceWidth = MediaQuery.of(context).size.width;
     List<Widget> balls = ballData.map((ball) {
       if (ball == false) {
         return CircleAvatar(
@@ -70,6 +79,13 @@ class AnswerBalls extends StatelessWidget {
       }
     }).toList();
 
-    return Row(children: balls);
+    return Container(
+      width: deviceWidth * 0.8,
+      child: Wrap(
+          alignment: WrapAlignment.start,
+          // Minus behövs för att bredden blir aaaningen för stor vid beräkningen annars
+          spacing: ((deviceWidth * 0.8 - 7 * 28) / 6) - 0.00000000000001,
+          children: balls),
+    );
   }
 }

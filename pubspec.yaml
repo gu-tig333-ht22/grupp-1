@@ -29,6 +29,7 @@ environment:
 dependencies:
   simple_gradient_text: 1.2.4
   flutter_octicons: ^0.14.0
+  http: ^0.13.5
   flutter:
 
     sdk: flutter

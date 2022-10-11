@@ -4,11 +4,11 @@ class Question {
   late String _id;
   late String _category;
   late String _correctAnswer;
-  late List<String>
+  late List
       _incorrectAnswers; // Denna variabeln kommer förmodligen aldrig användas och kan tas bort /August
   late String _question;
   late String _difficulty;
-  late List<String> _allAnswersInRandomOrder;
+  late List _allAnswersInRandomOrder;
 
   Question({
     required String id,
@@ -29,11 +29,16 @@ class Question {
   }
   /* Bygger objektet Question från json och returnerar ett färdigt objekt */
   factory Question.fromJson(Map<String, dynamic> json) {
+    List<String> incorrectInFormat = [];
+    for (String stringAnswer in json["incorrectAnswers"]) {
+      incorrectInFormat.add(stringAnswer);
+    }
     return Question(
       id: json["id"],
       category: json["category"],
       correctAnswer: json["correctAnswer"],
-      incorrectAnswers: json["incorrectAnswers"],
+      // incorrectAnswers: json["incorrectAnswers"],
+      incorrectAnswers: incorrectInFormat,
       question: json["question"],
       difficulty: json["difficulty"],
     );

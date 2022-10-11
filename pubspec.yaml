@@ -27,6 +27,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  simple_gradient_text: 1.2.4
   flutter_octicons: ^0.14.0
   flutter:
 
@@ -80,6 +81,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: RobotoRegular
+      fonts:
+        - asset: fonts/Roboto-Regular.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:

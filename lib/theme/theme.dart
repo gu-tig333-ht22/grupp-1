@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 /// Themes.category(name)
 /// Returns the first category object with that name
@@ -14,6 +15,12 @@ class Themes {
         .where((category) => category.name == name)
         .first;
   }
+
+  static ThemeData themeData() {
+    return ThemeData(fontFamily: 'RobotoRegular');
+  }
+
+  static ThemeTextStyles textstyle = ThemeTextStyles();
 }
 
 class ThemeColors {
@@ -127,5 +134,37 @@ class ScaffoldWithBackground extends StatelessWidget {
       ),
       child
     ]));
+  }
+}
+
+class ThemeTextStyles {
+  final TextStyle headline1 =
+      TextStyle(fontSize: 30, color: Themes.colors.whiteBackground);
+  final TextStyle headline2 =
+      TextStyle(fontSize: 20, color: Themes.colors.whiteBackground);
+  final TextStyle headline3 =
+      TextStyle(fontSize: 15, color: Themes.colors.whiteBackground);
+  final TextStyle questionText =
+      TextStyle(fontSize: 18, color: Themes.colors.textGrey);
+  final TextStyle answerText =
+      TextStyle(fontSize: 14, color: Themes.colors.textGrey);
+  GradientText headlineGradient(
+      {required String text, required double fontSize}) {
+    return GradientText(
+      text,
+      style: TextStyle(fontSize: fontSize),
+      colors: [
+        Color(0xffD04DC3),
+        Color(0xff7E4D9F),
+        Color(0xff1D83C5),
+        Color(0xff53DAF8),
+        Color(0xff54BB77),
+        Color(0xffA4CD63),
+        Color(0xffDFE34E),
+        Color(0xffFCB752),
+        Color(0xffF47D55),
+        Color(0xffF04349),
+      ],
+    );
   }
 }

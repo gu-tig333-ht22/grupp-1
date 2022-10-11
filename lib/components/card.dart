@@ -38,6 +38,7 @@ class QuestionCard extends StatelessWidget {
           ),
           Column(children: [
             Text(
+              style: Themes.textstyle.questionText,
               '${question.question}',
               textAlign: TextAlign.left,
             ),
@@ -64,7 +65,7 @@ class OptionsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var borderColor = const Color(0xff465E77);
+    var borderColor = Themes.colors.grey;
 
     return Material(
       color: const Color.fromARGB(0, 255, 255, 255),
@@ -82,6 +83,9 @@ class OptionsRow extends StatelessWidget {
               radius: 14,
               child: Text(
                 leadingLetter,
+                style: TextStyle(
+                    color: Themes.colors.whiteBackground,
+                    fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -90,6 +94,7 @@ class OptionsRow extends StatelessWidget {
             ),
             Expanded(
               child: Text(
+                style: Themes.textstyle.answerText,
                 option,
               ),
             ),

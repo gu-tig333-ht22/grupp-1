@@ -13,9 +13,9 @@ class QuestionCard extends StatelessWidget {
     var deviceWidth = MediaQuery.of(context).size.width;
     var deviceHeight = MediaQuery.of(context).size.height;
     List<String> options = question.allAnswersInRandomOrder;
-    Color categoryColor = Themes.categories[question.category]!.color;
+    Color categoryColor = Themes.category(question.category).color;
     Color backgroundColor = Colors.grey.shade200;
-    IconData categoryIcon = Themes.categories[question.category]!.icon;
+    IconData categoryIcon = Themes.category(question.category).icon;
 
     return Container(
       padding: const EdgeInsets.only(top: 30, bottom: 30, left: 8, right: 8),
@@ -39,6 +39,7 @@ class QuestionCard extends StatelessWidget {
           ),
           Column(children: [
             Text(
+              style: Themes.textstyle.questionText,
               '${question.question}',
             ),
             const Spacer(),
@@ -64,7 +65,7 @@ class OptionsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var borderColor = const Color(0xff465E77);
+    var borderColor = Themes.colors.grey;
 
     return Material(
       color: const Color.fromARGB(0, 255, 255, 255),
@@ -82,6 +83,9 @@ class OptionsRow extends StatelessWidget {
               radius: 14,
               child: Text(
                 leadingLetter,
+                style: TextStyle(
+                    color: Themes.colors.whiteBackground,
+                    fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -90,6 +94,7 @@ class OptionsRow extends StatelessWidget {
             ),
             Expanded(
               child: Text(
+                style: Themes.textstyle.answerText,
                 option,
               ),
             ),

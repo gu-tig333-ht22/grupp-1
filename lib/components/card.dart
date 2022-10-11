@@ -14,15 +14,15 @@ class QuestionCard extends StatelessWidget {
     var deviceHeight = MediaQuery.of(context).size.height;
     List<String> options = question.allAnswersInRandomOrder;
     Color categoryColor = Themes.category(question.category).color;
-    Color backgroundColor = Colors.grey.shade200;
+    Color backgroundColor = Themes.colors.whiteBackground;
     IconData categoryIcon = Themes.category(question.category).icon;
 
     return Container(
-      padding: const EdgeInsets.only(top: 30, bottom: 30, left: 8, right: 8),
+      padding: const EdgeInsets.only(top: 30, bottom: 30, left: 12, right: 12),
       decoration: BoxDecoration(
           color: backgroundColor,
-          borderRadius: BorderRadius.circular(70),
-          border: Border.all(width: 12, color: categoryColor)),
+          borderRadius: BorderRadius.circular(35),
+          border: Border.all(width: 10, color: categoryColor)),
       height: deviceHeight * 0.65,
       width: deviceWidth * 0.85,
       child: Stack(
@@ -39,7 +39,7 @@ class QuestionCard extends StatelessWidget {
           ),
           Column(children: [
             Text(
-              style: Themes.textstyle.questionText,
+              style: Themes.textStyle.questionText,
               '${question.question}',
             ),
             const Spacer(),
@@ -73,7 +73,7 @@ class OptionsRow extends StatelessWidget {
         padding: const EdgeInsets.only(top: 8.0),
         child: ListTile(
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(15),
               side: BorderSide(width: 2, color: borderColor)),
           contentPadding:
               const EdgeInsets.only(left: 5, right: 5, top: 1, bottom: 1),
@@ -83,9 +83,7 @@ class OptionsRow extends StatelessWidget {
               radius: 14,
               child: Text(
                 leadingLetter,
-                style: TextStyle(
-                    color: Themes.colors.whiteBackground,
-                    fontWeight: FontWeight.bold),
+                style: Themes.textStyle.headline2,
                 textAlign: TextAlign.center,
               ),
             ),
@@ -94,7 +92,7 @@ class OptionsRow extends StatelessWidget {
             ),
             Expanded(
               child: Text(
-                style: Themes.textstyle.answerText,
+                style: Themes.textStyle.answerText,
                 option,
               ),
             ),

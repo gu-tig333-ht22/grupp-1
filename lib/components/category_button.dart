@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:template/theme/theme.dart';
 
-InkWell categorySelectionBox(category) {
+Widget categorySelectionBox(category) {
   List tempValdaKategorier = [
     'Art & Literature',
     'General Knowledge',

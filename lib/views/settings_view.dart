@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_octicons/flutter_octicons.dart';
 import 'package:template/theme/theme.dart';
+import 'package:template/components/category_button.dart';
 
 class SettingsView extends StatelessWidget {
   @override
@@ -30,10 +31,13 @@ class SettingsView extends StatelessWidget {
 class CategoryRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var themesCategory = ThemeCategories();
+    List<ThemeCategory> categoryList = themesCategory.listCategories;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
+          //style: Themes.textStyle.answerText, Varför funkar inte det?
           'Categories',
         ),
         GridView.count(
@@ -42,48 +46,25 @@ class CategoryRow extends StatelessWidget {
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
           crossAxisCount: 5,
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.all(8),
-              color: Colors.teal[100],
-            ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              color: Colors.teal[100],
-            ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              color: Colors.teal[100],
-            ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              color: Colors.teal[200],
-            ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              color: Colors.teal[300],
-            ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              color: Colors.teal[400],
-            ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              color: Colors.teal[500],
-            ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              color: Colors.teal[600],
-            ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              color: Colors.teal[700],
-            ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              color: Colors.teal[800],
-            )
-          ],
+          children: categoryList
+              .map(
+                (category) => categorySelectionBox(
+                  color: category.color,
+                  size: 60,
+                  icon: category.icon,
+                ),
+              )
+              .toList(),
+          //<Widget>[
+          // categorySelectionBox(
+          //     color: Themes.colors.red,
+          //     size: 28,
+          //     child: Icon(Themes.icons.wrong,
+          //         color: Themes.colors.whiteBackground, size: 20)),
+          // Container(
+          //   padding: const EdgeInsets.all(8),
+          //   color: Colors.teal[100],
+          // ],
         ),
       ],
     );

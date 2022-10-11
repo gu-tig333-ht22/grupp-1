@@ -11,7 +11,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(body: AnswerView()),
+      home: Scaffold(body: SettingsView()),
       theme: Themes.themeData(),
       debugShowCheckedModeBanner: false,
     );

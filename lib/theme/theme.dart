@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
+/// Themes.category(name)
+/// Returns the first category object with that name
+/// Object.color returns Color of that category
+/// Object.icon returns IconData of that category
+/// Object.name returns String name of that category
 class Themes {
   static ThemeColors colors = ThemeColors();
 
-  static ThemeCategory category(String key) {
+  static ThemeCategory category(String name) {
     return ThemeCategories()
         .listCategories
-        .where((category) => category.name == key)
+        .where((category) => category.name == name)
         .first;
   }
 }
@@ -25,7 +30,6 @@ class ThemeColors {
   final Color sportLeisure = const Color(0xffD04DC3);
 
   // Övriga färger
-
   final textGrey = Color(0xff3A3A3A);
   final whiteBackground = Color(0xffEAEAEA);
   final backgroundMiddle = Color.fromARGB(248, 0, 41, 72);
@@ -67,7 +71,7 @@ class ThemeCategories {
         color: Themes.colors.artLiterature,
         icon: Icons.color_lens),
     ThemeCategory(
-        name: 'Film & TV', color: Themes.colors.filmTv, icon: Icons.movie),
+        name: 'Film & TV', color: Themes.colors.filmTv, icon: Icons.delete),
     ThemeCategory(
         name: 'Food & Drink',
         color: Themes.colors.foodDrink,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:template/data/question.dart';
 import 'package:template/theme/theme.dart';
+import 'package:template/views/answer_view.dart';
 
 class QuestionCard extends StatelessWidget {
   Question question;
@@ -39,7 +40,6 @@ class QuestionCard extends StatelessWidget {
           Column(children: [
             Text(
               '${question.question}',
-              textAlign: TextAlign.left,
             ),
             const Spacer(),
             Column(children: [
@@ -102,7 +102,10 @@ class OptionsRow extends StatelessWidget {
               border: Border.all(width: 2, color: borderColor),
             ),
           ),
-          onTap: (() {}),
+          onTap: (() {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => AnswerView()));
+          }),
         ),
       ),
     );

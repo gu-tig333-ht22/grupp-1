@@ -20,36 +20,31 @@ class ThemeColors {
   final Color sportLeisure = const Color(0xffD04DC3);
 
   // Övriga färger
-  final questionColor = Color(0xff3A3A3A);
-  final white = Color(0xffEAEAEA);
-  final backgroundDark = Color.fromARGB(249, 0, 16, 28);
-  final backgrounkdMiddle = Color.fromARGB(248, 0, 41, 72);
-  final backgroundLight = Color.fromARGB(250, 41, 130, 152);
 
-  final correctanswerLight = Color(0xffD9FFD2);
-  final correctanswerGreen = Color(0xff83D775);
-  final correctanswerDark = Color(0xff102C0C);
+  final textGrey = Color(0xff3A3A3A);
+  final whiteBackground = Color(0xffEAEAEA);
+  final backgroundMiddle = Color.fromARGB(248, 0, 41, 72);
+  final backgroundDark = Color(0xff0A1D2D);
+  final backgroundLight = Color(0xff298298);
 
-  final wronganswerLight = Color(0xffE79494);
-  final wronganswerRed = Color(0xffD64545);
-  final wronganswerDark = Color(0xff391515);
+  final greenLight = Color(0xffD9FFD2);
+  final green = Color(0xff83D775);
+  final greenDark = Color(0xff102C0C);
 
-  final totalLight = Color(0xff9FA9B5);
-  final total = Color(0xff465E77);
-  final totalDark = Color(0xff182837);
+  final redLight = Color(0xffE79494);
+  final red = Color(0xffD64545);
+  final redDark = Color(0xff391515);
 
-  final difficultyEasy = Color(0xff659C3A);
-  final difficultyMedium = Color(0xff9C6F3A);
-  final difficultyHard = Color(0xff9C3A3A);
+  final yellowLight = Color(0xffE7C694);
+  final yellow = Color(0xffD6B645);
+  final yellowDark = Color(0xff392D15);
 
-  final lightBlue = Color(0xff4E9CBD);
-  final darkBlue = Color(0xff22566C);
+  final greyLight = Color(0xff9FA9B5);
+  final grey = Color(0xff465E77);
+  final greyDark = Color(0xff182837);
 
-  final slidercircleDark = Color(0xff22566C);
-  final slidercirleLight = Color(0xff465E77);
-
-  final correctBackground = Color(0xff83D775);
-  final incorrectbackground = Color(0xffD64545);
+  final blueLight = Color(0xff4E9CBD);
+  final blueDark = Color(0xff22566C);
 }
 
 class ThemeCategory {
@@ -129,7 +124,7 @@ class ScaffoldWithBackground extends StatelessWidget {
                 end: Alignment.bottomCenter,
                 colors: [
               Themes.colors.backgroundDark,
-              Themes.colors.backgrounkdMiddle,
+              Themes.colors.backgroundMiddle,
               Themes.colors.backgroundLight
             ])),
       ),

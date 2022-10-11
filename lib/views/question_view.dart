@@ -6,6 +6,7 @@ import 'dart:math' as math;
 
 import 'package:template/test/test_file.dart';
 import 'package:template/theme/theme.dart';
+import 'package:template/views/answer_view.dart';
 
 class QuestionView extends StatelessWidget {
   @override
@@ -50,7 +51,7 @@ class _CountDownTimerState extends State<CountDownTimer> {
         ),
         const SizedBox(height: 15),
         CircularCountDownTimer(
-          duration: 5, //SKA FÅ VÄRDE FRÅN SETTINGS
+          duration: 15, //SKA FÅ VÄRDE FRÅN SETTINGS
           width: 100,
           height: 100,
           ringColor: Colors.grey[300]!,
@@ -80,7 +81,8 @@ class _CountDownTimerState extends State<CountDownTimer> {
           isTimerTextShown: true,
           autoStart: true,
           onComplete: () {
-            //SÄTT FEL SVAR/NOLL POÄNG OCH GÅ VIDARE TILL NÄSTA FRÅGA
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => AnswerView()));
           },
         )
       ],

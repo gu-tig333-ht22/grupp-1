@@ -21,6 +21,8 @@ class Themes {
   }
 
   static ThemeTextStyles textstyle = ThemeTextStyles();
+
+  static ThemeIcons themeIcons = ThemeIcons();
 }
 
 class ThemeColors {
@@ -163,8 +165,53 @@ class ThemeTextStyles {
         Color(0xffDFE34E),
         Color(0xffFCB752),
         Color(0xffF47D55),
-        Color(0xffF04349),
+        Color.fromARGB(255, 240, 67, 73),
       ],
     );
+  }
+}
+
+class ThemeIcons {
+  final IconData correct = Icons.done;
+  final IconData wrong = Icons.close;
+
+  Container circle({child, required Color color, required double size}) {
+    return Container(
+      child: Center(child: child),
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                lightenColor(color, 40),
+                color,
+                darkenColor(color, 70)
+              ],
+              stops: [
+                0,
+                0.2,
+                0.8,
+              ])),
+    );
+  }
+
+  Color darkenColor(Color color, [int percent = 10]) {
+    assert(1 <= percent && percent <= 100);
+    var p = 1 - percent / 100;
+    return Color.fromARGB(color.alpha, (color.red * p).round(),
+        (color.green * p).round(), (color.blue * p).round());
+  }
+
+  Color lightenColor(Color color, [int percent = 10]) {
+    assert(1 <= percent && percent <= 100);
+    var p = percent / 100;
+    return Color.fromARGB(
+        color.alpha,
+        color.red + ((255 - color.red) * p).round(),
+        color.green + ((255 - color.green) * p).round(),
+        color.blue + ((255 - color.blue) * p).round());
   }
 }

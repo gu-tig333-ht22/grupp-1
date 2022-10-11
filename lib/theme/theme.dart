@@ -20,9 +20,9 @@ class Themes {
     return ThemeData(fontFamily: 'RobotoRegular');
   }
 
-  static ThemeTextStyles textstyle = ThemeTextStyles();
+  static ThemeTextStyles textStyle = ThemeTextStyles();
 
-  static ThemeIcons themeIcons = ThemeIcons();
+  static ThemeIcons icons = ThemeIcons();
 }
 
 class ThemeColors {
@@ -41,9 +41,9 @@ class ThemeColors {
   // Övriga färger
   final textGrey = Color(0xff3A3A3A);
   final whiteBackground = Color(0xffEAEAEA);
-  final backgroundMiddle = Color.fromARGB(248, 0, 41, 72);
-  final backgroundDark = Color(0xff0A1D2D);
-  final backgroundLight = Color(0xff298298);
+  final backgroundMiddle = Color.fromARGB(240, 0, 41, 72);
+  final backgroundDark = Color.fromARGB(240, 10, 29, 45);
+  final backgroundLight = Color.fromARGB(240, 41, 130, 152);
 
   final greenLight = Color(0xffD9FFD2);
   final green = Color(0xff83D775);
@@ -119,9 +119,10 @@ class ScaffoldWithBackground extends StatelessWidget {
         body: Stack(children: [
       Container(
         decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/backgroundimage.jpg'),
-                fit: BoxFit.cover)),
+          image: DecorationImage(
+              image: AssetImage('assets/backgroundimage.jpg'),
+              fit: BoxFit.cover),
+        ),
       ),
       Container(
         decoration: BoxDecoration(
@@ -188,12 +189,12 @@ class ThemeIcons {
               colors: [
                 lightenColor(color, 40),
                 color,
-                darkenColor(color, 70)
+                darkenColor(color, 60)
               ],
               stops: [
                 0,
                 0.2,
-                0.8,
+                0.9,
               ])),
     );
   }

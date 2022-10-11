@@ -14,16 +14,15 @@ class AnswerView extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 40),
-              Text('Score: 5',
-                  style: TextStyle(fontSize: 40, color: ThemeColors().white)),
+              Text('Score: 5', style: Themes.textStyle.headline1),
               const Spacer(),
               AnswerBalls(),
               // HÄR HAMNAR SCORE OCH BOLLAR
               //const SizedBox(height: 30),
               const Spacer(),
-              const Text(
+              Text(
                 // X/X SKA ERSÄTTAS MED INDEXPOSITION I FRÅGELISTA SAMT VÄRDE PÅ ANTAL FRÅGOR I SETTINGS
-                "Question x/x", style: TextStyle(color: Colors.white),
+                "Question x/x", style: Themes.textStyle.headline2,
               ),
               const SizedBox(height: 10),
               QuestionCard(testQuestion1),
@@ -42,12 +41,12 @@ class AnswerBalls extends StatelessWidget {
   // LOGIK FÖR ATT SKAPA LISTAN SOM VISAS PÅ SKÄRMEN ÄR EJ IMPLEMENTERAD
   List<dynamic> ballData = [
     false,
+    true,
     false,
     false,
-    false,
-    false,
-    false,
-    false,
+    '6',
+    '7',
+    '8',
   ];
 
   @override
@@ -55,30 +54,26 @@ class AnswerBalls extends StatelessWidget {
     var deviceWidth = MediaQuery.of(context).size.width;
     List<Widget> balls = ballData.map((ball) {
       if (ball == false) {
-        return CircleAvatar(
-            radius: 14,
-            backgroundColor: ThemeColors().wronganswerRed,
-            child: Icon(
-              Icons.close,
-              color: ThemeColors().white,
-            ));
+        return Themes.icons.circle(
+            color: Themes.colors.red,
+            size: 28,
+            child: Icon(Themes.icons.wrong,
+                color: Themes.colors.whiteBackground, size: 20));
       }
       if (ball == true) {
-        return CircleAvatar(
-            radius: 14,
-            backgroundColor: ThemeColors().correctanswerGreen,
-            child: Icon(Icons.check, color: ThemeColors().white));
+        return Themes.icons.circle(
+            color: Themes.colors.green,
+            size: 28,
+            child: Icon(Themes.icons.correct,
+                color: Themes.colors.whiteBackground, size: 20));
       } else {
-        return CircleAvatar(
-            radius: 14,
-            backgroundColor: ThemeColors().darkBlue,
-            child: Text(
-              ball,
-              style: TextStyle(color: ThemeColors().white),
-            ));
+        return Themes.icons.circle(
+            color: Themes.colors.grey,
+            size: 28,
+            child: Text(ball, style: Themes.textStyle.headline3));
       }
     }).toList();
-
+    // FUNDERA PÅ MITTENCIRKEL STÖRRE
     return Container(
       width: deviceWidth * 0.8,
       child: Wrap(

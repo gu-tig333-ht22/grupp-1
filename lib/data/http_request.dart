@@ -10,6 +10,9 @@ class HttpConection {
   final String url = 'https://the-trivia-api.com/api/questions';
   // Huge thanks to Will Fry who created this open API!
 
+  /// Gets a set of answers from the trivia Api. This function recuires
+  /// an object of setting that contains game settings. It returns a
+  /// complete list of Question objects.
   Future getQuestions({required Settings settings}) async {
     List<Question> questionList = [];
     String path =

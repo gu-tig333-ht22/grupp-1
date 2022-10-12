@@ -8,14 +8,20 @@ import 'package:template/views/start_view.dart';
 import 'package:template/test/test_file.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/views/summary_view.dart';
+import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(body: SummaryView()),
-      theme: Themes.themeData(),
-      debugShowCheckedModeBanner: false,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => GameSession()),
+      ],
+      child: MaterialApp(
+        home: Scaffold(body: SettingsView()),
+        theme: Themes.themeData(),
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }

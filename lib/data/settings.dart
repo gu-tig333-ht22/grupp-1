@@ -36,4 +36,8 @@ class Settings {
 
   /// Returns time per question,
   int get timePerQuestion => _timePerQuestion;
+
+  void setDifficulty(String newDifficulty) {
+    _difficulty = newDifficulty;
+  }
 }

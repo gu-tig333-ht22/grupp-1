@@ -13,6 +13,7 @@ class GameSession extends ChangeNotifier {
   Settings settings = Settings();
 
   List get chosenCategories => settings.categories;
+  String get chosenDifficulty => settings.difficulty;
 
   void updateCategory(categoryName) {
     if (settings.categories.contains(categoryName)) {
@@ -20,6 +21,11 @@ class GameSession extends ChangeNotifier {
     } else {
       settings.categories.add(categoryName);
     }
+    notifyListeners();
+  }
+
+  void updateDifficulty(String newDifficulty) {
+    settings.setDifficulty(newDifficulty);
     notifyListeners();
   }
 }

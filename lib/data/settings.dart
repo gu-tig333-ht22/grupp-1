@@ -1,4 +1,5 @@
 import 'package:template/views/settings_view.dart';
+import 'package:template/theme/theme.dart';
 
 /// # Settings
 /// Holds all parameters for a game.
@@ -9,11 +10,9 @@ import 'package:template/views/settings_view.dart';
 /// int timePerQuestion defaullt 20.
 class Settings {
   late int _numberOfQuestions;
-  late List<String> _selectedCategories = [
-    'Art & Literature',
-    'General Knowledge',
-    'Geography',
-  ]; //
+  late List<String> _selectedCategories = Themes.categories.listCategories
+      .map((category) => category.name)
+      .toList();
   late String _difficulty;
   late int _timePerQuestion;
 

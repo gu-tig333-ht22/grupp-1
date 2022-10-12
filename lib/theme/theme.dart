@@ -9,9 +9,10 @@ import 'package:simple_gradient_text/simple_gradient_text.dart';
 class Themes {
   static ThemeColors colors = ThemeColors();
 
+  static ThemeCategories categories = ThemeCategories();
+
   static ThemeCategory category(String name) {
-    return ThemeCategories()
-        .listCategories
+    return categories.listCategories
         .where((category) => category.name == name)
         .first;
   }

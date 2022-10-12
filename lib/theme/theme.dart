@@ -45,11 +45,11 @@ class ThemeColors {
   final backgroundDark = Color.fromARGB(240, 10, 29, 45);
   final backgroundLight = Color.fromARGB(240, 41, 130, 152);
 
-  final greenLight = Color(0xffD9FFD2);
+  final greenLight = Color.fromARGB(255, 227, 255, 222);
   final green = Color(0xff83D775);
   final greenDark = Color(0xff102C0C);
 
-  final redLight = Color(0xffE79494);
+  final redLight = Color.fromARGB(255, 255, 232, 232);
   final red = Color(0xffD64545);
   final redDark = Color(0xff391515);
 

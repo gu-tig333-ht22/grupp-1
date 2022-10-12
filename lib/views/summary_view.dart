@@ -23,13 +23,15 @@ List<bool> listAnswers = [
   true,
   true
 ];
+List categories =
+    ThemeCategories().listCategories + ThemeCategories().listCategories;
 
 class SummaryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWithBackground(
         child: Padding(
-      padding: EdgeInsets.all(30),
+      padding: EdgeInsets.all(35),
       child: Column(
         children: [
           Text("Scorescreen", style: Themes.textStyle.headline1),
@@ -124,12 +126,42 @@ class SummaryView extends StatelessWidget {
   }
 
   Widget _listTile(index) {
-    return ListTile(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      tileColor: listAnswers[index]
-          ? Themes.colors.greenLight
-          : Themes.colors.redLight,
-      leading: Text("Test"),
+    return Padding(
+      padding: EdgeInsets.only(top: 3),
+      child: Container(
+        child: Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(2),
+              child: Container(
+                width: 21,
+                height: 21,
+                decoration: BoxDecoration(
+                    border: Border.all(width: 1, color: Themes.colors.grey),
+                    color: categories[index].color,
+                    shape: BoxShape.circle),
+                child: Center(
+                    child: Icon(
+                  categories[index].icon,
+                  color: Colors.white,
+                  size: 14,
+                )),
+              ),
+            )
+          ],
+        ),
+        height: 30,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            border: Border.all(
+                width: 3,
+                color: listAnswers[index]
+                    ? Themes.colors.green
+                    : Themes.colors.red),
+            color: listAnswers[index]
+                ? Themes.colors.greenLight
+                : Themes.colors.redLight),
+      ),
     );
   }
 }

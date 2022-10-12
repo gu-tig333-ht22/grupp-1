@@ -10,23 +10,15 @@ import 'package:template/theme/theme.dart';
 import 'package:provider/provider.dart';
 
 class GameSession extends ChangeNotifier {
-  Settings settings = Settings(
-      numberOfQuestions: 10,
-      selectedCategorys: [
-        'Art & Literature',
-        'General Knowledge',
-        'Geography',
-      ],
-      difficylty: "medium",
-      timePerQuestion: 10);
+  Settings settings = Settings();
 
-  List get chosenCategories => settings.categorys;
+  List get chosenCategories => settings.categories;
 
   void updateCategory(categoryName) {
-    if (settings.categorys.contains(categoryName)) {
-      settings.categorys.remove(categoryName);
+    if (settings.categories.contains(categoryName)) {
+      settings.categories.remove(categoryName);
     } else {
-      settings.categorys.add(categoryName);
+      settings.categories.add(categoryName);
     }
     notifyListeners();
   }

@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 class GameSession extends ChangeNotifier {
   Settings settings = Settings();
+  bool blured = false;
 
   List get chosenCategories => settings.categories;
   String get chosenDifficulty => settings.difficulty;
@@ -26,6 +27,15 @@ class GameSession extends ChangeNotifier {
 
   void updateDifficulty(String newDifficulty) {
     settings.setDifficulty(newDifficulty);
+    notifyListeners();
+  }
+
+  void setblured() {
+    if (blured == true) {
+      blured = false;
+    } else {
+      blured = true;
+    }
     notifyListeners();
   }
 }

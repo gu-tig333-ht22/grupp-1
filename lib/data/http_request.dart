@@ -33,11 +33,11 @@ class HttpConection {
   }
 
   String _pathToCategorys(Settings settings) {
-    if (settings.categorys.isEmpty) {
+    if (settings.categories.isEmpty) {
       return "";
     }
     String categories = '&categories=';
-    for (String category in settings.categorys) {
+    for (String category in settings.categories) {
       categories += ',$category';
     }
     return categories;

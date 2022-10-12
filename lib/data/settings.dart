@@ -9,17 +9,19 @@ import 'package:template/views/settings_view.dart';
 /// int timePerQuestion defaullt 20.
 class Settings {
   late int _numberOfQuestions;
-  late List<String> _selectedCategorys = []; //
+  late List<String> _selectedCategories = [
+    'Art & Literature',
+    'General Knowledge',
+    'Geography',
+  ]; //
   late String _difficulty;
   late int _timePerQuestion;
 
   Settings(
-      {required int numberOfQuestions,
-      required List<String> selectedCategorys,
-      required String difficylty,
-      required int timePerQuestion}) {
+      {int numberOfQuestions = 10,
+      String difficylty = "medium",
+      int timePerQuestion = 30}) {
     _numberOfQuestions = numberOfQuestions;
-    _selectedCategorys = selectedCategorys;
     _difficulty = difficylty;
     _timePerQuestion = timePerQuestion;
   }
@@ -28,7 +30,7 @@ class Settings {
   int get numberOfQuestions => _numberOfQuestions;
 
   /// Returns list of categorys.
-  List<String> get categorys => _selectedCategorys;
+  List<String> get categories => _selectedCategories;
 
   /// Returns the difficulty.
   String get difficulty => _difficulty;

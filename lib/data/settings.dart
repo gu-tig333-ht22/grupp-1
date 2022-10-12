@@ -18,10 +18,10 @@ class Settings {
 
   Settings(
       {int numberOfQuestions = 10,
-      String difficylty = "medium",
+      String difficulty = "medium",
       int timePerQuestion = 30}) {
     _numberOfQuestions = numberOfQuestions;
-    _difficulty = difficylty;
+    _difficulty = difficulty;
     _timePerQuestion = timePerQuestion;
   }
 

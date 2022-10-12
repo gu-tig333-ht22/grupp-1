@@ -1,11 +1,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:template/data/game_session.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/test/test_file.dart';
 import 'package:template/components/card.dart';
-
-bool blured = false;
 
 List<bool> listAnswers = [
   true,
@@ -36,7 +36,8 @@ class SummaryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWithBackground(
-      child: Stack(
+        child: Consumer<GameSession>(
+      builder: (context, notifierSnabbsaldo, child) => Stack(
         children: [
           Padding(
             padding: EdgeInsets.all(35),
@@ -50,18 +51,18 @@ class SummaryView extends StatelessWidget {
               ],
             ),
           ),
-          _setblured(),
-          _card(1)
+          _setblured(context),
+          _card(context)
         ],
       ),
-    );
+    ));
   }
 
-  Widget _setblured() {
-    if (blured) {
-      return InkWell(
+  Widget _setblured(context) {
+    if (Provider.of<GameSession>(context, listen: false).blured) {
+      return GestureDetector(
         onTap: () {
-          blured = false;
+          Provider.of<GameSession>(context, listen: false).setblured();
         },
         child: Container(
           child: BackdropFilter(
@@ -77,8 +78,8 @@ class SummaryView extends StatelessWidget {
     }
   }
 
-  Widget _card(id) {
-    if (blured) {
+  Widget _card(context) {
+    if (Provider.of<GameSession>(context, listen: false).blured) {
       return Center(child: QuestionCard(testQuestion1));
     } else {
       return Container();
@@ -164,13 +165,13 @@ class SummaryView extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             itemCount: listAnswers.length,
             itemBuilder: (BuildContext context, int index) {
-              return _listTile(index);
+              return _listTile(index, context);
             }),
       ),
     );
   }
 
-  Widget _listTile(index) {
+  Widget _listTile(index, context) {
     Color color;
     Color colorLight;
 
@@ -183,7 +184,7 @@ class SummaryView extends StatelessWidget {
     }
     return InkWell(
       onTap: () {
-        blured = true;
+        Provider.of<GameSession>(context, listen: false).setblured();
       },
       child: Padding(
         padding: EdgeInsets.only(top: 4),

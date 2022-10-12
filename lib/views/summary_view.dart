@@ -1,5 +1,11 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:template/theme/theme.dart';
+import 'package:template/test/test_file.dart';
+import 'package:template/components/card.dart';
+
+bool blured = false;
 
 List<bool> listAnswers = [
   true,
@@ -44,9 +50,39 @@ class SummaryView extends StatelessWidget {
               ],
             ),
           ),
+          _setblured(),
+          _card(1)
         ],
       ),
     );
+  }
+
+  Widget _setblured() {
+    if (blured) {
+      return InkWell(
+        onTap: () {
+          blured = false;
+        },
+        child: Container(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+            child: Container(
+              color: Colors.grey.withOpacity(0.1),
+            ),
+          ),
+        ),
+      );
+    } else {
+      return Container();
+    }
+  }
+
+  Widget _card(id) {
+    if (blured) {
+      return Center(child: QuestionCard(testQuestion1));
+    } else {
+      return Container();
+    }
   }
 
   Widget _scoreTable() {
@@ -146,9 +182,11 @@ class SummaryView extends StatelessWidget {
       colorLight = Themes.colors.redLight;
     }
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        blured = true;
+      },
       child: Padding(
-        padding: EdgeInsets.only(top: 3),
+        padding: EdgeInsets.only(top: 4),
         child: Container(
           child: Row(
             children: [

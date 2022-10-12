@@ -14,6 +14,7 @@ class SettingsView extends StatelessWidget {
             children: [
               const Text('Singleplayer'),
               CategoryRow(),
+              // DemoToggleButtons(),
               TimeSlider(),
               QuestionSlider(),
               DifficultyRow(),
@@ -49,7 +50,7 @@ class CategoryRow extends StatelessWidget {
           crossAxisCount: 5,
           children: categoryList
               .map(
-                (category) => categorySelectionBox(category),
+                (category) => CategoryButton(category),
               )
               .toList(),
         ),

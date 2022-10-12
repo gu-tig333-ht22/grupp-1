@@ -30,16 +30,23 @@ class SummaryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWithBackground(
-        child: Padding(
-      padding: EdgeInsets.all(35),
-      child: Column(
+      child: Stack(
         children: [
-          Text("Scorescreen", style: Themes.textStyle.headline1),
-          _scoreTable(),
-          Expanded(child: _summaryTable()),
+          Padding(
+            padding: EdgeInsets.all(35),
+            child: Column(
+              children: [
+                Text("Scorescreen", style: Themes.textStyle.headline1),
+                Container(height: 15),
+                _scoreTable(),
+                Container(height: 30),
+                _summaryTable(),
+              ],
+            ),
+          ),
         ],
       ),
-    ));
+    );
   }
 
   Widget _scoreTable() {
@@ -97,17 +104,19 @@ class SummaryView extends StatelessWidget {
   }
 
   Widget _summaryTable() {
-    return Column(
-      children: [
-        Text(
-          "Summary",
-          style: Themes.textStyle.headline2,
-        ),
-        Container(
-          height: 0,
-        ),
-        _listView(listAnswers)
-      ],
+    return Expanded(
+      child: Column(
+        children: [
+          Text(
+            "Summary",
+            style: Themes.textStyle.headline2,
+          ),
+          Container(
+            height: 0,
+          ),
+          _listView(listAnswers)
+        ],
+      ),
     );
   }
 
@@ -126,42 +135,77 @@ class SummaryView extends StatelessWidget {
   }
 
   Widget _listTile(index) {
-    return Padding(
-      padding: EdgeInsets.only(top: 3),
-      child: Container(
-        child: Row(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(2),
-              child: Container(
-                width: 21,
-                height: 21,
-                decoration: BoxDecoration(
-                    border: Border.all(width: 1, color: Themes.colors.grey),
-                    color: categories[index].color,
-                    shape: BoxShape.circle),
-                child: Center(
-                    child: Icon(
-                  categories[index].icon,
-                  color: Themes.colors.whiteBackground,
-                  size: 14,
-                )),
-              ),
-            )
-          ],
+    Color color;
+    Color colorLight;
+
+    if (listAnswers[index]) {
+      color = Themes.colors.green;
+      colorLight = Themes.colors.greenLight;
+    } else {
+      color = Themes.colors.red;
+      colorLight = Themes.colors.redLight;
+    }
+    return InkWell(
+      onTap: () {},
+      child: Padding(
+        padding: EdgeInsets.only(top: 3),
+        child: Container(
+          child: Row(
+            children: [
+              _iconCircle(index),
+              Container(width: 10),
+              Text("Question: " + (index + 1).toString()),
+              Expanded(
+                child: Align(
+                  child: _circleRight(listAnswers[index], color),
+                  alignment: Alignment.centerRight,
+                ),
+              )
+            ],
+          ),
+          height: 30,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              border: Border.all(width: 3, color: color),
+              color: colorLight),
         ),
-        height: 30,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            border: Border.all(
-                width: 3,
-                color: listAnswers[index]
-                    ? Themes.colors.green
-                    : Themes.colors.red),
-            color: listAnswers[index]
-                ? Themes.colors.greenLight
-                : Themes.colors.redLight),
       ),
+    );
+  }
+
+  Widget _iconCircle(index) {
+    return Padding(
+      padding: EdgeInsets.all(2),
+      child: Container(
+        width: 21,
+        height: 21,
+        decoration: BoxDecoration(
+            border: Border.all(width: 1, color: Themes.colors.grey),
+            color: categories[index].color,
+            shape: BoxShape.circle),
+        child: Center(
+            child: Icon(
+          categories[index].icon,
+          color: Themes.colors.whiteBackground,
+          size: 14,
+        )),
+      ),
+    );
+  }
+
+  Widget _circleRight(bool bool, Color color) {
+    double size = 15;
+    return Padding(
+      padding: EdgeInsets.all(5),
+      child: Container(
+          width: size,
+          height: size,
+          child: bool
+              ? Icon(Themes.icons.correct,
+                  size: 12, color: Themes.colors.whiteBackground)
+              : Icon(Themes.icons.wrong,
+                  size: 12, color: Themes.colors.whiteBackground),
+          decoration: BoxDecoration(shape: BoxShape.circle, color: color)),
     );
   }
 }

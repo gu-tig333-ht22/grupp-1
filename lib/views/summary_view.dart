@@ -143,7 +143,7 @@ class SummaryView extends StatelessWidget {
                 child: Center(
                     child: Icon(
                   categories[index].icon,
-                  color: Colors.white,
+                  color: Themes.colors.whiteBackground,
                   size: 14,
                 )),
               ),

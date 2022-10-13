@@ -18,7 +18,7 @@ class App extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => GameSession()),
       ],
       child: MaterialApp(
-        home: Scaffold(body: StartView()),
+        home: Scaffold(body: AnswerView()),
         theme: Themes.themeData,
         debugShowCheckedModeBanner: false,
       ),

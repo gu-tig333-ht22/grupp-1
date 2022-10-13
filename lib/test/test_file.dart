@@ -22,4 +22,4 @@ List<Widget> questions = [
   QuestionCard(testQuestion1),
 ];
 
-List listAnswersTest = ['Grå'];
+List listAnswersTest = [];

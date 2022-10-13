@@ -17,13 +17,13 @@ class Themes {
         .first;
   }
 
-  static ThemeData themeData() {
-    return ThemeData(fontFamily: 'RobotoRegular');
-  }
+  static ThemeData themeData = ThemeData(fontFamily: 'RobotoRegular');
 
   static ThemeTextStyles textStyle = ThemeTextStyles();
 
   static ThemeIcons icons = ThemeIcons();
+
+  static ThemeFunctions functions = ThemeFunctions();
 }
 
 class ThemeColors {
@@ -41,7 +41,7 @@ class ThemeColors {
 
   // Övriga färger
   final textGrey = Color(0xff3A3A3A);
-  final whiteBackground = Color(0xffEAEAEA);
+  final white = Color(0xffEAEAEA);
   final backgroundMiddle = Color.fromARGB(240, 0, 41, 72);
   final backgroundDark = Color.fromARGB(240, 10, 29, 45);
   final backgroundLight = Color.fromARGB(240, 41, 130, 152);
@@ -143,11 +143,11 @@ class ScaffoldWithBackground extends StatelessWidget {
 
 class ThemeTextStyles {
   final TextStyle headline1 =
-      TextStyle(fontSize: 30, color: Themes.colors.whiteBackground);
+      TextStyle(fontSize: 30, color: Themes.colors.white);
   final TextStyle headline2 =
-      TextStyle(fontSize: 20, color: Themes.colors.whiteBackground);
+      TextStyle(fontSize: 20, color: Themes.colors.white);
   final TextStyle headline3 =
-      TextStyle(fontSize: 15, color: Themes.colors.whiteBackground);
+      TextStyle(fontSize: 15, color: Themes.colors.white);
   final TextStyle questionText =
       TextStyle(fontSize: 18, color: Themes.colors.textGrey);
   final TextStyle answerText =
@@ -176,30 +176,9 @@ class ThemeTextStyles {
 class ThemeIcons {
   final IconData correct = Icons.done;
   final IconData wrong = Icons.close;
+}
 
-  Container circle({child, required Color color, required double size}) {
-    return Container(
-      child: Center(child: child),
-      width: size,
-      height: size,
-      decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                lightenColor(color, 40),
-                color,
-                darkenColor(color, 60)
-              ],
-              stops: [
-                0,
-                0.2,
-                0.9,
-              ])),
-    );
-  }
-
+class ThemeFunctions {
   Color darkenColor(Color color, [int percent = 10]) {
     assert(1 <= percent && percent <= 100);
     var p = 1 - percent / 100;

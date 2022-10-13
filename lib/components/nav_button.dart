@@ -31,7 +31,7 @@ class NavigationButton extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [color, Themes.icons.darkenColor(color, 40)],
+            colors: [color, Themes.functions.darkenColor(color, 40)],
             stops: const [
               0,
               0.9,

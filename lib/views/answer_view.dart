@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:template/components/card.dart';
+import 'package:template/components/gradient_circle.dart';
 import 'package:template/test/test_file.dart';
 import 'package:template/theme/theme.dart';
 
@@ -54,20 +55,20 @@ class AnswerBalls extends StatelessWidget {
     var deviceWidth = MediaQuery.of(context).size.width;
     List<Widget> balls = ballData.map((ball) {
       if (ball == false) {
-        return Themes.icons.circle(
+        return GradientCircle(
             color: Themes.colors.red,
             size: 28,
-            child: Icon(Themes.icons.wrong,
-                color: Themes.colors.whiteBackground, size: 20));
+            child:
+                Icon(Themes.icons.wrong, color: Themes.colors.white, size: 20));
       }
       if (ball == true) {
-        return Themes.icons.circle(
+        return GradientCircle(
             color: Themes.colors.green,
             size: 28,
             child: Icon(Themes.icons.correct,
-                color: Themes.colors.whiteBackground, size: 20));
+                color: Themes.colors.white, size: 20));
       } else {
-        return Themes.icons.circle(
+        return GradientCircle(
             color: Themes.colors.grey,
             size: 28,
             child: Text(ball, style: Themes.textStyle.headline3));

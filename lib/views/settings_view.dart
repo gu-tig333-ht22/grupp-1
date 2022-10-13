@@ -16,8 +16,7 @@ class SettingsView extends StatelessWidget {
             children: [
               Text(
                 'Singleplayer',
-                style: TextStyle(
-                    color: Themes.colors.whiteBackground, fontSize: 35),
+                style: TextStyle(color: Themes.colors.white, fontSize: 35),
               ),
               const SizedBox(
                 height: 70,
@@ -58,7 +57,7 @@ class CategoryRow extends StatelessWidget {
         Text(
           //style: Themes.textStyle.answerText, Varför funkar inte det?
           'Categories',
-          style: TextStyle(color: Themes.colors.whiteBackground, fontSize: 15),
+          style: TextStyle(color: Themes.colors.white, fontSize: 15),
         ),
         GridView.count(
           shrinkWrap: true,
@@ -90,10 +89,10 @@ class CategoryButton extends StatelessWidget {
         Provider.of<GameSession>(context, listen: true).chosenCategories;
 
     Color categoryColor = category.color;
-    Color iconColor = Themes.colors.whiteBackground;
+    Color iconColor = Themes.colors.white;
     double opacity = 1;
     if (!tempValdaKategorier.contains(category.name)) {
-      categoryColor = Themes.icons.lightenColor(categoryColor, 40);
+      categoryColor = Themes.functions.lightenColor(categoryColor, 40);
       opacity = 0.40;
     }
     return InkWell(
@@ -106,9 +105,9 @@ class CategoryButton extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                Themes.icons.lightenColor(categoryColor, 40),
+                Themes.functions.lightenColor(categoryColor, 40),
                 categoryColor,
-                Themes.icons.darkenColor(categoryColor, 60)
+                Themes.functions.darkenColor(categoryColor, 60)
               ],
               stops: const [
                 0,
@@ -151,7 +150,7 @@ class _QuestionSliderState extends State<QuestionSlider> {
       children: [
         Text(
           'Questions',
-          style: TextStyle(color: Themes.colors.whiteBackground, fontSize: 15),
+          style: TextStyle(color: Themes.colors.white, fontSize: 15),
         ),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Expanded(
@@ -201,7 +200,7 @@ class _QuestionSliderState extends State<QuestionSlider> {
                   child: Center(
                     child: Text(
                       timePerQuestion.toStringAsFixed(0),
-                      style: TextStyle(color: Themes.colors.whiteBackground),
+                      style: TextStyle(color: Themes.colors.white),
                     ),
                   ),
                 ),
@@ -228,7 +227,7 @@ class _TimeSliderState extends State<TimeSlider> {
       children: [
         Text(
           'Time per question',
-          style: TextStyle(color: Themes.colors.whiteBackground, fontSize: 15),
+          style: TextStyle(color: Themes.colors.white, fontSize: 15),
         ),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Expanded(
@@ -280,12 +279,11 @@ class _TimeSliderState extends State<TimeSlider> {
                       ? Icon(
                           OctIcons.infinity_16,
                           size: 15,
-                          color: Themes.colors.whiteBackground,
+                          color: Themes.colors.white,
                         )
                       : Text(
                           timePerQuestion.toStringAsFixed(0),
-                          style:
-                              TextStyle(color: Themes.colors.whiteBackground),
+                          style: TextStyle(color: Themes.colors.white),
                         ),
                 ),
               ],
@@ -327,7 +325,7 @@ class DifficultyRow extends StatelessWidget {
       children: [
         Text(
           'Difficulty: $difficulty',
-          style: TextStyle(color: Themes.colors.whiteBackground, fontSize: 15),
+          style: TextStyle(color: Themes.colors.white, fontSize: 15),
         ),
         SizedBox(height: 5),
         Row(
@@ -388,8 +386,8 @@ class StartButton extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Themes.icons.lightenColor(Themes.colors.blueLight, 40),
-              Themes.icons.darkenColor(Themes.colors.blueLight, 60)
+              Themes.functions.lightenColor(Themes.colors.blueLight, 40),
+              Themes.functions.darkenColor(Themes.colors.blueLight, 60)
             ],
             stops: const [
               0,
@@ -401,7 +399,7 @@ class StartButton extends StatelessWidget {
           onPressed: (() {}),
           child: Text(
             'Start',
-            style: TextStyle(color: Themes.colors.whiteBackground),
+            style: TextStyle(color: Themes.colors.white),
           ),
         ),
       ),

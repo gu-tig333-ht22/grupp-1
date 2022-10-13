@@ -15,6 +15,7 @@ class HttpConection {
   /// complete list of Question objects.
   Future getQuestions({required Settings settings}) async {
     List<Question> questionList = [];
+    int index = 0;
     String path =
         '?${_pathToCategorys(settings)}${_pathToDifficulty(settings)}${_pathToNumberOfQuestions(settings)}';
 
@@ -22,7 +23,8 @@ class HttpConection {
     if (response.statusCode == 200) {
       List<dynamic> data = jsonDecode(response.body);
       for (var question in data) {
-        questionList.add(Question.fromJson(question));
+        questionList.add(Question.fromJson(question, index));
+        index += 1;
       }
     }
     return questionList;

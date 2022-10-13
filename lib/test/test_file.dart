@@ -8,11 +8,12 @@ Question testQuestion1 = Question(
     correctAnswer: 'Grön',
     incorrectAnswers: [
       'Vita hästar är jättejättejättejättejättejättejättejättejättefina',
-      'Grå ',
+      'Grå',
       'Brun'
     ],
     question: 'Vilken färg kan hästar INTE ha?',
-    difficulty: 'Ganska lätt');
+    difficulty: 'Ganska lätt',
+    index: 0);
 
 List<Widget> questions = [
   QuestionCard(testQuestion1),
@@ -20,3 +21,5 @@ List<Widget> questions = [
   QuestionCard(testQuestion1),
   QuestionCard(testQuestion1),
 ];
+
+List listAnswersTest = ['Grå'];

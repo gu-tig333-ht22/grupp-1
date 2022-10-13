@@ -2,25 +2,31 @@
 /// Player is the class that holds information about the player.
 ///
 ///
-/// Name, score, streakCounter, longestStreak, correctAnswers and playerAnswers.
+/// Name, score, streakCounter, longestStreak, correctAnswers and playerAnswers boolAnswers.
 /// * Player.score => current score as int.
 /// * Player.correctAnswers => number of correct answers as int.
 /// * Player.playerAnswers => Map of questionID and answer.
 /// * Player.correctAnswer(newAnswer) updates the score and streak.
 ///   Also add answer to playerAnswer.
 /// * Player.incorrectAnswer(newAnswer). Also add answer to playerAnswer.
+/// * Player.boolAnswerList returns a list of bools.
 class Player {
   late String name;
   int _score = 0;
   int _streakCounter = 0; // if we deside to implement streakCounter
   int _longestStreak = 0; // or change score per question we also
   int _correctAnswers = 0; // need to track number of correct answers
-  final List<String> _playerAnswers = [];
+  final List<String> _playerAnswers =
+      []; // if string = "No answer" => player out of time
+  List<bool> _boolAnswers = [];
 
   Player({this.name = ""});
 
   /// Returns score as int.
   int get score => _score;
+
+  /// Returns player answers as bool list
+  List<bool> get boolAnswerList => _boolAnswers;
 
   /// Returns number of correctAnswer as int.
   int get correctAnswers => _correctAnswers;
@@ -43,6 +49,7 @@ class Player {
     }
     _correctAnswers += 1;
     _playerAnswers.add(newAnswer);
+    _boolAnswers.add(true);
   }
 
   /// Call if player answers incorectly, we update the longest streak if
@@ -55,5 +62,6 @@ class Player {
     }
     _streakCounter = 0;
     _playerAnswers.add(newAnswer);
+    _boolAnswers.add(false);
   }
 }

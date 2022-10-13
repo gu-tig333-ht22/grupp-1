@@ -34,19 +34,16 @@ class NavigationButton extends StatelessWidget {
         opacity: opacity,
         child: Container(
           height: 50,
-          width: 120,
+          width: 250,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(10),
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [
-                Themes.icons.lightenColor(color, 40),
-                Themes.icons.darkenColor(color, 60)
-              ],
+              colors: [color, Themes.icons.darkenColor(color, 40)],
               stops: const [
                 0,
-                1,
+                0.9,
               ],
             ),
           ),
@@ -54,7 +51,8 @@ class NavigationButton extends StatelessWidget {
             onPressed: _onPressed,
             child: Text(
               _buttonText,
-              style: TextStyle(color: Themes.colors.whiteBackground),
+              style:
+                  TextStyle(color: Themes.colors.whiteBackground, fontSize: 25),
             ),
           ),
         ),

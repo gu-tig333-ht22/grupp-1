@@ -74,15 +74,21 @@ class OptionsRow extends StatelessWidget {
   Widget build(BuildContext context) {
     if (listAnswersTest.asMap().containsKey(question.index)) {
       if (listAnswersTest[question.index] == option) {
-        borderColor = Themes.colors.red;
-        tileColor = Themes.colors.redLight;
-        circleColor = Themes.colors.red;
-        icon = Icon(
-          Themes.icons.wrong,
-          color: Colors.white,
-        );
-      }
-      if (option == question.correctAnswer) {
+        if (listAnswersTest[question.index] == question.correctAnswer) {
+          borderColor = Themes.colors.green;
+          tileColor = Themes.colors.greenLight;
+          circleColor = Themes.colors.green;
+          icon = Icon(Themes.icons.correct, color: Colors.white);
+        } else {
+          borderColor = Themes.colors.red;
+          tileColor = Themes.colors.redLight;
+          circleColor = Themes.colors.red;
+          icon = Icon(
+            Themes.icons.wrong,
+            color: Colors.white,
+          );
+        }
+      } else if (option == question.correctAnswer) {
         borderColor = Themes.colors.green;
         tileColor = Themes.colors.greenLight;
         circleColor = Themes.colors.greenLight;

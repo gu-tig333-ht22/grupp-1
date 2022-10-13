@@ -7,7 +7,10 @@ class GradientCircle extends StatelessWidget {
   var child;
   late Color color;
   late double size;
-  GradientCircle({child = null, required Color color, required double size});
+  GradientCircle(
+      {this.child = null,
+      required Color this.color,
+      required double this.size});
   @override
   Widget build(BuildContext context) {
     return Container(

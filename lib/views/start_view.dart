@@ -16,20 +16,20 @@ class StartView extends StatelessWidget {
             Themes.textStyle.headlineGradient(text: 'Pettersson', fontSize: 44),
             Spacer(),
             NavigationButton(
-              buttonText: "Single Player",
+              buttonText: "Singleplayer",
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => SettingsView()));
               },
               isActive: true,
             ),
-            SizedBox(height: 50),
+            const SizedBox(height: 20),
             NavigationButton(
               buttonText: "Multiplayer",
               onPressed: () {},
               isActive: false,
             ),
-            SizedBox(height: 50),
+            SizedBox(height: 20),
             NavigationButton(
               buttonText: "Highscore",
               onPressed: () {},

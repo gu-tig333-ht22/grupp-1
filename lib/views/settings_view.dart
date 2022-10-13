@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_octicons/flutter_octicons.dart';
 import 'package:provider/provider.dart';
+import 'package:template/components/nav_button.dart';
 import 'package:template/theme/theme.dart';
 import '../data/game_session.dart';
 
@@ -300,116 +301,71 @@ class DifficultyRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String difficulty = Provider.of<GameSession>(context).chosenDifficulty;
+    double easyOpacity = 0.4;
+    double mediumOpacity = 1;
+    double hardOpacity = 0.4;
+
+    if (difficulty == "easy") {
+      easyOpacity = 1;
+      mediumOpacity = 0.4;
+      hardOpacity = 0.4;
+    }
+
+    if (difficulty == "medium") {
+      easyOpacity = 0.4;
+      mediumOpacity = 1;
+      hardOpacity = 0.4;
+    }
+
+    if (difficulty == "hard") {
+      easyOpacity = 0.4;
+      mediumOpacity = 0.4;
+      hardOpacity = 1;
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Difficulty',
+          'Difficulty: $difficulty',
           style: TextStyle(color: Themes.colors.whiteBackground, fontSize: 15),
         ),
+        SizedBox(height: 5),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             //
 
             //
-            Container(
-              width: 80,
-              height: 35,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Themes.icons.lightenColor(Themes.colors.greenLight, 40),
-                    Colors.green,
-                    Themes.icons.darkenColor(Themes.colors.greenLight, 60)
-                  ],
-                  stops: [0, 0.5, 1],
-                ),
-              ),
-              child: TextButton(
-                onPressed: () {
-                  Provider.of<GameSession>(context, listen: false)
-                      .updateDifficulty("easy");
-                },
-                child: Text(
-                  'Easy',
-                  style: TextStyle(
-                    color: Themes.colors.whiteBackground,
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-            ),
-            //
+            NavigationButton(
+                text: Text("Easy", style: Themes.textStyle.headline3),
+                width: 80,
+                height: 40,
+                color: Themes.colors.green.withOpacity(easyOpacity),
+                onPressed: () =>
+                    Provider.of<GameSession>(context, listen: false)
+                        .updateDifficulty("easy")),
 
             //
-            Container(
-              width: 80,
-              height: 35,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Themes.icons.lightenColor(Themes.colors.yellowLight, 40),
-                    Colors.yellow,
-                    Themes.icons.darkenColor(Themes.colors.yellowLight, 60)
-                  ],
-                  stops: [0, 0.5, 1],
-                ),
-              ),
-              child: TextButton(
-                onPressed: () {
-                  Provider.of<GameSession>(context, listen: false)
-                      .updateDifficulty("medium");
-                },
-                child: Text(
-                  'Medium',
-                  style: TextStyle(
-                    color: Themes.colors.whiteBackground,
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-            ),
-            //
+
+            NavigationButton(
+                text: Text("Medium", style: Themes.textStyle.headline3),
+                width: 80,
+                height: 40,
+                color: Themes.colors.yellow.withOpacity(mediumOpacity),
+                onPressed: () =>
+                    Provider.of<GameSession>(context, listen: false)
+                        .updateDifficulty("medium")),
 
             //
-            Container(
-              width: 80,
-              height: 35,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Themes.icons.lightenColor(Themes.colors.redLight, 40),
-                    Colors.red,
-                    Themes.icons.darkenColor(Themes.colors.redLight, 60)
-                  ],
-                  stops: [0, 0.5, 1],
-                ),
-              ),
-              child: TextButton(
-                onPressed: () {
-                  Provider.of<GameSession>(context, listen: false)
-                      .updateDifficulty("hard");
-                },
-                child: Text(
-                  'Hard',
-                  style: TextStyle(
-                    color: Themes.colors.whiteBackground,
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-            ),
-            //
+
+            NavigationButton(
+                text: Text("Hard", style: Themes.textStyle.headline3),
+                width: 80,
+                height: 40,
+                color: Themes.colors.red.withOpacity(hardOpacity),
+                onPressed: () =>
+                    Provider.of<GameSession>(context, listen: false)
+                        .updateDifficulty("hard")),
 
             //
           ],

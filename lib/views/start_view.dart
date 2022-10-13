@@ -1,23 +1,68 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:template/components/nav_button.dart';
+import 'package:template/theme/theme.dart';
+import 'package:template/views/settings_view.dart';
 
 class StartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
+    return ScaffoldWithBackground(
+      child: Center(
         child: Column(
           children: [
             SizedBox(height: 50),
-            const Text('Quizter Pettersson'),
+            Themes.textStyle.headlineGradient(text: 'Quizter', fontSize: 44),
+            Themes.textStyle.headlineGradient(text: 'Pettersson', fontSize: 44),
             Spacer(),
-            ElevatedButton(
-                onPressed: () {}, child: const Text('Single Player')),
-            SizedBox(height: 50),
-            ElevatedButton(onPressed: () {}, child: const Text('Multiplayer')),
-            SizedBox(height: 50),
-            ElevatedButton(onPressed: () {}, child: const Text('Highscore')),
-            SizedBox(height: 150)
+            NavigationButton(
+              text: Text(
+                "Singleplayer",
+                style: Themes.textStyle.headline1,
+              ),
+              width: 250,
+              height: 50,
+              color: Themes.colors.blueDark,
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SettingsView()));
+              },
+            ),
+            const SizedBox(height: 20),
+            Opacity(
+              opacity: 0.4,
+              child: NavigationButton(
+                text: Text(
+                  "Multiplayer",
+                  style: Themes.textStyle.headline1,
+                ),
+                width: 250,
+                height: 50,
+                color: Themes.colors.blueDark,
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SettingsView()));
+                },
+              ),
+            ),
+            SizedBox(height: 20),
+            Opacity(
+              opacity: 0.4,
+              child: NavigationButton(
+                text: Text(
+                  "Highscore",
+                  style: Themes.textStyle.headline1,
+                ),
+                width: 250,
+                height: 50,
+                color: Themes.colors.blueDark,
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SettingsView()));
+                },
+              ),
+            ),
+            SizedBox(height: 70),
           ],
         ),
       ),

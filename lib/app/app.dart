@@ -19,7 +19,7 @@ class App extends StatelessWidget {
       ],
       child: MaterialApp(
         home: Scaffold(body: StartView()),
-        theme: Themes.themeData(),
+        theme: Themes.themeData,
         debugShowCheckedModeBanner: false,
       ),
     );

@@ -15,7 +15,7 @@ class QuestionCard extends StatelessWidget {
     var deviceHeight = MediaQuery.of(context).size.height;
     List<String> options = question.allAnswersInRandomOrder;
     Color categoryColor = Themes.category(question.category).color;
-    Color backgroundColor = Themes.colors.whiteBackground;
+    Color backgroundColor = Themes.colors.white;
     IconData categoryIcon = Themes.category(question.category).icon;
 
     return Container(
@@ -62,8 +62,8 @@ class OptionsRow extends StatelessWidget {
   String leadingLetter;
   Color categoryColor;
   Color borderColor = Themes.colors.grey;
-  Color tileColor = Themes.colors.whiteBackground;
-  Color circleColor = Themes.colors.whiteBackground;
+  Color tileColor = Themes.colors.white;
+  Color circleColor = Themes.colors.white;
   Question question;
   var icon = null;
 

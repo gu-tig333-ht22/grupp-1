@@ -22,9 +22,6 @@ class NavigationButton extends StatelessWidget {
   // ignore: empty_constructor_bodies
   @override
   Widget build(BuildContext context) {
-    Color color = Themes.colors.blueLight;
-    double opacity = 1;
-
     return Center(
       child: Container(
         height: height,

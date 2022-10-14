@@ -18,7 +18,7 @@ class HttpConection {
     int index = 0;
     String path =
         '?${_pathToCategorys(settings)}${_pathToDifficulty(settings)}${_pathToNumberOfQuestions(settings)}';
-
+    print(path);
     http.Response response = await http.get(Uri.parse('$url$path'));
     if (response.statusCode == 200) {
       List<dynamic> data = jsonDecode(response.body);

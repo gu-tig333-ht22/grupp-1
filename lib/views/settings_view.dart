@@ -41,7 +41,9 @@ class SettingsView extends StatelessWidget {
                   "Start",
                   style: Themes.textStyle.headline1,
                 ),
-                onPressed: () {
+                onPressed: () async {
+                  Provider.of<GameSession>(context, listen: false).startGame();
+                  await Future.delayed(const Duration(seconds: 2)); // quickfix
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => QuestionView()));
                 },
@@ -155,9 +157,9 @@ class QuestionSlider extends StatefulWidget {
 }
 
 class _QuestionSliderState extends State<QuestionSlider> {
-  double timePerQuestion = 10;
-
   Widget build(BuildContext context) {
+    double numberOfQuestions =
+        Provider.of<GameSession>(context, listen: true).getNumberOfQuestion();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -188,11 +190,14 @@ class _QuestionSliderState extends State<QuestionSlider> {
                             child: Slider(
                                 activeColor: Themes.colors.blueLight,
                                 inactiveColor: Themes.colors.blueDark,
-                                value: timePerQuestion,
+                                value: numberOfQuestions,
                                 divisions: 49,
                                 onChanged: (value) {
                                   setState(() {
-                                    timePerQuestion = value;
+                                    numberOfQuestions = value;
+                                    Provider.of<GameSession>(context,
+                                            listen: false)
+                                        .updateNumberOfQuestion(value);
                                   });
                                 },
                                 min: 1,
@@ -212,7 +217,7 @@ class _QuestionSliderState extends State<QuestionSlider> {
                       borderRadius: BorderRadius.circular(50)),
                   child: Center(
                     child: Text(
-                      timePerQuestion.toStringAsFixed(0),
+                      numberOfQuestions.toStringAsFixed(0),
                       style: TextStyle(color: Themes.colors.white),
                     ),
                   ),
@@ -232,9 +237,9 @@ class TimeSlider extends StatefulWidget {
 }
 
 class _TimeSliderState extends State<TimeSlider> {
-  double timePerQuestion = 20;
-
   Widget build(BuildContext context) {
+    double timePerQuestion =
+        Provider.of<GameSession>(context, listen: true).getTimePerQuestion();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -270,6 +275,9 @@ class _TimeSliderState extends State<TimeSlider> {
                                 onChanged: (value) {
                                   setState(() {
                                     timePerQuestion = value;
+                                    Provider.of<GameSession>(context,
+                                            listen: false)
+                                        .updateTimePerQuestion(value);
                                   });
                                 },
                                 min: 1,

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:provider/provider.dart';
 import 'package:template/components/card.dart';
+import 'package:template/data/game_session.dart';
 
 import 'dart:math' as math;
 
-import 'package:template/test/test_file.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/views/answer_view.dart';
 
@@ -12,26 +13,29 @@ class QuestionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWithBackground(
-      child: Center(
-        child: Column(
+        child: Center(
+      child: Consumer<GameSession>(
+        builder: (context, gameSession, child) => Column(
           children: [
             const SizedBox(height: 60),
             CountDownTimer(),
             //const SizedBox(height: 30),
             const Spacer(),
-            const Text(
-              // X/X SKA ERSÄTTAS MED INDEXPOSITION I FRÅGELISTA SAMT VÄRDE PÅ ANTAL FRÅGOR I SETTINGS
-              "Question x/x",
+            Text(
+              "Question ${gameSession.questionCounter + 1}/${gameSession.gameQuestions.length}",
             ),
             const SizedBox(height: 10),
-            QuestionCard(testQuestion1),
+            QuestionCard(
+              question: gameSession.currentQuestion,
+              isActive: true,
+            ),
             const SizedBox(
               height: 30,
             ),
           ],
         ),
       ),
-    );
+    ));
   }
 }
 
@@ -81,8 +85,8 @@ class _CountDownTimerState extends State<CountDownTimer> {
           isTimerTextShown: true,
           autoStart: true,
           onComplete: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => AnswerView()));
+            //Navigator.push(
+            //    context, MaterialPageRoute(builder: (context) => AnswerView()));
           },
         )
       ],

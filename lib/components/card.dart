@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:template/data/question.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/views/answer_view.dart';
 import 'package:template/test/test_file.dart';
 
+import '../data/game_session.dart';
+
 class QuestionCard extends StatelessWidget {
   Question question;
+  bool isActive;
 
-  QuestionCard(this.question);
+  QuestionCard({required this.question, required this.isActive});
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +49,10 @@ class QuestionCard extends StatelessWidget {
             ),
             const Spacer(),
             Column(children: [
-              OptionsRow('A', options[0], categoryColor, question),
-              OptionsRow('B', options[1], categoryColor, question),
-              OptionsRow('C', options[2], categoryColor, question),
-              OptionsRow('D', options[3], categoryColor, question),
+              OptionsRow('A', options[0], categoryColor, question, isActive),
+              OptionsRow('B', options[1], categoryColor, question, isActive),
+              OptionsRow('C', options[2], categoryColor, question, isActive),
+              OptionsRow('D', options[3], categoryColor, question, isActive),
             ])
           ])
         ],
@@ -65,16 +69,22 @@ class OptionsRow extends StatelessWidget {
   Color tileColor = Themes.colors.white;
   Color circleColor = Themes.colors.white;
   Question question;
+  bool isActive;
   var icon = null;
 
-  OptionsRow(
-      this.leadingLetter, this.option, this.categoryColor, this.question);
+  OptionsRow(this.leadingLetter, this.option, this.categoryColor, this.question,
+      this.isActive);
 
   @override
   Widget build(BuildContext context) {
-    if (listAnswersTest.asMap().containsKey(question.index)) {
-      if (listAnswersTest[question.index] == option) {
-        if (listAnswersTest[question.index] == question.correctAnswer) {
+    if (isActive == false) {
+      String playerAnswer = Provider.of<GameSession>(context, listen: false)
+          .player
+          .playerAnswers[question.index];
+      String correctAnswer = question.correctAnswer;
+      // Om kortet inte är aktivt så skall detta rätt samt eventuella felaktiga svaret ritas ut
+      if (playerAnswer == option) {
+        if (playerAnswer == correctAnswer) {
           borderColor = Themes.colors.green;
           tileColor = Themes.colors.greenLight;
           circleColor = Themes.colors.green;
@@ -88,7 +98,7 @@ class OptionsRow extends StatelessWidget {
             color: Colors.white,
           );
         }
-      } else if (option == question.correctAnswer) {
+      } else if (option == correctAnswer) {
         borderColor = Themes.colors.green;
         tileColor = Themes.colors.greenLight;
         circleColor = Themes.colors.greenLight;
@@ -136,10 +146,16 @@ class OptionsRow extends StatelessWidget {
               border: Border.all(width: 2, color: borderColor),
             ),
           ),
-          onTap: (() {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => AnswerView()));
-          }),
+          onTap: (isActive == true)
+              ? (() {
+                  Provider.of<GameSession>(context, listen: false)
+                      .player
+                      .playerAnswers
+                      .add(option);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => AnswerView()));
+                })
+              : null,
         ),
       ),
     );

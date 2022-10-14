@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:template/components/nav_button.dart';
+import 'package:template/data/game_session.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/views/settings_view.dart';
+import 'package:provider/provider.dart';
 
 class StartView extends StatelessWidget {
   @override
@@ -24,6 +26,7 @@ class StartView extends StatelessWidget {
               height: 50,
               color: Themes.colors.blueDark,
               onPressed: () {
+                //Provider.of<GameSession>(context, listen: false).startGame();
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => SettingsView()));
               },

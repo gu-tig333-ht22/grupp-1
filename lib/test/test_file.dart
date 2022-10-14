@@ -15,11 +15,4 @@ Question testQuestion1 = Question(
     difficulty: 'Ganska lätt',
     index: 0);
 
-List<Widget> questions = [
-  QuestionCard(testQuestion1),
-  QuestionCard(testQuestion1),
-  QuestionCard(testQuestion1),
-  QuestionCard(testQuestion1),
-];
-
 List listAnswersTest = [];

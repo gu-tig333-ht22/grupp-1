@@ -40,4 +40,20 @@ class Settings {
   void setDifficulty(String newDifficulty) {
     _difficulty = newDifficulty;
   }
+
+  void setTimePerQuestion(int newTime) {
+    _timePerQuestion = newTime;
+  }
+
+  void setNumberOfQuestions(int newNumberOfQuestions) {
+    _numberOfQuestions = newNumberOfQuestions;
+  }
+
+  void updateSelectedCategories(String category) {
+    if (_selectedCategories.contains(category)) {
+      _selectedCategories.remove(category);
+    } else {
+      _selectedCategories.add(category);
+    }
+  }
 }

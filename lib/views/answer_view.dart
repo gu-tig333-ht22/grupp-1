@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:template/components/card.dart';
 import 'package:template/components/gradient_circle.dart';
 import 'package:template/test/test_file.dart';
 import 'package:template/theme/theme.dart';
+import 'package:template/data/game_session.dart';
+import 'package:template/views/question_view.dart';
+import 'package:template/views/summary_view.dart';
 
 class AnswerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWithBackground(
-      child: InkWell(
-        onTap: () => Navigator.pop(
-            context), // SKA TA BORT GJORT KORT UR LISTAN I GAMESESSION
+        child: Consumer<GameSession>(
+      builder: (context, gameSession, child) => InkWell(
+        onTap: () {
+          gameSession.increaseQuestionCounter();
+          if (gameSession.questionCounter >= gameSession.gameQuestions.length) {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => SummaryView()));
+          } else {
+            Navigator.pop(context);
+          }
+        },
         child: Center(
           child: Column(
             children: [
@@ -18,15 +30,15 @@ class AnswerView extends StatelessWidget {
               Text('Score: 5', style: Themes.textStyle.headline1),
               const Spacer(),
               AnswerBalls(),
-              // HÄR HAMNAR SCORE OCH BOLLAR
-              //const SizedBox(height: 30),
               const Spacer(),
               Text(
                 // X/X SKA ERSÄTTAS MED INDEXPOSITION I FRÅGELISTA SAMT VÄRDE PÅ ANTAL FRÅGOR I SETTINGS
-                "Question x/x", style: Themes.textStyle.headline2,
+                "Question ${gameSession.questionCounter + 1}/${gameSession.gameQuestions.length}",
+                style: Themes.textStyle.headline2,
               ),
               const SizedBox(height: 10),
-              QuestionCard(testQuestion1),
+              QuestionCard(
+                  question: gameSession.currentQuestion, isActive: false),
               const SizedBox(
                 height: 30,
               ),
@@ -34,7 +46,7 @@ class AnswerView extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ));
   }
 }
 
@@ -74,7 +86,7 @@ class AnswerBalls extends StatelessWidget {
             child: Text(ball, style: Themes.textStyle.headline3));
       }
     }).toList();
-    // FUNDERA PÅ MITTENCIRKEL STÖRRE
+    // FUNDERA PÅ MITTENCIRKEL STÖRRE -- GÖR TILL EN CYLINDERSCROLL?!
     return Container(
       width: deviceWidth * 0.8,
       child: Wrap(

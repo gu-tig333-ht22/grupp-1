@@ -5,6 +5,7 @@
 //
 import 'package:flutter/material.dart';
 import 'package:template/data/http_request.dart';
+import 'package:template/data/player.dart';
 import 'package:template/data/question.dart';
 import 'package:template/data/settings.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,54 +16,60 @@ import '../views/answer_view.dart';
 import '../views/summary_view.dart';
 
 class GameSession extends ChangeNotifier {
-  late Settings settings;
+  late Settings settings = Settings();
   HttpConection httpConection = HttpConection();
   bool blured = false;
   List get chosenCategories => settings.categories;
   String get chosenDifficulty => settings.difficulty;
   late List<Question> gameQuestions;
-  int questionCounter = 0;
+
   late Question currentQuestion = gameQuestions[questionCounter];
+  late Player player;
+  late int questionCounter;
 
   bool loading = false;
 
-  /// Startar ett nytt spel med nya settings.
-  void createNewGame() {
-    settings = Settings();
-  }
-
   Future startGame() async {
     loading = true;
+    player = Player();
     notifyListeners();
-    gameQuestions = await httpConection.getQuestions(settings: settings);
     questionCounter = 0;
+    gameQuestions = await httpConection.getQuestions(settings: settings);
+
     loading = false;
     notifyListeners();
-    // Anropar question_view,  nja vi kommer gå till sidan direkt ändå
   }
 
   /// Returnerar alla frågor
-  List<Question> getQuestions() => gameQuestions;
-
-  // Question_view
-  // Bygger card med List<Questions>[index = counter]
-  // Card on tap anropar answer_view
-
-  // Answer_view
-  // Bygger card med List<Questions>[index = counter]
-  // Filter över hela skärmen. On tap anropar funktion:
-  // if counter == List<Questions>.lenght => anropar summar_view
-  // else anropar question_view
-
-  void nextQuestion(context) {}
+  //List<Question> getQuestions() => gameQuestions;
 
   void updateCategory(categoryName) {
-    if (settings.categories.contains(categoryName)) {
-      settings.categories.remove(categoryName);
-    } else {
-      settings.categories.add(categoryName);
-    }
+    settings.updateSelectedCategories(categoryName);
     notifyListeners();
+  }
+
+  void increaseQuestionCounter() {
+    questionCounter++;
+    currentQuestion = gameQuestions[questionCounter];
+    notifyListeners();
+  }
+
+  void updateNumberOfQuestion(double numberOfQuestions) {
+    settings.setNumberOfQuestions(numberOfQuestions.round());
+    notifyListeners(); // skall det vara det
+  }
+
+  double getNumberOfQuestion() {
+    return settings.numberOfQuestions.toDouble();
+  }
+
+  void updateTimePerQuestion(double newTime) {
+    settings.setTimePerQuestion(newTime.round());
+    notifyListeners(); // skall det vara det
+  }
+
+  double getTimePerQuestion() {
+    return settings.timePerQuestion.toDouble();
   }
 
   void updateDifficulty(String newDifficulty) {

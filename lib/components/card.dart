@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:template/data/question.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/views/answer_view.dart';
 import 'package:template/test/test_file.dart';
+
+import '../data/game_session.dart';
 
 class QuestionCard extends StatelessWidget {
   Question question;
@@ -75,28 +78,30 @@ class OptionsRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isActive == false) {
+      String playerAnswer = Provider.of<GameSession>(context, listen: false)
+          .player
+          .playerAnswers[question.index];
+      String correctAnswer = question.correctAnswer;
       // Om kortet inte är aktivt så skall detta rätt samt eventuella felaktiga svaret ritas ut
-      if (listAnswersTest.asMap().containsKey(question.index)) {
-        if (listAnswersTest[question.index] == option) {
-          if (listAnswersTest[question.index] == question.correctAnswer) {
-            borderColor = Themes.colors.green;
-            tileColor = Themes.colors.greenLight;
-            circleColor = Themes.colors.green;
-            icon = Icon(Themes.icons.correct, color: Colors.white);
-          } else {
-            borderColor = Themes.colors.red;
-            tileColor = Themes.colors.redLight;
-            circleColor = Themes.colors.red;
-            icon = Icon(
-              Themes.icons.wrong,
-              color: Colors.white,
-            );
-          }
-        } else if (option == question.correctAnswer) {
+      if (playerAnswer == option) {
+        if (playerAnswer == correctAnswer) {
           borderColor = Themes.colors.green;
           tileColor = Themes.colors.greenLight;
-          circleColor = Themes.colors.greenLight;
+          circleColor = Themes.colors.green;
+          icon = Icon(Themes.icons.correct, color: Colors.white);
+        } else {
+          borderColor = Themes.colors.red;
+          tileColor = Themes.colors.redLight;
+          circleColor = Themes.colors.red;
+          icon = Icon(
+            Themes.icons.wrong,
+            color: Colors.white,
+          );
         }
+      } else if (option == correctAnswer) {
+        borderColor = Themes.colors.green;
+        tileColor = Themes.colors.greenLight;
+        circleColor = Themes.colors.greenLight;
       }
     }
 
@@ -143,6 +148,10 @@ class OptionsRow extends StatelessWidget {
           ),
           onTap: (isActive == true)
               ? (() {
+                  Provider.of<GameSession>(context, listen: false)
+                      .player
+                      .playerAnswers
+                      .add(option);
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => AnswerView()));
                 })

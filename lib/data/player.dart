@@ -16,6 +16,7 @@ class Player {
   int _streakCounter = 0; // if we deside to implement streakCounter
   int _longestStreak = 0; // or change score per question we also
   int _correctAnswers = 0; // need to track number of correct answers
+
   final List<String> _playerAnswers =
       []; // if string = "No answer" => player out of time
   List<bool> _boolAnswers = [];

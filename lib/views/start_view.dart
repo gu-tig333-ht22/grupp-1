@@ -26,8 +26,7 @@ class StartView extends StatelessWidget {
               height: 50,
               color: Themes.colors.blueDark,
               onPressed: () {
-                Provider.of<GameSession>(context, listen: false)
-                    .createNewGame();
+                //Provider.of<GameSession>(context, listen: false).startGame();
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => SettingsView()));
               },

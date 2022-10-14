@@ -22,7 +22,7 @@ class QuestionView extends StatelessWidget {
             //const SizedBox(height: 30),
             const Spacer(),
             Text(
-              "Question ${gameSession.questionCounter}/${gameSession.gameQuestions.length}",
+              "Question ${gameSession.questionCounter + 1}/${gameSession.gameQuestions.length}",
             ),
             const SizedBox(height: 10),
             QuestionCard(
@@ -85,8 +85,8 @@ class _CountDownTimerState extends State<CountDownTimer> {
           isTimerTextShown: true,
           autoStart: true,
           onComplete: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => AnswerView()));
+            //Navigator.push(
+            //    context, MaterialPageRoute(builder: (context) => AnswerView()));
           },
         )
       ],

@@ -354,8 +354,7 @@ class DifficultyRow extends StatelessWidget {
   Widget _Difficultybutton(
       context, String newDifficulty, String setDifficulty, color) {
     double opacity = 0.4;
-    String test = newDifficulty.toLowerCase();
-    if (test == setDifficulty) {
+    if (newDifficulty.toLowerCase() == setDifficulty) {
       opacity = 1;
     }
     return Opacity(

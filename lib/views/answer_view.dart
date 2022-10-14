@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:template/components/card.dart';
 import 'package:template/components/gradient_circle.dart';
 import 'package:template/test/test_file.dart';
 import 'package:template/theme/theme.dart';
+import 'package:template/data/game_session.dart';
 
 class AnswerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWithBackground(
       child: InkWell(
-        onTap: () => Navigator.pop(
-            context), // SKA TA BORT GJORT KORT UR LISTAN I GAMESESSION
+        onTap: () => Provider.of<GameSession>(context, listen: false)
+            .nextQuestion(context),
         child: Center(
           child: Column(
             children: [
@@ -26,7 +28,7 @@ class AnswerView extends StatelessWidget {
                 "Question x/x", style: Themes.textStyle.headline2,
               ),
               const SizedBox(height: 10),
-              QuestionCard(testQuestion1),
+              QuestionCard(question: testQuestion1, isActive: false),
               const SizedBox(
                 height: 30,
               ),

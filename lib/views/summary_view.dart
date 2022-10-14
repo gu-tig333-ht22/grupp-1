@@ -38,7 +38,7 @@ class SummaryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldWithBackground(
         child: Consumer<GameSession>(
-      builder: (context, notifierSnabbsaldo, child) => Stack(
+      builder: (context, gameSession, child) => Stack(
         children: [
           Padding(
             padding: EdgeInsets.all(35),
@@ -81,7 +81,11 @@ class SummaryView extends StatelessWidget {
 
   Widget _card(context) {
     if (Provider.of<GameSession>(context, listen: false).blured) {
-      return Center(child: QuestionCard(testQuestion1));
+      return Center(
+          child: QuestionCard(
+        question: testQuestion1,
+        isActive: false,
+      ));
     } else {
       return Container();
     }

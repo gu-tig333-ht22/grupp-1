@@ -22,6 +22,9 @@ class GameSession extends ChangeNotifier {
   String get chosenDifficulty => settings.difficulty;
   late List<Question> gameQuestions;
   int questionCounter = 0;
+  late Question currentQuestion = gameQuestions[questionCounter];
+
+  bool loading = false;
 
   /// Startar ett nytt spel med nya settings.
   void createNewGame() {
@@ -29,10 +32,13 @@ class GameSession extends ChangeNotifier {
   }
 
   Future startGame() async {
+    loading = true;
+    notifyListeners();
     gameQuestions = await httpConection.getQuestions(settings: settings);
     questionCounter = 0;
-
-    // Anropar question_view
+    loading = false;
+    notifyListeners();
+    // Anropar question_view,  nja vi kommer gå till sidan direkt ändå
   }
 
   /// Returnerar alla frågor
@@ -51,10 +57,10 @@ class GameSession extends ChangeNotifier {
   void nextQuestion(context) {
     questionCounter += 1;
     if (questionCounter == gameQuestions.length) {
-      Navigator.pop(
+      Navigator.push(
           context, MaterialPageRoute(builder: (context) => SummaryView()));
     } else {
-      Navigator.push(
+      Navigator.pop(
           context, MaterialPageRoute(builder: (context) => AnswerView()));
     }
   }

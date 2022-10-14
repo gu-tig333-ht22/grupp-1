@@ -6,8 +6,9 @@ import 'package:template/test/test_file.dart';
 
 class QuestionCard extends StatelessWidget {
   Question question;
+  bool isActive;
 
-  QuestionCard(this.question);
+  QuestionCard({required this.question, required this.isActive});
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +46,10 @@ class QuestionCard extends StatelessWidget {
             ),
             const Spacer(),
             Column(children: [
-              OptionsRow('A', options[0], categoryColor, question),
-              OptionsRow('B', options[1], categoryColor, question),
-              OptionsRow('C', options[2], categoryColor, question),
-              OptionsRow('D', options[3], categoryColor, question),
+              OptionsRow('A', options[0], categoryColor, question, isActive),
+              OptionsRow('B', options[1], categoryColor, question, isActive),
+              OptionsRow('C', options[2], categoryColor, question, isActive),
+              OptionsRow('D', options[3], categoryColor, question, isActive),
             ])
           ])
         ],
@@ -65,33 +66,37 @@ class OptionsRow extends StatelessWidget {
   Color tileColor = Themes.colors.white;
   Color circleColor = Themes.colors.white;
   Question question;
+  bool isActive;
   var icon = null;
 
-  OptionsRow(
-      this.leadingLetter, this.option, this.categoryColor, this.question);
+  OptionsRow(this.leadingLetter, this.option, this.categoryColor, this.question,
+      this.isActive);
 
   @override
   Widget build(BuildContext context) {
-    if (listAnswersTest.asMap().containsKey(question.index)) {
-      if (listAnswersTest[question.index] == option) {
-        if (listAnswersTest[question.index] == question.correctAnswer) {
+    if (isActive == false) {
+      // Om kortet inte är aktivt så skall detta rätt samt eventuella felaktiga svaret ritas ut
+      if (listAnswersTest.asMap().containsKey(question.index)) {
+        if (listAnswersTest[question.index] == option) {
+          if (listAnswersTest[question.index] == question.correctAnswer) {
+            borderColor = Themes.colors.green;
+            tileColor = Themes.colors.greenLight;
+            circleColor = Themes.colors.green;
+            icon = Icon(Themes.icons.correct, color: Colors.white);
+          } else {
+            borderColor = Themes.colors.red;
+            tileColor = Themes.colors.redLight;
+            circleColor = Themes.colors.red;
+            icon = Icon(
+              Themes.icons.wrong,
+              color: Colors.white,
+            );
+          }
+        } else if (option == question.correctAnswer) {
           borderColor = Themes.colors.green;
           tileColor = Themes.colors.greenLight;
-          circleColor = Themes.colors.green;
-          icon = Icon(Themes.icons.correct, color: Colors.white);
-        } else {
-          borderColor = Themes.colors.red;
-          tileColor = Themes.colors.redLight;
-          circleColor = Themes.colors.red;
-          icon = Icon(
-            Themes.icons.wrong,
-            color: Colors.white,
-          );
+          circleColor = Themes.colors.greenLight;
         }
-      } else if (option == question.correctAnswer) {
-        borderColor = Themes.colors.green;
-        tileColor = Themes.colors.greenLight;
-        circleColor = Themes.colors.greenLight;
       }
     }
 
@@ -136,10 +141,12 @@ class OptionsRow extends StatelessWidget {
               border: Border.all(width: 2, color: borderColor),
             ),
           ),
-          onTap: (() {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => AnswerView()));
-          }),
+          onTap: (isActive == true)
+              ? (() {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => AnswerView()));
+                })
+              : null,
         ),
       ),
     );

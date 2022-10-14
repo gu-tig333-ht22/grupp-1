@@ -21,16 +21,7 @@ List<bool> listAnswers = [
   false,
   true,
   false,
-  true,
-  false,
-  false,
-  true,
-  false,
-  true,
-  false,
-  false,
-  true,
-  false,
+
 ];
 List categories =
     ThemeCategories().listCategories + ThemeCategories().listCategories;

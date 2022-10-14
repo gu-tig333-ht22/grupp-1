@@ -318,7 +318,7 @@ class DifficultyRow extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Difficulty: $difficulty',
+          'Difficulty',
           style: TextStyle(color: Themes.colors.white, fontSize: 15),
         ),
         SizedBox(height: 5),

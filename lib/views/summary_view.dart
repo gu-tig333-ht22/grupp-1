@@ -47,12 +47,20 @@ class SummaryView extends StatelessWidget {
                   height: 30,
                 ),
                 NavigationButton(
-                    buttonText: "End game",
-                    isActive: true,
-                    onPressed: () {
-                      Navigator.pop(context,
-                          MaterialPageRoute(builder: (context) => StartView()));
-                    }),
+                  text: Text(
+                    "End game",
+                    style: Themes.textStyle.headline1,
+                  ),
+                  width: 250,
+                  height: 50,
+                  color: Themes.colors.blueDark,
+                  onPressed: () {
+                    Provider.of<GameSession>(context, listen: false)
+                        .createNewGame();
+                    Navigator.pop(context,
+                        MaterialPageRoute(builder: (context) => StartView()));
+                  },
+                ),
               ],
             ),
           ),

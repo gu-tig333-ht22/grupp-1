@@ -80,11 +80,7 @@ class GameSession extends ChangeNotifier {
   }
 
   void setblured() {
-    if (blured == true) {
-      blured = false;
-    } else {
-      blured = true;
-    }
+    blured = !blured;
     notifyListeners();
   }
 }

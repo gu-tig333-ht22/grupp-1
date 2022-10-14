@@ -3,6 +3,7 @@ import 'package:flutter_octicons/flutter_octicons.dart';
 import 'package:provider/provider.dart';
 import 'package:template/components/nav_button.dart';
 import 'package:template/theme/theme.dart';
+import 'package:template/views/question_view.dart';
 import '../data/game_session.dart';
 
 class SettingsView extends StatelessWidget {
@@ -35,7 +36,19 @@ class SettingsView extends StatelessWidget {
               ),
               DifficultyRow(),
               const Spacer(),
-              StartButton(),
+              NavigationButton(
+                text: Text(
+                  "Start",
+                  style: Themes.textStyle.headline1,
+                ),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => QuestionView()));
+                },
+                width: 250,
+                height: 50,
+                color: Themes.colors.blueDark,
+              ),
               const Spacer(),
             ],
           ),
@@ -298,28 +311,9 @@ class _TimeSliderState extends State<TimeSlider> {
 class DifficultyRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    String difficulty = Provider.of<GameSession>(context).chosenDifficulty;
-    double easyOpacity = 0.4;
-    double mediumOpacity = 1;
-    double hardOpacity = 0.4;
+    String difficulty =
+        Provider.of<GameSession>(context, listen: true).chosenDifficulty;
 
-    if (difficulty == "easy") {
-      easyOpacity = 1;
-      mediumOpacity = 0.4;
-      hardOpacity = 0.4;
-    }
-
-    if (difficulty == "medium") {
-      easyOpacity = 0.4;
-      mediumOpacity = 1;
-      hardOpacity = 0.4;
-    }
-
-    if (difficulty == "hard") {
-      easyOpacity = 0.4;
-      mediumOpacity = 0.4;
-      hardOpacity = 1;
-    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -331,77 +325,48 @@ class DifficultyRow extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            //
-
-            //
-            NavigationButton(
-                text: Text("Easy", style: Themes.textStyle.headline3),
-                width: 80,
-                height: 40,
-                color: Themes.colors.green.withOpacity(easyOpacity),
-                onPressed: () =>
-                    Provider.of<GameSession>(context, listen: false)
-                        .updateDifficulty("easy")),
-
-            //
-
-            NavigationButton(
-                text: Text("Medium", style: Themes.textStyle.headline3),
-                width: 80,
-                height: 40,
-                color: Themes.colors.yellow.withOpacity(mediumOpacity),
-                onPressed: () =>
-                    Provider.of<GameSession>(context, listen: false)
-                        .updateDifficulty("medium")),
-
-            //
-
-            NavigationButton(
-                text: Text("Hard", style: Themes.textStyle.headline3),
-                width: 80,
-                height: 40,
-                color: Themes.colors.red.withOpacity(hardOpacity),
-                onPressed: () =>
-                    Provider.of<GameSession>(context, listen: false)
-                        .updateDifficulty("hard")),
-
-            //
+            _Difficultybutton(
+              context,
+              "Easy",
+              difficulty,
+              Themes.colors.green,
+            ),
+            SizedBox(width: 20),
+            _Difficultybutton(
+              context,
+              "Medium",
+              difficulty,
+              Themes.colors.yellow,
+            ),
+            SizedBox(width: 20),
+            _Difficultybutton(
+              context,
+              "Hard",
+              difficulty,
+              Themes.colors.red,
+            ),
           ],
         ),
       ],
     );
   }
-}
 
-class StartButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        height: 50,
-        width: 120,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Themes.functions.lightenColor(Themes.colors.blueLight, 40),
-              Themes.functions.darkenColor(Themes.colors.blueLight, 60)
-            ],
-            stops: const [
-              0,
-              1,
-            ],
-          ),
-        ),
-        child: TextButton(
-          onPressed: (() {}),
-          child: Text(
-            'Start',
-            style: TextStyle(color: Themes.colors.white),
-          ),
-        ),
+  Widget _Difficultybutton(
+      context, String newDifficulty, String setDifficulty, color) {
+    double opacity = 0.4;
+    String test = newDifficulty.toLowerCase();
+    if (test == setDifficulty) {
+      opacity = 1;
+    }
+    return Opacity(
+      opacity: opacity,
+      child: NavigationButton(
+        text: Text(newDifficulty, style: Themes.textStyle.headline3),
+        width: 80,
+        height: 40,
+        color: color,
+        onPressed: () => Provider.of<GameSession>(context, listen: false)
+            .updateDifficulty(newDifficulty.toLowerCase()),
       ),
     );
   }

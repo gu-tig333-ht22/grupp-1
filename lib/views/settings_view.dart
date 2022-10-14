@@ -41,8 +41,9 @@ class SettingsView extends StatelessWidget {
                   "Start",
                   style: Themes.textStyle.headline1,
                 ),
-                onPressed: () {
+                onPressed: () async {
                   Provider.of<GameSession>(context, listen: false).startGame();
+                  await Future.delayed(const Duration(seconds: 2)); // quickfix
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => QuestionView()));
                 },

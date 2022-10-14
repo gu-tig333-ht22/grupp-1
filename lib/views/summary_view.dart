@@ -6,33 +6,37 @@ import 'package:template/data/game_session.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/test/test_file.dart';
 import 'package:template/components/card.dart';
+import 'package:template/components/nav_button.dart';
+import 'package:template/views/start_view.dart';
+import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 
 List<bool> listAnswers = [
   true,
   false,
   false,
   true,
-  true,
+  false,
   true,
   false,
   false,
   true,
-  true,
+  false,
   true,
   false,
   false,
   true,
-  true,
+  false,
   true,
   false,
   false,
   true,
-  true
+  false,
 ];
 List categories =
     ThemeCategories().listCategories + ThemeCategories().listCategories;
 
 class SummaryView extends StatelessWidget {
+  final _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
     return ScaffoldWithBackground(
@@ -48,6 +52,16 @@ class SummaryView extends StatelessWidget {
                 _scoreTable(),
                 Container(height: 30),
                 _summaryTable(),
+                Container(
+                  height: 30,
+                ),
+                NavigationButton(
+                    buttonText: "End game",
+                    isActive: true,
+                    onPressed: () {
+                      Navigator.pop(context,
+                          MaterialPageRoute(builder: (context) => StartView()));
+                    }),
               ],
             ),
           ),
@@ -149,9 +163,9 @@ class SummaryView extends StatelessWidget {
             style: Themes.textStyle.headline2,
           ),
           Container(
-            height: 0,
+            height: 10,
           ),
-          _listView(listAnswers)
+          _listView(listAnswers),
         ],
       ),
     );
@@ -159,14 +173,16 @@ class SummaryView extends StatelessWidget {
 
   Widget _listView(listAnswers) {
     return Expanded(
-      child: Material(
-        color: Color.fromARGB(0, 255, 255, 255),
-        child: ListView.builder(
-            padding: const EdgeInsets.all(8),
-            itemCount: listAnswers.length,
-            itemBuilder: (BuildContext context, int index) {
-              return _listTile(index, context);
-            }),
+      child: Container(
+        child: FadingEdgeScrollView.fromScrollView(
+          child: ListView.builder(
+              controller: _controller,
+              padding: const EdgeInsets.all(8),
+              itemCount: listAnswers.length,
+              itemBuilder: (BuildContext context, int index) {
+                return _listTile(index, context);
+              }),
+        ),
       ),
     );
   }
@@ -247,4 +263,24 @@ class SummaryView extends StatelessWidget {
           decoration: BoxDecoration(shape: BoxShape.circle, color: color)),
     );
   }
+}
+
+Widget fadeList() {
+  return Expanded(
+    child: ShaderMask(
+      shaderCallback: (Rect bounds) {
+        return LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: <Color>[Colors.transparent, Colors.red],
+        ).createShader(bounds);
+      },
+      child: Container(
+        height: 200,
+        width: 200.0,
+        color: Themes.colors.blueDark,
+      ),
+      blendMode: BlendMode.dstATop,
+    ),
+  );
 }

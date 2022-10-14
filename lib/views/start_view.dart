@@ -16,26 +16,53 @@ class StartView extends StatelessWidget {
             Themes.textStyle.headlineGradient(text: 'Pettersson', fontSize: 44),
             Spacer(),
             NavigationButton(
-              buttonText: "Singleplayer",
+              text: Text(
+                "Singleplayer",
+                style: Themes.textStyle.headline1,
+              ),
+              width: 250,
+              height: 50,
+              color: Themes.colors.blueDark,
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => SettingsView()));
               },
-              isActive: true,
             ),
             const SizedBox(height: 20),
-            NavigationButton(
-              buttonText: "Multiplayer",
-              onPressed: () {},
-              isActive: false,
+            Opacity(
+              opacity: 0.4,
+              child: NavigationButton(
+                text: Text(
+                  "Multiplayer",
+                  style: Themes.textStyle.headline1,
+                ),
+                width: 250,
+                height: 50,
+                color: Themes.colors.blueDark,
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SettingsView()));
+                },
+              ),
             ),
             SizedBox(height: 20),
-            NavigationButton(
-              buttonText: "Highscore",
-              onPressed: () {},
-              isActive: false,
+            Opacity(
+              opacity: 0.4,
+              child: NavigationButton(
+                text: Text(
+                  "Highscore",
+                  style: Themes.textStyle.headline1,
+                ),
+                width: 250,
+                height: 50,
+                color: Themes.colors.blueDark,
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SettingsView()));
+                },
+              ),
             ),
-            SizedBox(height: 150)
+            SizedBox(height: 70),
           ],
         ),
       ),

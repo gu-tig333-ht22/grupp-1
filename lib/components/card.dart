@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:template/data/question.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/views/answer_view.dart';
+import 'package:template/test/test_file.dart';
 
 class QuestionCard extends StatelessWidget {
   Question question;
@@ -14,7 +15,7 @@ class QuestionCard extends StatelessWidget {
     var deviceHeight = MediaQuery.of(context).size.height;
     List<String> options = question.allAnswersInRandomOrder;
     Color categoryColor = Themes.category(question.category).color;
-    Color backgroundColor = Themes.colors.whiteBackground;
+    Color backgroundColor = Themes.colors.white;
     IconData categoryIcon = Themes.category(question.category).icon;
 
     return Container(
@@ -44,10 +45,10 @@ class QuestionCard extends StatelessWidget {
             ),
             const Spacer(),
             Column(children: [
-              OptionsRow('A', options[0], categoryColor),
-              OptionsRow('B', options[1], categoryColor),
-              OptionsRow('C', options[2], categoryColor),
-              OptionsRow('D', options[3], categoryColor),
+              OptionsRow('A', options[0], categoryColor, question),
+              OptionsRow('B', options[1], categoryColor, question),
+              OptionsRow('C', options[2], categoryColor, question),
+              OptionsRow('D', options[3], categoryColor, question),
             ])
           ])
         ],
@@ -60,18 +61,46 @@ class OptionsRow extends StatelessWidget {
   String option = 'Option is missing.';
   String leadingLetter;
   Color categoryColor;
+  Color borderColor = Themes.colors.grey;
+  Color tileColor = Themes.colors.white;
+  Color circleColor = Themes.colors.white;
+  Question question;
+  var icon = null;
 
-  OptionsRow(this.leadingLetter, this.option, this.categoryColor);
+  OptionsRow(
+      this.leadingLetter, this.option, this.categoryColor, this.question);
 
   @override
   Widget build(BuildContext context) {
-    var borderColor = Themes.colors.grey;
+    if (listAnswersTest.asMap().containsKey(question.index)) {
+      if (listAnswersTest[question.index] == option) {
+        if (listAnswersTest[question.index] == question.correctAnswer) {
+          borderColor = Themes.colors.green;
+          tileColor = Themes.colors.greenLight;
+          circleColor = Themes.colors.green;
+          icon = Icon(Themes.icons.correct, color: Colors.white);
+        } else {
+          borderColor = Themes.colors.red;
+          tileColor = Themes.colors.redLight;
+          circleColor = Themes.colors.red;
+          icon = Icon(
+            Themes.icons.wrong,
+            color: Colors.white,
+          );
+        }
+      } else if (option == question.correctAnswer) {
+        borderColor = Themes.colors.green;
+        tileColor = Themes.colors.greenLight;
+        circleColor = Themes.colors.greenLight;
+      }
+    }
 
     return Material(
       color: const Color.fromARGB(0, 255, 255, 255),
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: ListTile(
+          tileColor: tileColor,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
               side: BorderSide(width: 2, color: borderColor)),
@@ -98,9 +127,11 @@ class OptionsRow extends StatelessWidget {
             ),
           ]),
           trailing: Container(
+            child: icon,
             width: 28,
             height: 28,
             decoration: BoxDecoration(
+              color: circleColor,
               borderRadius: BorderRadius.circular(15),
               border: Border.all(width: 2, color: borderColor),
             ),

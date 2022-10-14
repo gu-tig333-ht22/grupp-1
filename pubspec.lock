@@ -129,7 +129,9 @@ packages:
       name: material_color_utilities
       url: "https://pub.dartlang.org"
     source: hosted
+
     version: "0.2.0"
+
   meta:
     dependency: transitive
     description:
@@ -176,7 +178,9 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
+
     version: "1.9.1"
+
   stack_trace:
     dependency: transitive
     description:
@@ -211,7 +215,10 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
+
     version: "0.4.14"
+
+
   typed_data:
     dependency: transitive
     description:

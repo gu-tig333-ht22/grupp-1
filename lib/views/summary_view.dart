@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:template/components/gradient_circle.dart';
 import 'package:template/data/game_session.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/test/test_file.dart';
@@ -126,7 +127,7 @@ class SummaryView extends StatelessWidget {
       {required int number, required String text, required Color color}) {
     return Column(
       children: [
-        Themes.icons.circle(
+        GradientCircle(
             child: Text(
               number.toString(),
               style: Themes.textStyle.headline1,
@@ -232,7 +233,7 @@ class SummaryView extends StatelessWidget {
         child: Center(
             child: Icon(
           categories[index].icon,
-          color: Themes.colors.whiteBackground,
+          color: Themes.colors.white,
           size: 14,
         )),
       ),
@@ -247,10 +248,8 @@ class SummaryView extends StatelessWidget {
           width: size,
           height: size,
           child: bool
-              ? Icon(Themes.icons.correct,
-                  size: 12, color: Themes.colors.whiteBackground)
-              : Icon(Themes.icons.wrong,
-                  size: 12, color: Themes.colors.whiteBackground),
+              ? Icon(Themes.icons.correct, size: 12, color: Themes.colors.white)
+              : Icon(Themes.icons.wrong, size: 12, color: Themes.colors.white),
           decoration: BoxDecoration(shape: BoxShape.circle, color: color)),
     );
   }

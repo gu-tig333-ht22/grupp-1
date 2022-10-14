@@ -38,7 +38,7 @@ class Player {
   /// Call if player answers correctly we increse score by 1, streakCounter by 1
   /// and correctAnswers by 1. The longest streak is also updatet. Also add
   /// newAnswer(string) to playerAnswers.
-  void correctAnswer({required String newAnswer}) {
+  void correctAnswer() {
     _streakCounter += 1;
     if (_streakCounter > _longestStreak) {
       _longestStreak = _streakCounter;
@@ -49,7 +49,6 @@ class Player {
       _score += 1;
     }
     _correctAnswers += 1;
-    _playerAnswers.add(newAnswer);
     _boolAnswers.add(true);
   }
 

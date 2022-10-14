@@ -40,8 +40,15 @@ class GameSession extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Returnerar alla frågor
-  //List<Question> getQuestions() => gameQuestions;
+  void calculatePlayerScore(String answer) {
+    player.playerAnswers.add(answer);
+    if (player.playerAnswers[questionCounter] ==
+        currentQuestion.correctAnswer) {
+      player.correctAnswer();
+    } else {
+      player.incorrectAnswer();
+    }
+  }
 
   void updateCategory(categoryName) {
     settings.updateSelectedCategories(categoryName);

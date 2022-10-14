@@ -149,9 +149,7 @@ class OptionsRow extends StatelessWidget {
           onTap: (isActive == true)
               ? (() {
                   Provider.of<GameSession>(context, listen: false)
-                      .player
-                      .playerAnswers
-                      .add(option);
+                      .calculatePlayerScore(option);
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => AnswerView()));
                 })

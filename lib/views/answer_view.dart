@@ -27,7 +27,8 @@ class AnswerView extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 40),
-              Text('Score: 5', style: Themes.textStyle.headline1),
+              Text('Score: ${gameSession.player.score}',
+                  style: Themes.textStyle.headline1),
               const Spacer(),
               AnswerBalls(),
               const Spacer(),

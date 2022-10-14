@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:template/components/card.dart';
-import 'package:template/data'
+import 'package:template/data/game_session.dart';
 
 import 'dart:math' as math;
 

@@ -22,7 +22,6 @@ List<bool> listAnswers = [
   false,
   true,
   false,
-
 ];
 List categories =
     ThemeCategories().listCategories + ThemeCategories().listCategories;
@@ -253,24 +252,4 @@ class SummaryView extends StatelessWidget {
           decoration: BoxDecoration(shape: BoxShape.circle, color: color)),
     );
   }
-}
-
-Widget fadeList() {
-  return Expanded(
-    child: ShaderMask(
-      shaderCallback: (Rect bounds) {
-        return LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: <Color>[Colors.transparent, Colors.red],
-        ).createShader(bounds);
-      },
-      child: Container(
-        height: 200,
-        width: 200.0,
-        color: Themes.colors.blueDark,
-      ),
-      blendMode: BlendMode.dstATop,
-    ),
-  );
 }

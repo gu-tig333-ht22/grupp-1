@@ -54,16 +54,7 @@ class GameSession extends ChangeNotifier {
   // if counter == List<Questions>.lenght => anropar summar_view
   // else anropar question_view
 
-  void nextQuestion(context) {
-    questionCounter += 1;
-    if (questionCounter == gameQuestions.length) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => SummaryView()));
-    } else {
-      Navigator.pop(
-          context, MaterialPageRoute(builder: (context) => AnswerView()));
-    }
-  }
+  void nextQuestion(context) {}
 
   void updateCategory(categoryName) {
     if (settings.categories.contains(categoryName)) {

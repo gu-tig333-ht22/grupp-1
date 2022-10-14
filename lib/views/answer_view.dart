@@ -20,12 +20,11 @@ class AnswerView extends StatelessWidget {
               Text('Score: 5', style: Themes.textStyle.headline1),
               const Spacer(),
               AnswerBalls(),
-              // HÄR HAMNAR SCORE OCH BOLLAR
-              //const SizedBox(height: 30),
               const Spacer(),
               Text(
                 // X/X SKA ERSÄTTAS MED INDEXPOSITION I FRÅGELISTA SAMT VÄRDE PÅ ANTAL FRÅGOR I SETTINGS
-                "Question x/x", style: Themes.textStyle.headline2,
+                "Question ${gameSession.questionCounter}/${gameSession.gameQuestions.length}",
+                style: Themes.textStyle.headline2,
               ),
               const SizedBox(height: 10),
               QuestionCard(question: testQuestion1, isActive: false),

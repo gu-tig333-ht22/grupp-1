@@ -16,7 +16,7 @@ class AnswerView extends StatelessWidget {
       builder: (context, gameSession, child) => InkWell(
         onTap: () {
           gameSession.increaseQuestionCounter();
-          if (gameSession.questionCounter >= gameSession.gameQuestions.length) {
+          if (gameSession.questionCounter == gameSession.gameQuestions.length) {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => SummaryView()));
           } else {

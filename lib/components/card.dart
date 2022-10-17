@@ -159,8 +159,9 @@ class OptionsRow extends StatelessWidget {
               ? (() {
                   Provider.of<GameSession>(context, listen: false)
                       .calculatePlayerScore(option);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AnswerView()));
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) => AnswerView()),
+                      ((route) => false));
                 })
               : null,
         ),

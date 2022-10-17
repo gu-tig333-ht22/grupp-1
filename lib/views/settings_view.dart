@@ -35,6 +35,19 @@ class SettingsView extends StatelessWidget {
                 height: 20,
               ),
               DifficultyRow(),
+              const SizedBox(
+                height: 20,
+              ),
+              NavigationButton(
+                  text:
+                      Text("Reset settings", style: Themes.textStyle.headline3),
+                  onPressed: () {
+                    Provider.of<GameSession>(context, listen: false)
+                        .resetSettings();
+                  },
+                  width: 140,
+                  height: 35,
+                  color: Themes.colors.grey),
               const Spacer(),
               NavigationButton(
                 text: Text(

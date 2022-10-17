@@ -81,7 +81,7 @@ class ThemeCategories {
         color: Themes.colors.artLiterature,
         icon: Icons.color_lens),
     ThemeCategory(
-        name: 'Film & TV', color: Themes.colors.filmTv, icon: Icons.delete),
+        name: 'Film & TV', color: Themes.colors.filmTv, icon: Icons.movie),
     ThemeCategory(
         name: 'Food & Drink',
         color: Themes.colors.foodDrink,

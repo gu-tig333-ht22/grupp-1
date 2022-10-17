@@ -110,7 +110,7 @@ class OptionsRow extends StatelessWidget {
       } else if (playerAnswer == "No answer") {
         borderColor = Themes.colors.red;
         tileColor = Themes.colors.redLight;
-        circleColor = Themes.colors.red;
+        circleColor = Themes.colors.redLight;
       }
     }
 

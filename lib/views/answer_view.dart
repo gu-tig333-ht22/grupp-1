@@ -16,11 +16,14 @@ class AnswerView extends StatelessWidget {
       builder: (context, gameSession, child) => InkWell(
         onTap: () {
           gameSession.increaseQuestionCounter();
-          if (gameSession.questionCounter == gameSession.gameQuestions.length) {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => SummaryView()));
+          if (gameSession.questionCounter >= gameSession.gameQuestions.length) {
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => SummaryView()),
+                ((route) => false));
           } else {
-            Navigator.pop(context);
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => QuestionView()),
+                ((route) => false));
           }
         },
         child: Center(

@@ -61,7 +61,6 @@ class GameSession extends ChangeNotifier {
   void increaseQuestionCounter() {
     questionCounter++;
     if (questionCounter < gameQuestions.length) {
-      notifyListeners();
       currentQuestion = gameQuestions[questionCounter];
     }
   }

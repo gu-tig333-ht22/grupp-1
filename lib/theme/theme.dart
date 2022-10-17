@@ -149,9 +149,9 @@ class ThemeTextStyles {
   final TextStyle headline3 =
       TextStyle(fontSize: 15, color: Themes.colors.white);
   final TextStyle questionText =
-      TextStyle(fontSize: 18, color: Themes.colors.textGrey);
+      TextStyle(fontSize: 16, color: Themes.colors.textGrey);
   final TextStyle answerText =
-      TextStyle(fontSize: 14, color: Themes.colors.textGrey);
+      TextStyle(fontSize: 12, color: Themes.colors.textGrey);
   GradientText headlineGradient(
       {required String text, required double fontSize}) {
     return GradientText(

@@ -94,7 +94,7 @@ class SummaryView extends StatelessWidget {
       return Center(
           child: QuestionCard(
         question: testQuestion1,
-        isActive: false,
+        answerable: false,
       ));
     } else {
       return Container();

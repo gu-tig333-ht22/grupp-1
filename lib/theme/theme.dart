@@ -77,7 +77,7 @@ class ThemeCategory {
 class ThemeCategories {
   final List<ThemeCategory> listCategories = [
     ThemeCategory(
-        name: 'Art & Literature',
+        name: 'Arts & Literature',
         color: Themes.colors.artLiterature,
         icon: Icons.color_lens),
     ThemeCategory(
@@ -93,9 +93,9 @@ class ThemeCategories {
     ThemeCategory(
         name: 'Geography', color: Themes.colors.geography, icon: Icons.public),
     ThemeCategory(
-        name: 'History', color: Themes.colors.history, icon: Icons.music_note),
+        name: 'History', color: Themes.colors.history, icon: Icons.castle),
     ThemeCategory(
-        name: 'Music', color: Themes.colors.music, icon: Icons.castle),
+        name: 'Music', color: Themes.colors.music, icon: Icons.music_note),
     ThemeCategory(
         name: 'Science', color: Themes.colors.science, icon: Icons.science),
     ThemeCategory(

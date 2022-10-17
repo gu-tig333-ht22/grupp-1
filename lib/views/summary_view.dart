@@ -11,11 +11,15 @@ import 'package:template/components/nav_button.dart';
 import 'package:template/views/start_view.dart';
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 
+import '../data/question.dart';
+
 class SummaryView extends StatelessWidget {
   final _controller = ScrollController();
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    int currentIndex = 0;
     return ScaffoldWithBackground(
         child: Consumer<GameSession>(
       builder: (context, gameSession, child) => Stack(
@@ -77,9 +81,11 @@ class SummaryView extends StatelessWidget {
 
   Widget _card(context) {
     if (Provider.of<GameSession>(context, listen: false).blured) {
+      Question question = Provider.of<GameSession>(context, listen: false)
+          .gameQuestions[currentIndex];
       return Center(
           child: QuestionCard(
-        question: testQuestion1,
+        question: question,
         answerable: false,
       ));
     } else {
@@ -196,6 +202,7 @@ class SummaryView extends StatelessWidget {
     return InkWell(
       onTap: () {
         Provider.of<GameSession>(context, listen: false).setblured();
+        currentIndex = index;
       },
       child: Padding(
         padding: const EdgeInsets.only(top: 4),

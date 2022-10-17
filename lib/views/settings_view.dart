@@ -43,9 +43,14 @@ class SettingsView extends StatelessWidget {
                 ),
                 onPressed: () async {
                   Provider.of<GameSession>(context, listen: false).startGame();
-                  await Future.delayed(const Duration(seconds: 2)); // quickfix
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => QuestionView()));
+                  if (Provider.of<GameSession>(context, listen: true).loading) {
+                  } else {
+                    //Future.delayed(const Duration(seconds: 2)); // quickfix
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => QuestionView()));
+                  }
                 },
                 width: 250,
                 height: 50,

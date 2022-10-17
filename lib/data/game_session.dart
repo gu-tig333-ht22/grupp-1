@@ -16,7 +16,7 @@ import '../views/answer_view.dart';
 import '../views/summary_view.dart';
 
 class GameSession extends ChangeNotifier {
-  late Settings settings = Settings();
+  Settings settings = Settings();
   HttpConection httpConection = HttpConection();
   bool blured = false;
   List get chosenCategories => settings.categories;
@@ -46,6 +46,11 @@ class GameSession extends ChangeNotifier {
     } else {
       player.incorrectAnswer(newAnswer: answer);
     }
+  }
+
+  void resetSettings() {
+    this.settings = Settings();
+    notifyListeners();
   }
 
   void updateCategory(categoryName) {

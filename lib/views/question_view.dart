@@ -27,7 +27,7 @@ class QuestionView extends StatelessWidget {
             const SizedBox(height: 10),
             QuestionCard(
               question: gameSession.currentQuestion,
-              isActive: true,
+              answerable: true,
             ),
             const SizedBox(
               height: 30,

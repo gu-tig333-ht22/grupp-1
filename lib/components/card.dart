@@ -9,9 +9,9 @@ import '../data/game_session.dart';
 
 class QuestionCard extends StatelessWidget {
   Question question;
-  bool isActive;
+  bool answerable; // Avgör om det är ett klickbart kort eller inte.
 
-  QuestionCard({required this.question, required this.isActive});
+  QuestionCard({required this.question, required this.answerable});
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +49,10 @@ class QuestionCard extends StatelessWidget {
             ),
             const Spacer(),
             Column(children: [
-              OptionsRow('A', options[0], categoryColor, question, isActive),
-              OptionsRow('B', options[1], categoryColor, question, isActive),
-              OptionsRow('C', options[2], categoryColor, question, isActive),
-              OptionsRow('D', options[3], categoryColor, question, isActive),
+              OptionsRow('A', options[0], categoryColor, question, answerable),
+              OptionsRow('B', options[1], categoryColor, question, answerable),
+              OptionsRow('C', options[2], categoryColor, question, answerable),
+              OptionsRow('D', options[3], categoryColor, question, answerable),
             ])
           ])
         ],
@@ -69,16 +69,16 @@ class OptionsRow extends StatelessWidget {
   Color tileColor = Themes.colors.white;
   Color circleColor = Themes.colors.white;
   Question question;
-  bool isActive;
+  bool answerable;
   var icon = null;
 
   OptionsRow(this.leadingLetter, this.option, this.categoryColor, this.question,
-      this.isActive);
+      this.answerable);
 
   @override
   Widget build(BuildContext context) {
     // Om kortet inte är aktivt så skall varje rad byggas upp enligt nedan
-    if (isActive == false) {
+    if (answerable == false) {
       String playerAnswer = Provider.of<GameSession>(context, listen: false)
           .player
           .playerAnswers[question.index];
@@ -155,7 +155,7 @@ class OptionsRow extends StatelessWidget {
               border: Border.all(width: 2, color: borderColor),
             ),
           ),
-          onTap: (isActive == true)
+          onTap: (answerable == true)
               ? (() {
                   Provider.of<GameSession>(context, listen: false)
                       .calculatePlayerScore(option);

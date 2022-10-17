@@ -77,18 +77,21 @@ class OptionsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Om kortet inte är aktivt så skall varje rad byggas upp enligt nedan
     if (isActive == false) {
       String playerAnswer = Provider.of<GameSession>(context, listen: false)
           .player
           .playerAnswers[question.index];
       String correctAnswer = question.correctAnswer;
-      // Om kortet inte är aktivt så skall detta rätt samt eventuella felaktiga svaret ritas ut
+      // 1 Om spelarens svar är samma som radens värde
       if (playerAnswer == option) {
+        // 1.1 Om spelarens svar också är det rätta svaret så skall raden bli grön och en grön ikon ritas ut
         if (playerAnswer == correctAnswer) {
           borderColor = Themes.colors.green;
           tileColor = Themes.colors.greenLight;
           circleColor = Themes.colors.green;
           icon = Icon(Themes.icons.correct, color: Colors.white);
+          // 1.2 Om det inte är det rätta svaret så skall raden ritas ut som röd med en röd ikon
         } else {
           borderColor = Themes.colors.red;
           tileColor = Themes.colors.redLight;
@@ -98,10 +101,16 @@ class OptionsRow extends StatelessWidget {
             color: Colors.white,
           );
         }
+        // 2 Om raden inte är spelarens svar men det är det rätta svaret så skall raden ritas ut som grön
       } else if (option == correctAnswer) {
         borderColor = Themes.colors.green;
         tileColor = Themes.colors.greenLight;
         circleColor = Themes.colors.greenLight;
+        // 3 Om tiden går ut skall alla rader förutom den rätta raden ritas ut som röd
+      } else if (playerAnswer == "No answer") {
+        borderColor = Themes.colors.red;
+        tileColor = Themes.colors.redLight;
+        circleColor = Themes.colors.redLight;
       }
     }
 

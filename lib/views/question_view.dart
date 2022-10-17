@@ -19,7 +19,6 @@ class QuestionView extends StatelessWidget {
           children: [
             const SizedBox(height: 60),
             CountDownTimer(),
-            //const SizedBox(height: 30),
             const Spacer(),
             Text(
               "Question ${gameSession.questionCounter + 1}/${gameSession.gameQuestions.length}",
@@ -71,8 +70,7 @@ class _CountDownTimerState extends State<CountDownTimer> {
             endAngle: 7 * math.pi / 2,
             tileMode: TileMode.repeated,
           ),
-
-          backgroundColor: const Color.fromARGB(255, 41, 67, 88),
+          backgroundColor: Themes.colors.blueDark,
           backgroundGradient: null,
           strokeWidth: 20.0,
           textStyle: const TextStyle(

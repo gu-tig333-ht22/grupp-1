@@ -115,7 +115,7 @@ class OptionsRow extends StatelessWidget {
     }
 
     return Material(
-      color: const Color.fromARGB(0, 255, 255, 255),
+      color: Themes.colors.white,
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: ListTile(

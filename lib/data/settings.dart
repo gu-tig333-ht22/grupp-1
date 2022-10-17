@@ -9,21 +9,12 @@ import 'package:template/theme/theme.dart';
 /// Stirng difficulty defaullt medium.
 /// int timePerQuestion defaullt 20.
 class Settings {
-  late int _numberOfQuestions;
+  int _numberOfQuestions = 10;
   late List<String> _selectedCategories = Themes.categories.listCategories
       .map((category) => category.name)
       .toList();
-  late String _difficulty;
-  late int _timePerQuestion;
-
-  Settings(
-      {int numberOfQuestions = 10,
-      String difficulty = "medium",
-      int timePerQuestion = 30}) {
-    _numberOfQuestions = numberOfQuestions;
-    _difficulty = difficulty;
-    _timePerQuestion = timePerQuestion;
-  }
+  String _difficulty = "medium";
+  int _timePerQuestion = 30;
 
   /// Returns number of questions.
   int get numberOfQuestions => _numberOfQuestions;

@@ -19,15 +19,15 @@ class QuestionView extends StatelessWidget {
           children: [
             const SizedBox(height: 60),
             CountDownTimer(),
-            //const SizedBox(height: 30),
             const Spacer(),
             Text(
               "Question ${gameSession.questionCounter + 1}/${gameSession.gameQuestions.length}",
+              style: Themes.textStyle.headline3,
             ),
             const SizedBox(height: 10),
             QuestionCard(
               question: gameSession.currentQuestion,
-              isActive: true,
+              answerable: true,
             ),
             const SizedBox(
               height: 30,
@@ -50,9 +50,7 @@ class _CountDownTimerState extends State<CountDownTimer> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Text(
-          'Time left',
-        ),
+        Text('Time left', style: Themes.textStyle.headline3),
         const SizedBox(height: 15),
         CircularCountDownTimer(
           duration: 15, //SKA FÅ VÄRDE FRÅN SETTINGS
@@ -72,8 +70,7 @@ class _CountDownTimerState extends State<CountDownTimer> {
             endAngle: 7 * math.pi / 2,
             tileMode: TileMode.repeated,
           ),
-
-          backgroundColor: const Color.fromARGB(255, 41, 67, 88),
+          backgroundColor: Themes.colors.blueDark,
           backgroundGradient: null,
           strokeWidth: 20.0,
           textStyle: const TextStyle(

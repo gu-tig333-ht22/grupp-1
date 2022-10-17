@@ -33,7 +33,7 @@ class AnswerView extends StatelessWidget {
               Text('Score: ${gameSession.player.score}',
                   style: Themes.textStyle.headline1),
               const Spacer(),
-              AnswerBalls(),
+              AnswerCircles(),
               const Spacer(),
               Text(
                 // X/X SKA ERSÄTTAS MED INDEXPOSITION I FRÅGELISTA SAMT VÄRDE PÅ ANTAL FRÅGOR I SETTINGS
@@ -42,7 +42,7 @@ class AnswerView extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               QuestionCard(
-                  question: gameSession.currentQuestion, isActive: false),
+                  question: gameSession.currentQuestion, answerable: false),
               const SizedBox(
                 height: 30,
               ),
@@ -54,9 +54,9 @@ class AnswerView extends StatelessWidget {
   }
 }
 
-class AnswerBalls extends StatelessWidget {
+class AnswerCircles extends StatelessWidget {
   // LOGIK FÖR ATT SKAPA LISTAN SOM VISAS PÅ SKÄRMEN ÄR EJ IMPLEMENTERAD
-  List<dynamic> ballData = [
+  List<dynamic> circleData = [
     false,
     true,
     false,
@@ -69,15 +69,15 @@ class AnswerBalls extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var deviceWidth = MediaQuery.of(context).size.width;
-    List<Widget> balls = ballData.map((ball) {
-      if (ball == false) {
+    List<Widget> circles = circleData.map((circle) {
+      if (circle == false) {
         return GradientCircle(
             color: Themes.colors.red,
             size: 28,
             child:
                 Icon(Themes.icons.wrong, color: Themes.colors.white, size: 20));
       }
-      if (ball == true) {
+      if (circle == true) {
         return GradientCircle(
             color: Themes.colors.green,
             size: 28,
@@ -87,7 +87,7 @@ class AnswerBalls extends StatelessWidget {
         return GradientCircle(
             color: Themes.colors.grey,
             size: 28,
-            child: Text(ball, style: Themes.textStyle.headline3));
+            child: Text(circle, style: Themes.textStyle.headline3));
       }
     }).toList();
     // FUNDERA PÅ MITTENCIRKEL STÖRRE -- GÖR TILL EN CYLINDERSCROLL?!
@@ -97,7 +97,7 @@ class AnswerBalls extends StatelessWidget {
           alignment: WrapAlignment.start,
           // Minus behövs för att bredden blir aaaningen för stor vid beräkningen annars
           spacing: ((deviceWidth * 0.8 - 7 * 28) / 6) - 0.00000000000001,
-          children: balls),
+          children: circles),
     );
   }
 }

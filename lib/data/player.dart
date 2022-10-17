@@ -62,7 +62,6 @@ class Player {
   /// newAnswer(string) to playerAnswers. Default value ="No answer" if player
   /// did not answer.
   void incorrectAnswer({String newAnswer = "No answer"}) {
-    _playerAnswers.add(newAnswer);
     if (_streakCounter > _longestStreak) {
       _longestStreak = _streakCounter;
     }

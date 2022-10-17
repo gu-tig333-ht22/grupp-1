@@ -13,7 +13,7 @@ class HttpConection {
     "Food & Drink": "food_and_drink",
     "General Knowledge": "general_knowledge",
     "Film & TV": "film_and_tv",
-    "Art & Literature": "arts_and_literature",
+    "Arts & Literature": "arts_and_literature",
     "Geography": "geography",
     "History": "history",
     "Music": "music",
@@ -30,7 +30,7 @@ class HttpConection {
     int index = 0;
     String path =
         '?${_pathToCategorys(settings)}${_pathToDifficulty(settings)}${_pathToNumberOfQuestions(settings)}';
-    print(path);
+    print(url + path);
     http.Response response = await http.get(Uri.parse('$url$path'));
     if (response.statusCode == 200) {
       List<dynamic> data = jsonDecode(response.body);
@@ -54,7 +54,7 @@ class HttpConection {
     for (String category in settings.categories) {
       categories += '${listCategories[category]},';
     }
-    return categories;
+    return categories.substring(0, categories.length - 1);
   }
 
   String _pathToNumberOfQuestions(Settings settings) {

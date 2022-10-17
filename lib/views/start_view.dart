@@ -42,10 +42,7 @@ class StartView extends StatelessWidget {
                 width: 250,
                 height: 50,
                 color: Themes.colors.blueDark,
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SettingsView()));
-                },
+                onPressed: () {},
               ),
             ),
             SizedBox(height: 20),
@@ -59,10 +56,7 @@ class StartView extends StatelessWidget {
                 width: 250,
                 height: 50,
                 color: Themes.colors.blueDark,
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SettingsView()));
-                },
+                onPressed: () {},
               ),
             ),
             SizedBox(height: 70),

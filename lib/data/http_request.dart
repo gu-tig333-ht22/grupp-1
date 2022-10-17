@@ -9,6 +9,18 @@ class HttpConection {
   late List listaMedQuestion = [];
   final String url = 'https://the-trivia-api.com/api/questions';
   // Huge thanks to Will Fry who created this open API!
+  Map<String, String> listCategories = {
+    "Food & Drink": "food_and_drink",
+    "General Knowledge": "general_knowledge",
+    "Film & TV": "film_and_tv",
+    "Art & Literature": "arts_and_literature",
+    "Geography": "geography",
+    "History": "history",
+    "Music": "music",
+    "Science": "science",
+    "Society & Culture": "society_and_culture",
+    "Sport & Leisure": "sport_and_leisure"
+  };
 
   /// Gets a set of answers from the trivia Api. This function recuires
   /// an object of setting that contains game settings. It returns a
@@ -40,7 +52,7 @@ class HttpConection {
     }
     String categories = '&categories=';
     for (String category in settings.categories) {
-      categories += ',$category';
+      categories += '${listCategories[category]},';
     }
     return categories;
   }

@@ -23,6 +23,7 @@ class QuestionView extends StatelessWidget {
             const Spacer(),
             Text(
               "Question ${gameSession.questionCounter + 1}/${gameSession.gameQuestions.length}",
+              style: Themes.textStyle.headline3,
             ),
             const SizedBox(height: 10),
             QuestionCard(
@@ -50,9 +51,7 @@ class _CountDownTimerState extends State<CountDownTimer> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Text(
-          'Time left',
-        ),
+        Text('Time left', style: Themes.textStyle.headline3),
         const SizedBox(height: 15),
         CircularCountDownTimer(
           duration: 15, //SKA FÅ VÄRDE FRÅN SETTINGS

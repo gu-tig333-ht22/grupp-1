@@ -41,12 +41,10 @@ class GameSession extends ChangeNotifier {
   }
 
   void calculatePlayerScore(String answer) {
-    player.playerAnswers.add(answer);
-    if (player.playerAnswers[questionCounter] ==
-        currentQuestion.correctAnswer) {
-      player.correctAnswer();
+    if (answer == currentQuestion.correctAnswer) {
+      player.correctAnswer(answer);
     } else {
-      player.incorrectAnswer();
+      player.incorrectAnswer(newAnswer: answer);
     }
   }
 

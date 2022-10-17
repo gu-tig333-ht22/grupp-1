@@ -35,10 +35,15 @@ class Player {
   /// Returns list of playerAnswers as string.
   List<String> get playerAnswers => _playerAnswers;
 
+  void setPlayerName(String newName) {
+    name = newName;
+  }
+
   /// Call if player answers correctly we increse score by 1, streakCounter by 1
   /// and correctAnswers by 1. The longest streak is also updatet. Also add
   /// newAnswer(string) to playerAnswers.
-  void correctAnswer() {
+  void correctAnswer(String newAnswer) {
+    _playerAnswers.add(newAnswer);
     _streakCounter += 1;
     if (_streakCounter > _longestStreak) {
       _longestStreak = _streakCounter;
@@ -57,6 +62,7 @@ class Player {
   /// newAnswer(string) to playerAnswers. Default value ="No answer" if player
   /// did not answer.
   void incorrectAnswer({String newAnswer = "No answer"}) {
+    _playerAnswers.add(newAnswer);
     if (_streakCounter > _longestStreak) {
       _longestStreak = _streakCounter;
     }

@@ -8,6 +8,7 @@ import 'package:template/theme/theme.dart';
 import 'package:template/test/test_file.dart';
 import 'package:template/components/card.dart';
 import 'package:template/components/nav_button.dart';
+import 'package:template/views/settings_view.dart';
 import 'package:template/views/start_view.dart';
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 
@@ -45,8 +46,9 @@ class SummaryView extends StatelessWidget {
                   height: 50,
                   color: Themes.colors.blueDark,
                   onPressed: () {
-                    Navigator.popUntil(
-                        context, ModalRoute.withName('/settings_view'));
+                    Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(builder: (context) => SettingsView()),
+                        ((route) => false));
                   },
                 ),
               ],

@@ -112,4 +112,10 @@ class GameSession extends ChangeNotifier {
     blured = !blured;
     notifyListeners();
   }
+
+  // Funktioner och data för boll-scrollen
+  final FixedExtentScrollController _scrollController =
+      FixedExtentScrollController();
+
+  FixedExtentScrollController get scrollController => _scrollController;
 }

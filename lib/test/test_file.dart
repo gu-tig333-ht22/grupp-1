@@ -40,40 +40,32 @@ import 'package:template/theme/theme.dart';
   }
 }*/
 
-class SideScrollBalls extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<SideScrollBalls> {
-  double itemWidth = 60.0;
+class SideScrollBalls extends StatelessWidget {
   int itemCount = 7;
-  int selected = 1;
-  FixedExtentScrollController _scrollController =
-      FixedExtentScrollController(initialItem: 1);
+
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: RotatedBox(
+    return Consumer<GameSession>(
+      builder: (context, gameSession, child) => Expanded(
+        child: RotatedBox(
           quarterTurns: -1,
           child: ListWheelScrollView(
-            magnification: 2.0,
-            onSelectedItemChanged: (x) {
-              setState(() {
-                selected = x;
-              });
-            },
-            controller: _scrollController,
-            itemExtent: itemWidth,
+            controller: gameSession.scrollController,
+            itemExtent: 50,
             children: List.generate(
-                itemCount,
-                (x) => RotatedBox(
-                    quarterTurns: 1,
-                    child: GradientCircle(
-                        color: Themes.colors.green,
-                        size: 29,
-                        child: Icon(Themes.icons.correct)))),
-          )),
+              itemCount,
+              (x) => RotatedBox(
+                quarterTurns: 1,
+                child: GradientCircle(
+                  color: Themes.colors.green,
+                  size: 25,
+                  child: Icon(Themes.icons.correct),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

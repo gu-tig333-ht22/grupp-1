@@ -39,7 +39,8 @@ class AnswerView extends StatelessWidget {
               Text('Score: ${gameSession.player.score}',
                   style: Themes.textStyle.headline1),
               const Spacer(),
-              AnswerCircles(),
+              //AnswerCircles(),
+              SideScrollBalls(),
               const Spacer(),
               Text(
                 // X/X SKA ERSÄTTAS MED INDEXPOSITION I FRÅGELISTA SAMT VÄRDE PÅ ANTAL FRÅGOR I SETTINGS

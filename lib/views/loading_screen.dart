@@ -5,6 +5,10 @@ import 'package:template/theme/theme.dart';
 import 'package:template/views/question_view.dart';
 
 class LoadingView extends StatefulWidget {
+  late Navigator routeTo;
+
+  LoadingView({required Navigator routeTo});
+
   @override
   State<LoadingView> createState() => _LoadingViewState();
 }
@@ -13,13 +17,12 @@ class _LoadingViewState extends State<LoadingView> {
   @override
   void initState() {
     super.initState();
-    _navigateTo();
+    _navigateTo(widget.routeTo);
   }
 
-  _navigateTo() async {
+  _navigateTo(routeTo) async {
     await Future.delayed(Duration(seconds: 2), () {});
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => QuestionView()));
+    routeTo;
   }
 
   @override

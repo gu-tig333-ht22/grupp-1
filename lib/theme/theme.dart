@@ -28,16 +28,16 @@ class Themes {
 
 class ThemeColors {
   // Färger för varje kategori
-  final Color artLiterature = const Color(0xff1D83C5);
+  final Color artLiterature = Color.fromARGB(255, 29, 121, 197);
   final Color filmTv = const Color(0xffF04349);
   final Color foodDrink = const Color(0xffFCB752);
   final Color generalKnowledge = const Color(0xffF47D55);
-  final Color geography = const Color(0xffA4CD63);
+  final Color geography = Color.fromARGB(255, 56, 69, 149);
   final Color history = const Color(0xff7E4D9F);
-  final Color music = const Color(0xff54BB77);
-  final Color science = const Color(0xffDFE34E);
+  final Color music = Color.fromARGB(255, 60, 132, 84);
+  final Color science = Color.fromARGB(255, 135, 174, 69);
   final Color societyCulture = const Color(0xff53DAF8);
-  final Color sportLeisure = const Color(0xffD04DC3);
+  final Color sportLeisure = Color.fromARGB(255, 208, 77, 151);
 
   // Övriga färger
   final textGrey = Color(0xff3A3A3A);
@@ -47,7 +47,7 @@ class ThemeColors {
   final backgroundLight = Color.fromARGB(240, 41, 130, 152);
 
   final greenLight = Color.fromARGB(255, 227, 255, 222);
-  final green = Color(0xff83D775);
+  final green = Color.fromARGB(255, 77, 210, 53);
   final greenDark = Color(0xff102C0C);
 
   final redLight = Color.fromARGB(255, 255, 232, 232);
@@ -176,6 +176,8 @@ class ThemeTextStyles {
 class ThemeIcons {
   final IconData correct = Icons.done;
   final IconData wrong = Icons.close;
+  final IconData reset = Icons.manage_history;
+  final IconData timeout = Icons.timer_off_outlined;
 }
 
 class ThemeFunctions {
@@ -194,5 +196,22 @@ class ThemeFunctions {
         color.red + ((255 - color.red) * p).round(),
         color.green + ((255 - color.green) * p).round(),
         color.blue + ((255 - color.blue) * p).round());
+  }
+
+  LinearGradient applyGradient(Color color) {
+    return LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: [
+        Themes.functions.lightenColor(color, 40),
+        color,
+        Themes.functions.darkenColor(color, 60)
+      ],
+      stops: const [
+        0,
+        0.2,
+        0.9,
+      ],
+    );
   }
 }

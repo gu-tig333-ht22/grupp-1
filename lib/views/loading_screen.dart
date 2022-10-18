@@ -5,9 +5,7 @@ import 'package:template/theme/theme.dart';
 import 'package:template/views/question_view.dart';
 
 class LoadingView extends StatefulWidget {
-  //late Navigator routeTo;
-
-  //LoadingView({required Navigator routeTo});
+  String countDown = "";
 
   @override
   State<LoadingView> createState() => _LoadingViewState();
@@ -21,7 +19,10 @@ class _LoadingViewState extends State<LoadingView> {
   }
 
   _navigateTo() async {
-    await Future.delayed(Duration(seconds: 2), () {});
+    await Provider.of<GameSession>(context, listen: false).startGame();
+
+    await Future.delayed(Duration(seconds: 1), () {});
+
     Navigator.push(
         context,
         PageRouteBuilder(
@@ -33,8 +34,13 @@ class _LoadingViewState extends State<LoadingView> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWithBackground(
-      child:
-          Center(child: Text("Get Ready", style: Themes.textStyle.headline1)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text("Get Ready!", style: Themes.textStyle.headline1),
+          Text(widget.countDown)
+        ],
+      ),
     );
   }
 }

@@ -195,4 +195,21 @@ class ThemeFunctions {
         color.green + ((255 - color.green) * p).round(),
         color.blue + ((255 - color.blue) * p).round());
   }
+
+  LinearGradient applyGradient(Color color) {
+    return LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: [
+        Themes.functions.lightenColor(color, 40),
+        color,
+        Themes.functions.darkenColor(color, 60)
+      ],
+      stops: const [
+        0,
+        0.2,
+        0.9,
+      ],
+    );
+  }
 }

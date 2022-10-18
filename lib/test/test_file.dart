@@ -41,7 +41,8 @@ import 'package:template/theme/theme.dart';
 }*/
 
 class SideScrollBalls extends StatelessWidget {
-  int itemCount = 7;
+  // skapa en riktig lista i gameSession från boolAnswers och Questions.index?
+  List testList = [true, false, 3];
 
   @override
   Widget build(BuildContext context) {
@@ -50,19 +51,42 @@ class SideScrollBalls extends StatelessWidget {
         child: RotatedBox(
           quarterTurns: -1,
           child: ListWheelScrollView(
-            controller: gameSession.scrollController,
+            controller: FixedExtentScrollController(
+                initialItem: gameSession.questionCounter),
             itemExtent: 50,
-            children: List.generate(
-              itemCount,
-              (x) => RotatedBox(
-                quarterTurns: 1,
-                child: GradientCircle(
-                  color: Themes.colors.green,
-                  size: 25,
-                  child: Icon(Themes.icons.correct),
-                ),
-              ),
-            ),
+            children: testList.map((question) {
+              double size = gameSession.questionCounter == question ? 35 : 25;
+
+              if (question == true) {
+                return RotatedBox(
+                  quarterTurns: 1,
+                  child: GradientCircle(
+                    color: Themes.colors.green,
+                    size: size,
+                    child: Icon(Themes.icons.correct),
+                  ),
+                );
+              }
+              if (question == false) {
+                return RotatedBox(
+                  quarterTurns: 1,
+                  child: GradientCircle(
+                    color: Themes.colors.red,
+                    size: size,
+                    child: Icon(Themes.icons.wrong),
+                  ),
+                );
+              } else {
+                return RotatedBox(
+                  quarterTurns: 1,
+                  child: GradientCircle(
+                    color: Themes.colors.greyLight,
+                    size: 25,
+                    child: Text('$question'),
+                  ),
+                );
+              }
+            }).toList(),
           ),
         ),
       ),

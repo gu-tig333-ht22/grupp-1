@@ -114,8 +114,4 @@ class GameSession extends ChangeNotifier {
   }
 
   // Funktioner och data för boll-scrollen
-  final FixedExtentScrollController _scrollController =
-      FixedExtentScrollController();
-
-  FixedExtentScrollController get scrollController => _scrollController;
 }

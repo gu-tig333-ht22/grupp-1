@@ -47,7 +47,10 @@ class SummaryView extends StatelessWidget {
                   color: Themes.colors.blueDark,
                   onPressed: () {
                     Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) => SettingsView()),
+                        PageRouteBuilder(
+                            pageBuilder: (context, _, __) => SettingsView(),
+                            transitionDuration: Duration.zero,
+                            reverseTransitionDuration: Duration.zero),
                         ((route) => false));
                   },
                 ),

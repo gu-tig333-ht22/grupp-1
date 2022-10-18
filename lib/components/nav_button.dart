@@ -27,17 +27,8 @@ class NavigationButton extends StatelessWidget {
         height: height,
         width: width,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [color, Themes.functions.darkenColor(color, 40)],
-            stops: const [
-              0,
-              0.9,
-            ],
-          ),
-        ),
+            borderRadius: BorderRadius.circular(10),
+            gradient: Themes.functions.applyGradient(color)),
         child: TextButton(
           onPressed: onPressed,
           child: text,

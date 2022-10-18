@@ -15,12 +15,32 @@ class SettingsView extends StatelessWidget {
           padding: const EdgeInsets.all(30.0),
           child: Column(
             children: [
+              Container(height: 30),
               Text(
                 'Singleplayer',
                 style: TextStyle(color: Themes.colors.white, fontSize: 35),
               ),
               const SizedBox(
-                height: 70,
+                height: 40,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  MaterialButton(
+                    onPressed: () {
+                      Provider.of<GameSession>(context, listen: false)
+                          .resetSettings();
+                    },
+                    color: Themes.colors.backgroundDark,
+                    textColor: Colors.white,
+                    child: Icon(
+                      Themes.icons.reset,
+                      size: 24,
+                    ),
+                    padding: EdgeInsets.all(16),
+                    shape: CircleBorder(),
+                  ),
+                ],
               ),
               CategoryRow(),
               const SizedBox(
@@ -38,17 +58,6 @@ class SettingsView extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              NavigationButton(
-                  text:
-                      Text("Reset settings", style: Themes.textStyle.headline3),
-                  onPressed: () {
-                    Provider.of<GameSession>(context, listen: false)
-                        .resetSettings();
-                  },
-                  width: 140,
-                  height: 35,
-                  color: Themes.colors.grey),
-              const Spacer(),
               NavigationButton(
                 text: Text(
                   "Start",

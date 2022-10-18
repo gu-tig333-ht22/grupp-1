@@ -7,6 +7,7 @@ import 'package:template/theme/theme.dart';
 import 'package:template/data/game_session.dart';
 import 'package:template/views/question_view.dart';
 import 'package:template/views/summary_view.dart';
+import 'package:template/components/endgamebutton.dart';
 
 class AnswerView extends StatelessWidget {
   @override
@@ -26,6 +27,15 @@ class AnswerView extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 35, top: 20),
+                    child: Endgame(),
+                  ),
+                ],
+              ),
               const SizedBox(height: 40),
               Text('Score: ${gameSession.player.score}',
                   style: Themes.textStyle.headline1),

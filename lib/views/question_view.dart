@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:provider/provider.dart';
 import 'package:template/components/card.dart';
+import 'package:template/components/endgamebutton.dart';
 import 'package:template/data/game_session.dart';
 
 import 'dart:math' as math;
@@ -17,7 +18,17 @@ class QuestionView extends StatelessWidget {
       child: Consumer<GameSession>(
         builder: (context, gameSession, child) => Column(
           children: [
-            const SizedBox(height: 60),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20, left: 35),
+                  child: Endgame(),
+                ),
+              ],
+            ),
+
             CountDownTimer(),
             //const SizedBox(height: 30),
             const Spacer(),

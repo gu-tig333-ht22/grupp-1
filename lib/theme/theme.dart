@@ -176,6 +176,7 @@ class ThemeTextStyles {
 class ThemeIcons {
   final IconData correct = Icons.done;
   final IconData wrong = Icons.close;
+  final IconData reset = Icons.manage_history;
 }
 
 class ThemeFunctions {

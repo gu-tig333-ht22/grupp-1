@@ -40,7 +40,7 @@ class GameSession extends ChangeNotifier {
     notifyListeners();
   }
 
-  void calculatePlayerScore(String answer) {
+  void calculatePlayerScore({required String answer}) {
     if (answer == currentQuestion.correctAnswer) {
       player.correctAnswer(answer);
     } else {

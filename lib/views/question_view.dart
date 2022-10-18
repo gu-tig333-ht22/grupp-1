@@ -30,7 +30,6 @@ class QuestionView extends StatelessWidget {
             ),
 
             CountDownTimer(),
-            //const SizedBox(height: 30),
             const Spacer(),
             Text(
               "Question ${gameSession.questionCounter + 1}/${gameSession.gameQuestions.length}",
@@ -57,49 +56,67 @@ class CountDownTimer extends StatefulWidget {
 }
 
 class _CountDownTimerState extends State<CountDownTimer> {
+  final CountDownController _controller = CountDownController();
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text('Time left', style: Themes.textStyle.headline3),
-        const SizedBox(height: 15),
-        CircularCountDownTimer(
-          duration: 15, //SKA FÅ VÄRDE FRÅN SETTINGS
-          width: 100,
-          height: 100,
-          ringColor: Colors.grey[300]!,
-          ringGradient: null,
-          fillColor: Colors.blue, //Måste finnas med men används inte...
-          fillGradient: const SweepGradient(
-            colors: [Colors.blue, Colors.lightBlue, Colors.red],
-            stops: [
-              0.0,
-              0.5,
-              0.7,
-            ],
-            startAngle: 3 * math.pi / 2,
-            endAngle: 7 * math.pi / 2,
-            tileMode: TileMode.repeated,
-          ),
+    double _duration =
+        Provider.of<GameSession>(context, listen: true).getTimePerQuestion();
+    if (_duration == 61) {
+      return Row(
+        children: [Text("No time limit")],
+      );
+    } else {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text('Time left', style: Themes.textStyle.headline3),
+          const SizedBox(height: 15),
+          CircularCountDownTimer(
+            controller: _controller,
+            duration: _duration.toInt(),
+            initialDuration: 0,
 
-          backgroundColor: const Color.fromARGB(255, 41, 67, 88),
-          backgroundGradient: null,
-          strokeWidth: 20.0,
-          textStyle: const TextStyle(
-              fontSize: 33.0,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              inherit: false),
-          isReverse: true,
-          isTimerTextShown: true,
-          autoStart: true,
-          onComplete: () {
-            //Navigator.push(
-            //    context, MaterialPageRoute(builder: (context) => AnswerView()));
-          },
-        )
-      ],
-    );
+            width: 100,
+            height: 100,
+            ringColor: Colors.grey[300]!,
+            ringGradient: null,
+            fillColor: Colors.blue, //Måste finnas med men används inte...
+            fillGradient: const SweepGradient(
+              colors: [Colors.blue, Colors.lightBlue, Colors.red],
+              stops: [
+                0.0,
+                0.5,
+                0.7,
+              ],
+              startAngle: 3 * math.pi / 2,
+              endAngle: 7 * math.pi / 2,
+              tileMode: TileMode.repeated,
+            ),
+            backgroundColor: Themes.colors.blueDark,
+            backgroundGradient: null,
+            strokeWidth: 20.0,
+            textStyle: const TextStyle(
+                fontSize: 33.0,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                inherit: false),
+            isReverse: true,
+            isReverseAnimation: true,
+            isTimerTextShown: true,
+            autoStart: true,
+            onComplete: () {
+              _controller.restart();
+              _controller.pause();
+
+              Provider.of<GameSession>(context, listen: false)
+                  .calculatePlayerScore(answer: "No answer");
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => AnswerView()),
+                  ((route) => false));
+            },
+          )
+        ],
+      );
+    }
   }
 }

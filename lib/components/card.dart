@@ -111,11 +111,12 @@ class OptionsRow extends StatelessWidget {
         borderColor = Themes.colors.red;
         tileColor = Themes.colors.redLight;
         circleColor = Themes.colors.redLight;
+        icon = Icon(Themes.icons.timeout, color: Themes.colors.greyDark);
       }
     }
 
     return Material(
-      color: const Color.fromARGB(0, 255, 255, 255),
+      color: Themes.colors.white,
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: ListTile(
@@ -158,9 +159,13 @@ class OptionsRow extends StatelessWidget {
           onTap: (answerable == true)
               ? (() {
                   Provider.of<GameSession>(context, listen: false)
-                      .calculatePlayerScore(option);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AnswerView()));
+                      .calculatePlayerScore(answer: option);
+                  Navigator.of(context).pushAndRemoveUntil(
+                      PageRouteBuilder(
+                          pageBuilder: (context, _, __) => AnswerView(),
+                          transitionDuration: Duration.zero,
+                          reverseTransitionDuration: Duration.zero),
+                      ((route) => false));
                 })
               : null,
         ),

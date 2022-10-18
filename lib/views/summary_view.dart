@@ -8,28 +8,19 @@ import 'package:template/theme/theme.dart';
 import 'package:template/test/test_file.dart';
 import 'package:template/components/card.dart';
 import 'package:template/components/nav_button.dart';
+import 'package:template/views/settings_view.dart';
 import 'package:template/views/start_view.dart';
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 
-List<bool> listAnswers = [
-  true,
-  false,
-  false,
-  true,
-  false,
-  true,
-  false,
-  false,
-  true,
-  false,
-];
-List categories =
-    ThemeCategories().listCategories + ThemeCategories().listCategories;
+import '../data/question.dart';
 
 class SummaryView extends StatelessWidget {
   final _controller = ScrollController();
+  int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
+    int currentIndex = 0;
     return ScaffoldWithBackground(
         child: Consumer<GameSession>(
       builder: (context, gameSession, child) => Stack(
@@ -40,9 +31,9 @@ class SummaryView extends StatelessWidget {
               children: [
                 Text("Scorescreen", style: Themes.textStyle.headline1),
                 Container(height: 15),
-                _scoreTable(),
+                _scoreTable(context),
                 Container(height: 30),
-                _summaryTable(),
+                _summaryTable(context),
                 Container(
                   height: 30,
                 ),
@@ -55,8 +46,12 @@ class SummaryView extends StatelessWidget {
                   height: 50,
                   color: Themes.colors.blueDark,
                   onPressed: () {
-                    Navigator.popUntil(
-                        context, ModalRoute.withName('/settings_view'));
+                    Navigator.of(context).pushAndRemoveUntil(
+                        PageRouteBuilder(
+                            pageBuilder: (context, _, __) => SettingsView(),
+                            transitionDuration: Duration.zero,
+                            reverseTransitionDuration: Duration.zero),
+                        ((route) => false));
                   },
                 ),
               ],
@@ -91,9 +86,11 @@ class SummaryView extends StatelessWidget {
 
   Widget _card(context) {
     if (Provider.of<GameSession>(context, listen: false).blured) {
+      Question question = Provider.of<GameSession>(context, listen: false)
+          .gameQuestions[currentIndex];
       return Center(
           child: QuestionCard(
-        question: testQuestion1,
+        question: question,
         answerable: false,
       ));
     } else {
@@ -101,10 +98,12 @@ class SummaryView extends StatelessWidget {
     }
   }
 
-  Widget _scoreTable() {
-    int playerScore = 13;
-    int settingsQuestions = 20;
-    int wrongAnswers = (settingsQuestions - playerScore);
+  Widget _scoreTable(context) {
+    int playerScore =
+        Provider.of<GameSession>(context, listen: false).player.score;
+    int totalScore =
+        Provider.of<GameSession>(context, listen: false).gameQuestions.length;
+    int wrongAnswers = (totalScore - playerScore);
     double spaceBetween = 15;
     return Container(
       child: Row(
@@ -119,14 +118,14 @@ class SummaryView extends StatelessWidget {
             width: spaceBetween,
           ),
           _scoreCircle(
-              number: playerScore,
+              number: wrongAnswers,
               text: "Wrong \nAnswers",
               color: Themes.colors.red),
           Container(
             width: spaceBetween,
           ),
           _scoreCircle(
-              number: playerScore, text: "Total", color: Themes.colors.grey)
+              number: totalScore, text: "Total", color: Themes.colors.grey)
         ],
       ),
     );
@@ -137,12 +136,12 @@ class SummaryView extends StatelessWidget {
     return Column(
       children: [
         GradientCircle(
+            color: color,
+            size: 80,
             child: Text(
               number.toString(),
               style: Themes.textStyle.headline1,
-            ),
-            color: color,
-            size: 80),
+            )),
         Container(
           height: 5,
         ),
@@ -155,7 +154,7 @@ class SummaryView extends StatelessWidget {
     );
   }
 
-  Widget _summaryTable() {
+  Widget _summaryTable(context) {
     return Expanded(
       child: Column(
         children: [
@@ -166,70 +165,77 @@ class SummaryView extends StatelessWidget {
           Container(
             height: 10,
           ),
-          _listView(listAnswers),
+          _listView(context),
         ],
       ),
     );
   }
 
-  Widget _listView(listAnswers) {
+  Widget _listView(context) {
+    List<bool> boolAnswerList =
+        Provider.of<GameSession>(context, listen: false).player.boolAnswerList;
     return Expanded(
       child: Container(
         child: FadingEdgeScrollView.fromScrollView(
           child: ListView.builder(
               controller: _controller,
               padding: const EdgeInsets.all(8),
-              itemCount: listAnswers.length,
+              itemCount: boolAnswerList.length,
               itemBuilder: (BuildContext context, int index) {
-                return _listTile(index, context);
+                return _listTile(index, context, boolAnswerList);
               }),
         ),
       ),
     );
   }
 
-  Widget _listTile(index, context) {
-    Color color;
-    Color colorLight;
-
-    if (listAnswers[index]) {
-      color = Themes.colors.green;
-      colorLight = Themes.colors.greenLight;
+  Widget _listTile(index, context, boolAnswerList) {
+    Color borderColor;
+    Color tileColor;
+    String category = Provider.of<GameSession>(context, listen: false)
+        .gameQuestions[index]
+        .category;
+    Color categoryColor = Themes.category(category).color;
+    IconData icon = Themes.category(category).icon;
+    if (boolAnswerList[index]) {
+      borderColor = Themes.colors.green;
+      tileColor = Themes.colors.greenLight;
     } else {
-      color = Themes.colors.red;
-      colorLight = Themes.colors.redLight;
+      borderColor = Themes.colors.red;
+      tileColor = Themes.colors.redLight;
     }
     return InkWell(
       onTap: () {
         Provider.of<GameSession>(context, listen: false).setblured();
+        currentIndex = index;
       },
       child: Padding(
-        padding: EdgeInsets.only(top: 4),
+        padding: const EdgeInsets.only(top: 4),
         child: Container(
+          height: 30,
+          decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              border: Border.all(width: 3, color: borderColor),
+              color: tileColor),
           child: Row(
             children: [
-              _iconCircle(index),
+              _iconCircle(icon, categoryColor),
               Container(width: 10),
-              Text("Question: " + (index + 1).toString()),
+              Text("Question: ${index + 1}"),
               Expanded(
                 child: Align(
-                  child: _circleRight(listAnswers[index], color),
                   alignment: Alignment.centerRight,
+                  child: _circleRight(boolAnswerList[index], borderColor),
                 ),
               )
             ],
           ),
-          height: 30,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              border: Border.all(width: 3, color: color),
-              color: colorLight),
         ),
       ),
     );
   }
 
-  Widget _iconCircle(index) {
+  Widget _iconCircle(IconData icon, Color categoryColor) {
     return Padding(
       padding: EdgeInsets.all(2),
       child: Container(
@@ -237,11 +243,11 @@ class SummaryView extends StatelessWidget {
         height: 21,
         decoration: BoxDecoration(
             border: Border.all(width: 1, color: Themes.colors.grey),
-            color: categories[index].color,
+            color: categoryColor,
             shape: BoxShape.circle),
         child: Center(
             child: Icon(
-          categories[index].icon,
+          icon,
           color: Themes.colors.white,
           size: 14,
         )),
@@ -252,14 +258,14 @@ class SummaryView extends StatelessWidget {
   Widget _circleRight(bool bool, Color color) {
     double size = 15;
     return Padding(
-      padding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       child: Container(
           width: size,
           height: size,
+          decoration: BoxDecoration(shape: BoxShape.circle, color: color),
           child: bool
               ? Icon(Themes.icons.correct, size: 12, color: Themes.colors.white)
-              : Icon(Themes.icons.wrong, size: 12, color: Themes.colors.white),
-          decoration: BoxDecoration(shape: BoxShape.circle, color: color)),
+              : Icon(Themes.icons.wrong, size: 12, color: Themes.colors.white)),
     );
   }
 }

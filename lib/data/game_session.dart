@@ -19,15 +19,15 @@ class GameSession extends ChangeNotifier {
   Settings settings = Settings();
   HttpConection httpConection = HttpConection();
   bool blured = false;
-  List get chosenCategories => settings.categories;
-  String get chosenDifficulty => settings.difficulty;
-  late List<Question> gameQuestions;
+  bool loading = false;
 
-  late Question currentQuestion = gameQuestions[questionCounter];
+  late List<Question> gameQuestions;
+  late Question currentQuestion;
   late Player player;
   late int questionCounter;
 
-  bool loading = false;
+  List get chosenCategories => settings.categories;
+  String get chosenDifficulty => settings.difficulty;
 
   Future startGame() async {
     loading = true;
@@ -35,12 +35,12 @@ class GameSession extends ChangeNotifier {
     notifyListeners();
     questionCounter = 0;
     gameQuestions = await httpConection.getQuestions(settings: settings);
-
+    currentQuestion = gameQuestions[questionCounter];
     loading = false;
     notifyListeners();
   }
 
-  void calculatePlayerScore(String answer) {
+  void calculatePlayerScore({required String answer}) {
     if (answer == currentQuestion.correctAnswer) {
       player.correctAnswer(answer);
     } else {
@@ -49,7 +49,7 @@ class GameSession extends ChangeNotifier {
   }
 
   void resetSettings() {
-    this.settings = Settings();
+    settings = Settings();
     notifyListeners();
   }
 
@@ -60,8 +60,9 @@ class GameSession extends ChangeNotifier {
 
   void increaseQuestionCounter() {
     questionCounter++;
-    currentQuestion = gameQuestions[questionCounter];
-    notifyListeners();
+    if (questionCounter < gameQuestions.length) {
+      currentQuestion = gameQuestions[questionCounter];
+    }
   }
 
   void updateNumberOfQuestion(double numberOfQuestions) {

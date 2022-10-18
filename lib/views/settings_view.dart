@@ -3,6 +3,7 @@ import 'package:flutter_octicons/flutter_octicons.dart';
 import 'package:provider/provider.dart';
 import 'package:template/components/nav_button.dart';
 import 'package:template/theme/theme.dart';
+import 'package:template/views/loading_screen.dart';
 import 'package:template/views/question_view.dart';
 import '../data/game_session.dart';
 
@@ -56,14 +57,13 @@ class SettingsView extends StatelessWidget {
                 ),
                 onPressed: () async {
                   Provider.of<GameSession>(context, listen: false).startGame();
-                  if (Provider.of<GameSession>(context, listen: true).loading) {
-                  } else {
-                    //Future.delayed(const Duration(seconds: 2)); // quickfix
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => QuestionView()));
-                  }
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => LoadingView()));
+                  //Future.delayed(const Duration(seconds: 2)); // quickfix
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => QuestionView()));
                 },
                 width: 250,
                 height: 50,

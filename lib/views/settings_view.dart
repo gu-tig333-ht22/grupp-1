@@ -55,9 +55,7 @@ class SettingsView extends StatelessWidget {
                   "Start",
                   style: Themes.textStyle.headline1,
                 ),
-                onPressed: () async {
-                  Provider.of<GameSession>(context, listen: false).startGame();
-
+                onPressed: () {
                   Navigator.push(
                       context,
                       PageRouteBuilder(

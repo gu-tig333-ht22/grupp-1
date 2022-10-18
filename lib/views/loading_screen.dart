@@ -13,16 +13,13 @@ class LoadingView extends StatefulWidget {
 
 class _LoadingViewState extends State<LoadingView> {
   @override
-  void initState() {
+  void initState() async {
     super.initState();
     _navigateTo();
   }
 
   _navigateTo() async {
     await Provider.of<GameSession>(context, listen: false).startGame();
-
-    await Future.delayed(Duration(seconds: 1), () {});
-
     Navigator.push(
         context,
         PageRouteBuilder(

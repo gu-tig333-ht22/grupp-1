@@ -28,7 +28,6 @@ class QuestionView extends StatelessWidget {
                 ),
               ],
             ),
-
             CountDownTimer(),
             const Spacer(),
             Text(
@@ -78,15 +77,16 @@ class _CountDownTimerState extends State<CountDownTimer> {
 
             width: 100,
             height: 100,
-            ringColor: Colors.grey[300]!,
+            ringColor: Themes.colors.white,
             ringGradient: null,
-            fillColor: Colors.blue, //Måste finnas med men används inte...
+            fillColor:
+                Colors.transparent, //Måste finnas med men används inte...
             fillGradient: const SweepGradient(
-              colors: [Colors.blue, Colors.lightBlue, Colors.red],
+              colors: [Colors.red, Colors.yellow, Colors.green],
               stops: [
-                0.0,
-                0.5,
-                0.7,
+                0.1,
+                0.3,
+                1,
               ],
               startAngle: 3 * math.pi / 2,
               endAngle: 7 * math.pi / 2,
@@ -97,7 +97,7 @@ class _CountDownTimerState extends State<CountDownTimer> {
             strokeWidth: 20.0,
             textStyle: const TextStyle(
                 fontSize: 33.0,
-                color: Colors.white,
+                color: Color(0xffEAEAEA),
                 fontWeight: FontWeight.bold,
                 inherit: false),
             isReverse: true,

@@ -44,6 +44,7 @@ dependencies:
   fading_edge_scrollview: ^3.0.0
   timer_count_down: ^2.2.1
   # flutter_math: ^0.2.1
+  realm: ^0.5.0+beta
 
 dev_dependencies:
   flutter_test:

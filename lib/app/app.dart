@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:template/components/card.dart';
 import 'package:template/data/game_session.dart';
+import 'package:template/data/highscore.dart';
 import 'package:template/views/answer_view.dart';
 import 'package:template/views/question_view.dart';
 import 'package:template/views/settings_view.dart';
@@ -16,9 +17,10 @@ class App extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => GameSession()),
+        ChangeNotifierProvider(create: (context) => Highscore()),
       ],
       child: MaterialApp(
-        home: Scaffold(body: StartView()),
+        home: Scaffold(body: Test()),
         theme: Themes.themeData,
         debugShowCheckedModeBanner: false,
       ),

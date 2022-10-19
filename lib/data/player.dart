@@ -35,6 +35,8 @@ class Player {
   /// Returns list of playerAnswers as string.
   List<String> get playerAnswers => _playerAnswers;
 
+  String get playerName => name;
+
   void setPlayerName(String newName) {
     name = newName;
   }

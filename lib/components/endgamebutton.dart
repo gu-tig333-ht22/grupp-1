@@ -18,8 +18,6 @@ class Endgame extends StatelessWidget {
         Themes.icons.wrong,
         size: 24,
       ),
-      padding: EdgeInsets.all(10),
-      shape: CircleBorder(),
     );
   }
 }

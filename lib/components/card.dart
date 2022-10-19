@@ -110,8 +110,8 @@ class OptionsRow extends StatelessWidget {
       } else if (playerAnswer == "No answer") {
         borderColor = Themes.colors.red;
         tileColor = Themes.colors.redLight;
-        circleColor = Themes.colors.redLight;
-        icon = Icon(Themes.icons.timeout, color: Themes.colors.greyDark);
+        circleColor = Themes.colors.red;
+        icon = Icon(Themes.icons.timeout, color: Themes.colors.white);
       }
     }
 
@@ -160,6 +160,8 @@ class OptionsRow extends StatelessWidget {
               ? (() {
                   Provider.of<GameSession>(context, listen: false)
                       .calculatePlayerScore(answer: option);
+                  Provider.of<GameSession>(context, listen: false)
+                      .addAnswerToBalls();
                   Navigator.of(context).pushAndRemoveUntil(
                       PageRouteBuilder(
                           pageBuilder: (context, _, __) => AnswerView(),

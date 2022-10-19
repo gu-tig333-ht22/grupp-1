@@ -4,6 +4,7 @@
 
 //
 import 'package:flutter/material.dart';
+import 'package:flutter_octicons/flutter_octicons.dart';
 import 'package:template/data/http_request.dart';
 import 'package:template/data/player.dart';
 import 'package:template/data/question.dart';
@@ -20,14 +21,18 @@ class GameSession extends ChangeNotifier {
   HttpConection httpConection = HttpConection();
   bool blured = false;
   bool loading = false;
+  int indexSummaryView = 0;
 
   late List<Question> gameQuestions;
   late Question currentQuestion;
   late Player player;
   late int questionCounter;
 
+  late List ballsDataList;
+
   List get chosenCategories => settings.categories;
   String get chosenDifficulty => settings.difficulty;
+  List<Question> get getGameQuestions => gameQuestions;
 
   Future startGame() async {
     loading = true;
@@ -36,6 +41,8 @@ class GameSession extends ChangeNotifier {
     questionCounter = 0;
     gameQuestions = await httpConection.getQuestions(settings: settings);
     currentQuestion = gameQuestions[questionCounter];
+    ballsDataList =
+        gameQuestions.map((question) => question.index + 1).toList();
     loading = false;
     notifyListeners();
   }
@@ -70,6 +77,11 @@ class GameSession extends ChangeNotifier {
     notifyListeners(); // skall det vara det
   }
 
+  Widget getNumberOfQuestionSlider() {
+    return Text(getNumberOfQuestion().toString(),
+        style: TextStyle(color: Themes.colors.white));
+  }
+
   double getNumberOfQuestion() {
     return settings.numberOfQuestions.toDouble();
   }
@@ -83,13 +95,52 @@ class GameSession extends ChangeNotifier {
     return settings.timePerQuestion.toDouble();
   }
 
+  Widget getTimePerQuestionSlider() {
+    double number = getTimePerQuestion();
+    if (number == 61) {
+      return Icon(
+        OctIcons.infinity_16,
+        size: 15,
+        color: Themes.colors.white,
+      );
+    } else {
+      return Text(number.toString(),
+          style: TextStyle(color: Themes.colors.white));
+    }
+  }
+
   void updateDifficulty(String newDifficulty) {
     settings.setDifficulty(newDifficulty);
     notifyListeners();
   }
 
-  void setblured() {
+  void toggleBluredSummaryView() {
     blured = !blured;
     notifyListeners();
+  }
+
+  void addAnswerToBalls() {
+    ballsDataList[questionCounter] = player.boolAnswerList[questionCounter];
+  }
+
+  void setIndexSummaryView({required int index}) {
+    indexSummaryView = index;
+  }
+
+  int getIndexSummaryView() {
+    return indexSummaryView;
+  }
+
+  String getPlayerAnswerSummaryView({required int index}) {
+    String playerAnswer = player.playerAnswers[index];
+    String correctAnswer = getGameQuestions[index].correctAnswer;
+
+    if (playerAnswer == "No answer") {
+      return "No answer";
+    } else if (playerAnswer == correctAnswer) {
+      return "Correct answer";
+    } else {
+      return "Wrong answer";
+    }
   }
 }

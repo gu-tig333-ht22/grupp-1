@@ -9,8 +9,12 @@ class BackToFirstViewButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       onPressed: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => StartView()));
+        Navigator.of(context).pushAndRemoveUntil(
+            PageRouteBuilder(
+                pageBuilder: (context, _, __) => StartView(),
+                transitionDuration: Duration.zero,
+                reverseTransitionDuration: Duration.zero),
+            ((route) => false));
       },
       color: Colors.transparent,
       textColor: Themes.colors.white,

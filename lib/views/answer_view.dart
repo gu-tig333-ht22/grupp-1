@@ -40,7 +40,7 @@ class AnswerView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(right: 35, top: 20),
+                    padding: const EdgeInsets.only(right: 30, top: 30),
                     child: EndGameButton(),
                   ),
                 ],

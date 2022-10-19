@@ -11,7 +11,7 @@ class TestView extends StatelessWidget {
   //final ScrollController _scrollController = ScrollController();
 
   Widget build(BuildContext context) {
-    // Provider.of<Highscore>(context, listen: false).newScore(
+    // Provider.of<Highscore>(context, listen: false).addNewScore(
     //   name: "Merit",
     //   score: 24,
     //   difficulty: "medium",
@@ -19,7 +19,7 @@ class TestView extends StatelessWidget {
     //   timePerQuestion: 20,
     //   categories: ["Arts & Literatures", "Sports"],
     // );
-    Provider.of<Highscore>(context, listen: false).getScores();
+    Provider.of<Highscore>(context, listen: false).fetchScores();
 
     return Container();
   }

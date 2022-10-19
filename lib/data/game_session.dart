@@ -28,6 +28,8 @@ class GameSession extends ChangeNotifier {
   late Player player;
   late int questionCounter;
 
+  late List ballsDataList;
+
   List get chosenCategories => settings.categories;
   String get chosenDifficulty => settings.difficulty;
   List<Question> get getGameQuestions => gameQuestions;
@@ -39,6 +41,8 @@ class GameSession extends ChangeNotifier {
     questionCounter = 0;
     gameQuestions = await httpConection.getQuestions(settings: settings);
     currentQuestion = gameQuestions[questionCounter];
+    ballsDataList =
+        gameQuestions.map((question) => question.index + 1).toList();
     loading = false;
     notifyListeners();
   }
@@ -113,6 +117,10 @@ class GameSession extends ChangeNotifier {
   void toggleBluredSummaryView() {
     blured = !blured;
     notifyListeners();
+  }
+
+  void addAnswerToBalls() {
+    ballsDataList[questionCounter] = player.boolAnswerList[questionCounter];
   }
 
   void setIndexSummaryView({required int index}) {

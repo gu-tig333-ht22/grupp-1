@@ -18,17 +18,22 @@ class QuestionView extends StatelessWidget {
       child: Consumer<GameSession>(
         builder: (context, gameSession, child) => Column(
           children: [
+            SizedBox(
+              height: 30,
+            ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20, left: 35),
-                  child: EndGameButton(),
-                ),
+                SizedBox(width: 60),
+                Expanded(child: CountDownTimer()),
+                Container(
+                    width: 60,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [EndGameButton(), Container(width: 30)],
+                    )),
               ],
             ),
-            CountDownTimer(),
             const Spacer(),
             Text(
               "Question ${gameSession.questionCounter + 1}/${gameSession.gameQuestions.length}",

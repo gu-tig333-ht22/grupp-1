@@ -24,9 +24,6 @@ class Highscore extends ChangeNotifier {
         projectKey: project_key,
         client: HttpClientDetaApi(http: http.Client()));
     detabase = deta.base("highscores-1");
-
-    // Det körs en hämtning direkt under initieringen så det finns scores.
-    fetchScores();
   }
 
   // Getters för de olika score
@@ -39,6 +36,7 @@ class Highscore extends ChangeNotifier {
     required String name,
     required int score,
     required String difficulty,
+    required int longestStreak,
     required int numberOfQuestions,
     required int timePerQuestion,
     required List<String> categories,
@@ -48,6 +46,7 @@ class Highscore extends ChangeNotifier {
       "name": name,
       "score": score,
       "difficulty": difficulty,
+      "longestStreak": longestStreak,
       "numberOfQuestions": numberOfQuestions,
       "timePerQuestion": timePerQuestion,
       "categories": categories,
@@ -83,7 +82,6 @@ class Highscore extends ChangeNotifier {
       sortedList.add(largest);
       scores.remove(largest);
     }
-    print(sortedList);
     return sortedList;
   }
 }

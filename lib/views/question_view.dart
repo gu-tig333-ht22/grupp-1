@@ -105,13 +105,13 @@ class _CountDownTimerState extends State<CountDownTimer> {
             isTimerTextShown: true,
             autoStart: true,
             onComplete: () {
-              _controller.restart();
-              _controller.pause();
-
               Provider.of<GameSession>(context, listen: false)
                   .calculatePlayerScore(answer: "No answer");
               Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => AnswerView()),
+                  PageRouteBuilder(
+                      pageBuilder: (context, _, __) => AnswerView(),
+                      transitionDuration: Duration.zero,
+                      reverseTransitionDuration: Duration.zero),
                   ((route) => false));
             },
           )

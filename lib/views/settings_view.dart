@@ -3,6 +3,7 @@ import 'package:flutter_octicons/flutter_octicons.dart';
 import 'package:provider/provider.dart';
 import 'package:template/components/nav_button.dart';
 import 'package:template/theme/theme.dart';
+import 'package:template/views/loading_screen.dart';
 import 'package:template/views/question_view.dart';
 import '../data/game_session.dart';
 import 'package:template/components/slider.dart';
@@ -98,13 +99,11 @@ class SettingsView extends StatelessWidget {
                   "Start",
                   style: Themes.textStyle.headline1,
                 ),
-                onPressed: () async {
-                  Provider.of<GameSession>(context, listen: false).startGame();
-                  await Future.delayed(const Duration(seconds: 2)); // quickfix
+                onPressed: () {
                   Navigator.push(
                       context,
                       PageRouteBuilder(
-                          pageBuilder: (context, _, __) => QuestionView(),
+                          pageBuilder: (context, _, __) => LoadingView(),
                           transitionDuration: Duration.zero,
                           reverseTransitionDuration: Duration.zero));
                 },

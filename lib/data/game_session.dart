@@ -119,10 +119,10 @@ class GameSession extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Funktioner och data för boll-scrollen
-
   void addAnswerToBalls() {
     ballsDataList[questionCounter] = player.boolAnswerList[questionCounter];
+  }
+
   void setIndexSummaryView({required int index}) {
     indexSummaryView = index;
   }

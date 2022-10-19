@@ -41,7 +41,7 @@ class AnswerView extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(right: 35, top: 20),
-                    child: Endgame(),
+                    child: EndGameButton(),
                   ),
                 ],
               ),

@@ -24,7 +24,7 @@ class QuestionView extends StatelessWidget {
                 const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.only(top: 20, left: 35),
-                  child: Endgame(),
+                  child: EndGameButton(),
                 ),
               ],
             ),

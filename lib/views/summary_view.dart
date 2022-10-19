@@ -11,6 +11,7 @@ import 'package:template/components/nav_button.dart';
 import 'package:template/views/settings_view.dart';
 import 'package:template/views/start_view.dart';
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
+import 'package:template/data/string_extension.dart';
 
 import '../data/question.dart';
 
@@ -104,6 +105,13 @@ class SummaryTable extends StatelessWidget {
         children: [
           Text(
             "Summary",
+            style: Themes.textStyle.headline2,
+          ),
+          const SizedBox(height: 5),
+          Text(
+            Provider.of<GameSession>(context, listen: false)
+                .chosenDifficulty
+                .capitalize(),
             style: Themes.textStyle.headline2,
           ),
           Container(

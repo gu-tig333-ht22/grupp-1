@@ -178,6 +178,7 @@ class ThemeIcons {
   final IconData wrong = Icons.close;
   final IconData reset = Icons.manage_history;
   final IconData timeout = Icons.timer_off_outlined;
+  final IconData backarrow = Icons.arrow_back_ios_new;
 }
 
 class ThemeFunctions {

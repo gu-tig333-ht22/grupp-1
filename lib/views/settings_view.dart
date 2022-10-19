@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_octicons/flutter_octicons.dart';
 import 'package:provider/provider.dart';
+import 'package:template/components/endgamebutton.dart';
 import 'package:template/components/nav_button.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/views/question_view.dart';
 import '../data/game_session.dart';
+import 'package:template/components/backbutton.dart';
 
 class SettingsView extends StatelessWidget {
   @override
@@ -15,10 +17,19 @@ class SettingsView extends StatelessWidget {
           padding: const EdgeInsets.all(30.0),
           child: Column(
             children: [
-              Container(height: 30),
-              Text(
-                'Singleplayer',
-                style: TextStyle(color: Themes.colors.white, fontSize: 35),
+              Row(
+                children: [
+                  SizedBox(width: 20, child: BackToFirstViewButton()),
+                  Expanded(
+                    child: Text(
+                      'Singleplayer',
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(color: Themes.colors.white, fontSize: 35),
+                    ),
+                  ),
+                  SizedBox(width: 20)
+                ],
               ),
               const SizedBox(
                 height: 40,
@@ -32,12 +43,13 @@ class SettingsView extends StatelessWidget {
                           .resetSettings();
                     },
                     color: Themes.colors.backgroundDark,
-                    textColor: Colors.white,
+                    textColor: Themes.colors.white,
                     child: Icon(
                       Themes.icons.reset,
                       size: 24,
                     ),
-                    padding: EdgeInsets.all(16),
+                    padding: EdgeInsets.all(0),
+                    minWidth: 0,
                     shape: CircleBorder(),
                   ),
                 ],

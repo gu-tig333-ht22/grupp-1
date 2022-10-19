@@ -4,7 +4,7 @@ import 'package:template/views/start_view.dart';
 
 import '../views/settings_view.dart';
 
-class EndGameButton extends StatelessWidget {
+class BackToFirstViewButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
@@ -12,13 +12,12 @@ class EndGameButton extends StatelessWidget {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => StartView()));
       },
-      color: Themes.colors.backgroundMiddle,
-      textColor: Colors.white,
+      color: Colors.transparent,
+      textColor: Themes.colors.white,
       padding: EdgeInsets.all(0),
       minWidth: 0,
-      shape: CircleBorder(),
       child: Icon(
-        Themes.icons.wrong,
+        Themes.icons.backarrow,
         size: 24,
       ),
     );

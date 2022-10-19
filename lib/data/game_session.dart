@@ -21,6 +21,7 @@ class GameSession extends ChangeNotifier {
   HttpConection httpConection = HttpConection();
   bool blured = false;
   bool loading = false;
+  int indexSummaryView = 0;
 
   late List<Question> gameQuestions;
   late Question currentQuestion;
@@ -31,6 +32,7 @@ class GameSession extends ChangeNotifier {
 
   List get chosenCategories => settings.categories;
   String get chosenDifficulty => settings.difficulty;
+  List<Question> get getGameQuestions => gameQuestions;
 
   Future startGame() async {
     loading = true;
@@ -112,7 +114,7 @@ class GameSession extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setblured() {
+  void toggleBluredSummaryView() {
     blured = !blured;
     notifyListeners();
   }
@@ -121,5 +123,24 @@ class GameSession extends ChangeNotifier {
 
   void addAnswerToBalls() {
     ballsDataList[questionCounter] = player.boolAnswerList[questionCounter];
+  void setIndexSummaryView({required int index}) {
+    indexSummaryView = index;
+  }
+
+  int getIndexSummaryView() {
+    return indexSummaryView;
+  }
+
+  String getPlayerAnswerSummaryView({required int index}) {
+    String playerAnswer = player.playerAnswers[index];
+    String correctAnswer = getGameQuestions[index].correctAnswer;
+
+    if (playerAnswer == "No answer") {
+      return "No answer";
+    } else if (playerAnswer == correctAnswer) {
+      return "Correct answer";
+    } else {
+      return "Wrong answer";
+    }
   }
 }

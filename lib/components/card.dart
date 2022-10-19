@@ -111,6 +111,7 @@ class OptionsRow extends StatelessWidget {
         borderColor = Themes.colors.red;
         tileColor = Themes.colors.redLight;
         circleColor = Themes.colors.redLight;
+        icon = Icon(Themes.icons.timeout, color: Themes.colors.greyDark);
       }
     }
 

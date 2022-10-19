@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:template/components/nav_button.dart';
+import 'package:template/data/about.dart';
 import 'package:template/data/game_session.dart';
 import 'package:template/theme/theme.dart';
+import 'package:template/views/about_view.dart';
 import 'package:template/views/settings_view.dart';
 import 'package:provider/provider.dart';
 
@@ -13,10 +15,29 @@ class StartView extends StatelessWidget {
       child: Center(
         child: Column(
           children: [
-            SizedBox(height: 50),
+            Row(
+              children: [
+                const SizedBox(height: 50),
+                const Spacer(),
+                Padding(
+                    padding: const EdgeInsets.only(top: 30, right: 30),
+                    child: IconButton(
+                      icon: Icon(Icons.info_outline_rounded,
+                          color: Themes.colors.white),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                                pageBuilder: (context, _, __) => AboutView(),
+                                transitionDuration: Duration.zero,
+                                reverseTransitionDuration: Duration.zero));
+                      },
+                    ))
+              ],
+            ),
             Themes.textStyle.headlineGradient(text: 'Quizter', fontSize: 44),
             Themes.textStyle.headlineGradient(text: 'Pettersson', fontSize: 44),
-            Spacer(),
+            const Spacer(),
             NavigationButton(
               text: Text(
                 "Singleplayer",

@@ -5,6 +5,10 @@ class About extends ChangeNotifier {
   String headline = '';
   String body = '';
 
+  About() {
+    aboutCardCredits();
+  }
+
   void aboutCardCredits() {
     category = 'Science';
     headline = 'We who have made this app are:';
@@ -17,7 +21,7 @@ class About extends ChangeNotifier {
     category = 'Arts & Literature';
     headline = 'Thanks!';
     body =
-        'This project would not have been possible without The Trivia API made by the generous Will Fry.';
+        'This project would not have been possible without Will Fry, who generously maintains and runs The Trivia API.';
     notifyListeners();
   }
 }

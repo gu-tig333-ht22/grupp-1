@@ -49,11 +49,9 @@ class AnswerView extends StatelessWidget {
               Text('Score: ${gameSession.player.score}',
                   style: Themes.textStyle.headline1),
               const Spacer(),
-              //AnswerCircles(),
               SideScrollBalls(),
               const Spacer(),
               Text(
-                // X/X SKA ERSÄTTAS MED INDEXPOSITION I FRÅGELISTA SAMT VÄRDE PÅ ANTAL FRÅGOR I SETTINGS
                 "Question ${gameSession.questionCounter + 1}/${gameSession.gameQuestions.length}",
                 style: Themes.textStyle.headline2,
               ),
@@ -71,17 +69,59 @@ class AnswerView extends StatelessWidget {
   }
 }
 
-class AnswerCircles extends StatelessWidget {
-  // LOGIK FÖR ATT SKAPA LISTAN SOM VISAS PÅ SKÄRMEN ÄR EJ IMPLEMENTERAD
-  List<dynamic> circleData = [
-    false,
-    true,
-    false,
-    false,
-    '6',
-    '7',
-    '8',
-  ];
+class SideScrollBalls extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<GameSession>(
+      builder: (context, gameSession, child) => Expanded(
+        child: RotatedBox(
+          quarterTurns: -1,
+          child: ListWheelScrollView(
+            controller: FixedExtentScrollController(
+                initialItem: gameSession.questionCounter),
+            itemExtent: 50,
+            children: gameSession.ballsDataList.map((question) {
+              double size = gameSession.questionCounter == question ? 35 : 25;
+
+              if (question == true) {
+                return RotatedBox(
+                  quarterTurns: 1,
+                  child: GradientCircle(
+                    color: Themes.colors.green,
+                    size: size,
+                    child: Icon(Themes.icons.correct),
+                  ),
+                );
+              }
+              if (question == false) {
+                return RotatedBox(
+                  quarterTurns: 1,
+                  child: GradientCircle(
+                    color: Themes.colors.red,
+                    size: size,
+                    child: Icon(Themes.icons.wrong),
+                  ),
+                );
+              } else {
+                return RotatedBox(
+                  quarterTurns: 1,
+                  child: GradientCircle(
+                    color: Themes.colors.greyLight,
+                    size: 25,
+                    child: Text('$question'),
+                  ),
+                );
+              }
+            }).toList(),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/*class AnswerCircles extends StatelessWidget {
+  
 
   @override
   Widget build(BuildContext context) {
@@ -117,4 +157,4 @@ class AnswerCircles extends StatelessWidget {
           children: circles),
     );
   }
-}
+}*/

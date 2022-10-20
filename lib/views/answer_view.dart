@@ -100,7 +100,8 @@ class SideScrollBalls extends StatelessWidget {
                   child: GradientCircle(
                     color: Themes.colors.green,
                     size: size,
-                    child: Icon(Themes.icons.correct),
+                    child: Icon(Themes.icons.correct,
+                        color: Themes.colors.white, size: 20),
                   ),
                 );
               }
@@ -110,16 +111,18 @@ class SideScrollBalls extends StatelessWidget {
                   child: GradientCircle(
                     color: Themes.colors.red,
                     size: size,
-                    child: Icon(Themes.icons.wrong),
+                    child: Icon(Themes.icons.wrong,
+                        color: Themes.colors.white, size: 20),
                   ),
                 );
               } else {
                 return RotatedBox(
                   quarterTurns: 1,
                   child: GradientCircle(
-                    color: Themes.colors.greyLight,
+                    color: Themes.colors.grey,
                     size: 25,
-                    child: Text('$question'),
+                    child: Text('$question',
+                        style: TextStyle(color: Themes.colors.white)),
                   ),
                 );
               }

@@ -76,7 +76,7 @@ class GameSession extends ChangeNotifier {
   }
 
   void setCardStack() {
-    if (questionCounter < gameQuestions.length) {
+    if (questionCounter + 1 < gameQuestions.length) {
       cardStackList = [
         gameQuestions[questionCounter + 1],
         currentQuestion,

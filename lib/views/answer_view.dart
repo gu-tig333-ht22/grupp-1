@@ -1,3 +1,4 @@
+import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:template/components/card.dart';
@@ -14,55 +15,65 @@ class AnswerView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldWithBackground(
         child: Consumer<GameSession>(
-      builder: (context, gameSession, child) => InkWell(
-        onTap: () {
-          gameSession.increaseQuestionCounter();
-          if (gameSession.questionCounter >= gameSession.gameQuestions.length) {
-            Navigator.of(context).pushAndRemoveUntil(
-                PageRouteBuilder(
-                    pageBuilder: (context, _, __) => SummaryView(),
-                    transitionDuration: Duration.zero,
-                    reverseTransitionDuration: Duration.zero),
-                ((route) => false));
-          } else {
-            Navigator.of(context).pushAndRemoveUntil(
-                PageRouteBuilder(
-                    pageBuilder: (context, _, __) => QuestionView(),
-                    transitionDuration: Duration.zero,
-                    reverseTransitionDuration: Duration.zero),
-                ((route) => false));
-          }
-        },
-        child: Center(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 30, top: 30),
-                    child: EndGameButton(),
-                  ),
-                ],
+      builder: (context, gameSession, child) => Center(
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 30, top: 30),
+                  child: EndGameButton(),
+                ),
+              ],
+            ),
+            const SizedBox(height: 40),
+            Text('Score: ${gameSession.player.score}',
+                style: Themes.textStyle.headline1),
+            const Spacer(),
+            SideScrollBalls(),
+            const Spacer(),
+            Text(
+              "Question ${gameSession.questionCounter + 1}/${gameSession.gameQuestions.length}",
+              style: Themes.textStyle.headline2,
+            ),
+            const SizedBox(height: 10),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.65,
+              width: MediaQuery.of(context).size.width * 0.85,
+              child: AppinioSwiper(
+                padding: const EdgeInsets.symmetric(),
+                isDisabled: false,
+                onSwipe: (index, direction) {
+                  gameSession.increaseQuestionCounter();
+                  if (gameSession.questionCounter >=
+                      gameSession.gameQuestions.length) {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        PageRouteBuilder(
+                            pageBuilder: (context, _, __) => SummaryView(),
+                            transitionDuration: Duration.zero,
+                            reverseTransitionDuration: Duration.zero),
+                        ((route) => false));
+                  } else {
+                    gameSession.setCardStack();
+                    Navigator.of(context).pushAndRemoveUntil(
+                        PageRouteBuilder(
+                            pageBuilder: (context, _, __) => QuestionView(),
+                            transitionDuration: Duration.zero,
+                            reverseTransitionDuration: Duration.zero),
+                        ((route) => false));
+                  }
+                },
+                cards: gameSession.cardStackList
+                    .map((question) =>
+                        QuestionCard(question: question, answerable: false))
+                    .toList(),
               ),
-              const SizedBox(height: 40),
-              Text('Score: ${gameSession.player.score}',
-                  style: Themes.textStyle.headline1),
-              const Spacer(),
-              SideScrollBalls(),
-              const Spacer(),
-              Text(
-                "Question ${gameSession.questionCounter + 1}/${gameSession.gameQuestions.length}",
-                style: Themes.textStyle.headline2,
-              ),
-              const SizedBox(height: 10),
-              QuestionCard(
-                  question: gameSession.currentQuestion, answerable: false),
-              const SizedBox(
-                height: 30,
-              ),
-            ],
-          ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+          ],
         ),
       ),
     ));
@@ -119,42 +130,3 @@ class SideScrollBalls extends StatelessWidget {
     );
   }
 }
-
-/*class AnswerCircles extends StatelessWidget {
-  
-
-  @override
-  Widget build(BuildContext context) {
-    var deviceWidth = MediaQuery.of(context).size.width;
-    List<Widget> circles = circleData.map((circle) {
-      if (circle == false) {
-        return GradientCircle(
-            color: Themes.colors.red,
-            size: 28,
-            child:
-                Icon(Themes.icons.wrong, color: Themes.colors.white, size: 20));
-      }
-      if (circle == true) {
-        return GradientCircle(
-            color: Themes.colors.green,
-            size: 28,
-            child: Icon(Themes.icons.correct,
-                color: Themes.colors.white, size: 20));
-      } else {
-        return GradientCircle(
-            color: Themes.colors.grey,
-            size: 28,
-            child: Text(circle, style: Themes.textStyle.headline3));
-      }
-    }).toList();
-    // FUNDERA PÅ MITTENCIRKEL STÖRRE -- GÖR TILL EN CYLINDERSCROLL?!
-    return Container(
-      width: deviceWidth * 0.8,
-      child: Wrap(
-          alignment: WrapAlignment.start,
-          // Minus behövs för att bredden blir aaaningen för stor vid beräkningen annars
-          spacing: ((deviceWidth * 0.8 - 7 * 28) / 6) - 0.00000000000001,
-          children: circles),
-    );
-  }
-}*/

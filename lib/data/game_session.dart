@@ -78,7 +78,19 @@ class GameSession extends ChangeNotifier {
   void setCardStack() {
     if (questionCounter + 1 < gameQuestions.length) {
       cardStackList = [
-        gameQuestions[questionCounter + 1],
+        Question(
+            id: '100',
+            category: gameQuestions[questionCounter + 1].category,
+            correctAnswer: 'No info here!',
+            incorrectAnswers: [
+              'Trying to cheat, are we?',
+              'You wont reach the highscore this way!',
+              'Nosy.'
+            ],
+            question:
+                'This is where the next question will be, but you need to swipe away first! The border color might give away a clue, though.',
+            difficulty: 'hard',
+            index: 100),
         currentQuestion,
       ];
     } else {

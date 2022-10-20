@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:template/components/nav_button.dart';
 import 'package:template/data/about.dart';
 import 'package:template/data/game_session.dart';
+import 'package:template/data/highscore.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/views/about_view.dart';
 import 'package:template/views/settings_view.dart';
@@ -11,6 +12,8 @@ import 'package:provider/provider.dart';
 class StartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //Fetching data for highscore at start.
+    Provider.of<Highscore>(context, listen: false).fetchScores();
     return ScaffoldWithBackground(
       child: Center(
         child: Column(

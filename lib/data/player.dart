@@ -19,7 +19,7 @@ class Player {
 
   final List<String> _playerAnswers =
       []; // if string = "No answer" => player out of time
-  List<bool> _boolAnswers = [];
+  List<dynamic> _boolAnswers = [];
 
   Player({this.name = ""});
 
@@ -27,7 +27,7 @@ class Player {
   int get score => _score;
 
   /// Returns player answers as bool list
-  List<bool> get boolAnswerList => _boolAnswers;
+  List<dynamic> get boolAnswerList => _boolAnswers;
 
   /// Returns number of correctAnswer as int.
   int get correctAnswers => _correctAnswers;
@@ -69,6 +69,10 @@ class Player {
     }
     _streakCounter = 0;
     _playerAnswers.add(newAnswer);
-    _boolAnswers.add(false);
+    if (newAnswer == 'No answer') {
+      _boolAnswers.add(newAnswer);
+    } else {
+      _boolAnswers.add(false);
+    }
   }
 }

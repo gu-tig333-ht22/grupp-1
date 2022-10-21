@@ -25,6 +25,13 @@ class QuestionCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(top: 30, bottom: 30, left: 12, right: 12),
       decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Themes.colors.grey.withOpacity(0.5),
+              spreadRadius: 3,
+              blurRadius: 3,
+            )
+          ],
           color: backgroundColor,
           borderRadius: BorderRadius.circular(35),
           border: Border.all(width: 10, color: categoryColor)),

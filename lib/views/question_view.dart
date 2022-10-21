@@ -121,7 +121,9 @@ class _CountDownTimerState extends State<CountDownTimer> {
             autoStart: true,
             onComplete: () {
               Provider.of<GameSession>(context, listen: false)
-                  .calculatePlayerScore(answer: "No answer");
+                  .calculatePlayerScore(answer: 'No answer');
+              Provider.of<GameSession>(context, listen: false)
+                  .addAnswerToBalls();
               Navigator.of(context).pushAndRemoveUntil(
                   PageRouteBuilder(
                       pageBuilder: (context, _, __) => AnswerView(),

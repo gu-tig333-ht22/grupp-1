@@ -22,7 +22,7 @@ class AnswerView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(right: 30, top: 30),
+                  padding: const EdgeInsets.only(right: 12, top: 30),
                   child: EndGameButton(),
                 ),
               ],
@@ -91,10 +91,10 @@ class SideScrollBalls extends StatelessWidget {
             controller: FixedExtentScrollController(
                 initialItem: gameSession.questionCounter),
             itemExtent: 50,
-            children: gameSession.ballsDataList.map((question) {
-              double size = gameSession.questionCounter == question ? 35 : 25;
+            children: gameSession.ballsDataList.map((answer) {
+              double size = gameSession.questionCounter == answer ? 35 : 25;
 
-              if (question == true) {
+              if (answer == true) {
                 return RotatedBox(
                   quarterTurns: 1,
                   child: GradientCircle(
@@ -104,8 +104,7 @@ class SideScrollBalls extends StatelessWidget {
                         color: Themes.colors.white, size: 20),
                   ),
                 );
-              }
-              if (question == false) {
+              } else if (answer == false) {
                 return RotatedBox(
                   quarterTurns: 1,
                   child: GradientCircle(
@@ -115,13 +114,23 @@ class SideScrollBalls extends StatelessWidget {
                         color: Themes.colors.white, size: 20),
                   ),
                 );
+              } else if (answer == 'No answer') {
+                return RotatedBox(
+                  quarterTurns: 1,
+                  child: GradientCircle(
+                    color: Themes.colors.red,
+                    size: size,
+                    child: Icon(Themes.icons.timeout,
+                        color: Themes.colors.white, size: 20),
+                  ),
+                );
               } else {
                 return RotatedBox(
                   quarterTurns: 1,
                   child: GradientCircle(
                     color: Themes.colors.grey,
                     size: 25,
-                    child: Text('$question',
+                    child: Text('$answer',
                         style: TextStyle(color: Themes.colors.white)),
                   ),
                 );

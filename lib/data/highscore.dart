@@ -17,6 +17,7 @@ class Highscore extends ChangeNotifier {
   late List _scoresEasy;
   late List _scoresMedium;
   late List _scoresHard;
+  String _difficultyToView = "medium";
 
   // Öppnar kopplingen till databasen.
   Highscore() {
@@ -30,6 +31,23 @@ class Highscore extends ChangeNotifier {
   List get highscoreEasy => _scoresEasy;
   List get highscoreMedium => _scoresMedium;
   List get highscoreHart => _scoresHard;
+  String get difficultyToView => _difficultyToView;
+
+  List getChosenHighscores() {
+    if (difficultyToView == "easy") {
+      return _scoresEasy;
+    } else if (difficultyToView == "medium") {
+      return _scoresMedium;
+    } else if (difficultyToView == "hard") {
+      return _scoresHard;
+    }
+    return _scoresMedium;
+  }
+
+  void setDifficultyToView(String newDifficultyToView) {
+    _difficultyToView = newDifficultyToView;
+    notifyListeners();
+  }
 
   /// Använd för att skapa ett nytt objekt i databasen.
   void addNewScore({

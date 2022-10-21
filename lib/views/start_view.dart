@@ -9,6 +9,8 @@ import 'package:template/views/about_view.dart';
 import 'package:template/views/settings_view.dart';
 import 'package:provider/provider.dart';
 
+import 'highscore_view.dart';
+
 class StartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -23,19 +25,20 @@ class StartView extends StatelessWidget {
                 const SizedBox(height: 50),
                 const Spacer(),
                 Padding(
-                    padding: const EdgeInsets.only(top: 30, right: 30),
-                    child: IconButton(
-                      icon: Icon(Icons.info_outline_rounded,
-                          color: Themes.colors.white),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                                pageBuilder: (context, _, __) => AboutView(),
-                                transitionDuration: Duration.zero,
-                                reverseTransitionDuration: Duration.zero));
-                      },
-                    ))
+                  padding: const EdgeInsets.only(top: 30, right: 30),
+                  child: IconButton(
+                    icon: Icon(Icons.info_outline_rounded,
+                        color: Themes.colors.white),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                              pageBuilder: (context, _, __) => AboutView(),
+                              transitionDuration: Duration.zero,
+                              reverseTransitionDuration: Duration.zero));
+                    },
+                  ),
+                )
               ],
             ),
             Themes.textStyle.headlineGradient(text: 'Quizter', fontSize: 44),
@@ -83,7 +86,14 @@ class StartView extends StatelessWidget {
                 width: 250,
                 height: 50,
                 color: Themes.colors.blueDark,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                          pageBuilder: (context, _, __) => HighscoreView(),
+                          transitionDuration: Duration.zero,
+                          reverseTransitionDuration: Duration.zero));
+                },
               ),
             ),
             SizedBox(height: 70),

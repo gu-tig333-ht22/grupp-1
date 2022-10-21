@@ -25,6 +25,13 @@ class QuestionCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(top: 30, bottom: 30, left: 12, right: 12),
       decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Themes.colors.grey.withOpacity(0.5),
+              spreadRadius: 3,
+              blurRadius: 3,
+            )
+          ],
           color: backgroundColor,
           borderRadius: BorderRadius.circular(35),
           border: Border.all(width: 10, color: categoryColor)),
@@ -79,39 +86,42 @@ class OptionsRow extends StatelessWidget {
   Widget build(BuildContext context) {
     // Om kortet inte är aktivt så skall varje rad byggas upp enligt nedan
     if (answerable == false) {
-      String playerAnswer = Provider.of<GameSession>(context, listen: false)
-          .player
-          .playerAnswers[question.index];
-      String correctAnswer = question.correctAnswer;
-      // 1 Om spelarens svar är samma som radens värde
-      if (playerAnswer == option) {
-        // 1.1 Om spelarens svar också är det rätta svaret så skall raden bli grön och en grön ikon ritas ut
-        if (playerAnswer == correctAnswer) {
+      if (question.index ==
+          Provider.of<GameSession>(context, listen: false).questionCounter) {
+        String playerAnswer = Provider.of<GameSession>(context, listen: false)
+            .player
+            .playerAnswers[question.index];
+        String correctAnswer = question.correctAnswer;
+        // 1 Om spelarens svar är samma som radens värde
+        if (playerAnswer == option) {
+          // 1.1 Om spelarens svar också är det rätta svaret så skall raden bli grön och en grön ikon ritas ut
+          if (playerAnswer == correctAnswer) {
+            borderColor = Themes.colors.green;
+            tileColor = Themes.colors.greenLight;
+            circleColor = Themes.colors.green;
+            icon = Icon(Themes.icons.correct, color: Colors.white);
+            // 1.2 Om det inte är det rätta svaret så skall raden ritas ut som röd med en röd ikon
+          } else {
+            borderColor = Themes.colors.red;
+            tileColor = Themes.colors.redLight;
+            circleColor = Themes.colors.red;
+            icon = Icon(
+              Themes.icons.wrong,
+              color: Colors.white,
+            );
+          }
+          // 2 Om raden inte är spelarens svar men det är det rätta svaret så skall raden ritas ut som grön
+        } else if (option == correctAnswer) {
           borderColor = Themes.colors.green;
           tileColor = Themes.colors.greenLight;
-          circleColor = Themes.colors.green;
-          icon = Icon(Themes.icons.correct, color: Colors.white);
-          // 1.2 Om det inte är det rätta svaret så skall raden ritas ut som röd med en röd ikon
-        } else {
+          circleColor = Themes.colors.greenLight;
+          // 3 Om tiden går ut skall alla rader förutom den rätta raden ritas ut som röd
+        } else if (playerAnswer == "No answer") {
           borderColor = Themes.colors.red;
           tileColor = Themes.colors.redLight;
           circleColor = Themes.colors.red;
-          icon = Icon(
-            Themes.icons.wrong,
-            color: Colors.white,
-          );
+          icon = Icon(Themes.icons.timeout, color: Themes.colors.white);
         }
-        // 2 Om raden inte är spelarens svar men det är det rätta svaret så skall raden ritas ut som grön
-      } else if (option == correctAnswer) {
-        borderColor = Themes.colors.green;
-        tileColor = Themes.colors.greenLight;
-        circleColor = Themes.colors.greenLight;
-        // 3 Om tiden går ut skall alla rader förutom den rätta raden ritas ut som röd
-      } else if (playerAnswer == "No answer") {
-        borderColor = Themes.colors.red;
-        tileColor = Themes.colors.redLight;
-        circleColor = Themes.colors.red;
-        icon = Icon(Themes.icons.timeout, color: Themes.colors.white);
       }
     }
 

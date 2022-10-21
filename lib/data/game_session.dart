@@ -30,6 +30,8 @@ class GameSession extends ChangeNotifier {
 
   late List ballsDataList;
 
+  late List<Question> cardStackList;
+
   List get chosenCategories => settings.categories;
   String get chosenDifficulty => settings.difficulty;
   List<Question> get getGameQuestions => gameQuestions;
@@ -44,6 +46,7 @@ class GameSession extends ChangeNotifier {
     ballsDataList =
         gameQuestions.map((question) => question.index + 1).toList();
     loading = false;
+    setCardStack();
     notifyListeners();
   }
 
@@ -72,11 +75,35 @@ class GameSession extends ChangeNotifier {
     }
   }
 
+  void setCardStack() {
+    if (questionCounter + 1 < gameQuestions.length) {
+      cardStackList = [
+        Question(
+            id: '100',
+            category: gameQuestions[questionCounter + 1].category,
+            correctAnswer: 'No info here!',
+            incorrectAnswers: [
+              'Trying to cheat, are we?',
+              'You wont reach the highscore this way!',
+              'Nosy.'
+            ],
+            question:
+                'This is where the next question will be, but you need to swipe away first! The border color might give away a clue, though.',
+            difficulty: 'hard',
+            index: 100),
+        currentQuestion,
+      ];
+    } else {
+      cardStackList = [currentQuestion];
+    }
+  }
+
   void updateNumberOfQuestion(double numberOfQuestions) {
     settings.setNumberOfQuestions(numberOfQuestions.round());
     notifyListeners(); // skall det vara det
   }
 
+  //Borde bara finnas data i denna klassen. Onödig funktion?
   Widget getNumberOfQuestionSlider() {
     return Text(getNumberOfQuestion().toString(),
         style: TextStyle(color: Themes.colors.white));

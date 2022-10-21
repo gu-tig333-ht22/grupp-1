@@ -1,3 +1,4 @@
+import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:provider/provider.dart';
@@ -18,20 +19,21 @@ class QuestionView extends StatelessWidget {
       child: Consumer<GameSession>(
         builder: (context, gameSession, child) => Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(width: 60),
+                const SizedBox(width: 60),
                 Expanded(child: CountDownTimer()),
                 Container(
-                    width: 60,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [EndGameButton(), Container(width: 30)],
-                    )),
+                  width: 60,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [EndGameButton(), Container(width: 12)],
+                  ),
+                ),
               ],
             ),
             const Spacer(),
@@ -40,13 +42,21 @@ class QuestionView extends StatelessWidget {
               style: Themes.textStyle.headline3,
             ),
             const SizedBox(height: 10),
-            QuestionCard(
-              question: gameSession.currentQuestion,
-              answerable: true,
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.65,
+              width: MediaQuery.of(context).size.width * 0.85,
+              child: AppinioSwiper(
+                padding: const EdgeInsets.symmetric(),
+                isDisabled: true,
+                cards: gameSession.cardStackList
+                    .map((question) =>
+                        QuestionCard(question: question, answerable: true))
+                    .toList(),
+              ),
             ),
             const SizedBox(
-              height: 30,
-            ),
+              height: 20,
+            )
           ],
         ),
       ),
@@ -111,7 +121,9 @@ class _CountDownTimerState extends State<CountDownTimer> {
             autoStart: true,
             onComplete: () {
               Provider.of<GameSession>(context, listen: false)
-                  .calculatePlayerScore(answer: "No answer");
+                  .calculatePlayerScore(answer: 'No answer');
+              Provider.of<GameSession>(context, listen: false)
+                  .addAnswerToBalls();
               Navigator.of(context).pushAndRemoveUntil(
                   PageRouteBuilder(
                       pageBuilder: (context, _, __) => AnswerView(),

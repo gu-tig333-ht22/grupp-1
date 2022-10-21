@@ -2,6 +2,7 @@ import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:template/components/card.dart';
+import 'package:template/components/displayCard.dart';
 import 'package:template/components/gradient_circle.dart';
 import 'package:template/test/test_file.dart';
 import 'package:template/theme/theme.dart';
@@ -42,33 +43,44 @@ class AnswerView extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.65,
               width: MediaQuery.of(context).size.width * 0.85,
               child: AppinioSwiper(
-                padding: const EdgeInsets.symmetric(),
-                isDisabled: false,
-                onSwipe: (index, direction) {
-                  gameSession.increaseQuestionCounter();
-                  if (gameSession.questionCounter >=
-                      gameSession.gameQuestions.length) {
-                    Navigator.of(context).pushAndRemoveUntil(
-                        PageRouteBuilder(
-                            pageBuilder: (context, _, __) => SummaryView(),
-                            transitionDuration: Duration.zero,
-                            reverseTransitionDuration: Duration.zero),
-                        ((route) => false));
-                  } else {
-                    gameSession.setCardStack();
-                    Navigator.of(context).pushAndRemoveUntil(
-                        PageRouteBuilder(
-                            pageBuilder: (context, _, __) => QuestionView(),
-                            transitionDuration: Duration.zero,
-                            reverseTransitionDuration: Duration.zero),
-                        ((route) => false));
-                  }
-                },
-                cards: gameSession.cardStackList
-                    .map((question) =>
-                        QuestionCard(question: question, answerable: false))
-                    .toList(),
-              ),
+                  padding: const EdgeInsets.symmetric(),
+                  isDisabled: false,
+                  onSwipe: (index, direction) {
+                    gameSession.increaseQuestionCounter();
+                    if (gameSession.questionCounter >=
+                        gameSession.gameQuestions.length) {
+                      Navigator.of(context).pushAndRemoveUntil(
+                          PageRouteBuilder(
+                              pageBuilder: (context, _, __) => SummaryView(),
+                              transitionDuration: Duration.zero,
+                              reverseTransitionDuration: Duration.zero),
+                          ((route) => false));
+                    } else {
+                      gameSession.setNextQuestion();
+                      Navigator.of(context).pushAndRemoveUntil(
+                          PageRouteBuilder(
+                              pageBuilder: (context, _, __) => QuestionView(),
+                              transitionDuration: Duration.zero,
+                              reverseTransitionDuration: Duration.zero),
+                          ((route) => false));
+                    }
+                  },
+                  cards: gameSession.questionCounter + 1 <
+                          gameSession.gameQuestions.length
+                      ? [
+                          DisplayCard(
+                              category: gameSession.nextQuestion.category,
+                              headline: Text(''),
+                              body: Text('')),
+                          QuestionCard(
+                              question: gameSession.currentQuestion,
+                              answerable: false),
+                        ]
+                      : [
+                          QuestionCard(
+                              question: gameSession.currentQuestion,
+                              answerable: false)
+                        ]),
             ),
             const SizedBox(
               height: 20,

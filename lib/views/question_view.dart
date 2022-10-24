@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:provider/provider.dart';
 import 'package:template/components/card.dart';
+import 'package:template/components/displayCard.dart';
 import 'package:template/components/endgamebutton.dart';
 import 'package:template/data/game_session.dart';
 
@@ -48,10 +49,22 @@ class QuestionView extends StatelessWidget {
               child: AppinioSwiper(
                 padding: const EdgeInsets.symmetric(),
                 isDisabled: true,
-                cards: gameSession.cardStackList
-                    .map((question) =>
-                        QuestionCard(question: question, answerable: true))
-                    .toList(),
+                cards: gameSession.questionCounter + 1 <
+                        gameSession.gameQuestions.length
+                    ? [
+                        DisplayCard(
+                            category: gameSession.nextQuestion.category,
+                            headline: Text(''),
+                            body: Text('')),
+                        QuestionCard(
+                            question: gameSession.currentQuestion,
+                            answerable: true),
+                      ]
+                    : [
+                        QuestionCard(
+                            question: gameSession.currentQuestion,
+                            answerable: true)
+                      ],
               ),
             ),
             const SizedBox(

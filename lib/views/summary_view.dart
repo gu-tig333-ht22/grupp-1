@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:template/components/gradient_circle.dart';
 import 'package:template/data/game_session.dart';
+import 'package:template/data/highscore.dart';
 //import 'package:template/data/highscore.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/test/test_file.dart';
@@ -39,7 +40,7 @@ class SummaryView extends StatelessWidget {
                     const SizedBox(height: 15),
                     gameSession.settings.standardSettings
                         ? AddNameButton()
-                        : Container(),
+                        : const SizedBox(),
                   ],
                 )
               ],
@@ -340,30 +341,42 @@ class AddNameDialog extends StatelessWidget {
       actions: [
         Row(
           children: [
-            NavigationButton(
-                text: Text('Add name', style: Themes.textStyle.headline3),
-                onPressed: () {
-                  Provider.of<GameSession>(context, listen: false)
-                      .player
-                      .setPlayerName(nameController.text);
-                  /*
-                  Provider.of<Highscore>(context, listen: false)
-                      .setDifficultyToView(
-                          Provider.of<GameSession>(context, listen: false)
-                              .chosenDifficulty);
-                              */ // KOMMER MED NÄSTA PULL
-                  /*
-                  Navigator.of(context).pushAndRemoveUntil(
-            PageRouteBuilder(
-                pageBuilder: (context, _, __) => HighScoreView(),
-                transitionDuration: Duration.zero,
-                reverseTransitionDuration: Duration.zero),
-            ((route) => false));
-            */ // KOMMER MED NÄSTA PULL
-                },
-                width: 100,
-                height: 30,
-                color: Themes.colors.blueDark),
+            Consumer<GameSession>(
+                builder: (BuildContext context, gameSession, child) {
+              return NavigationButton(
+                  text: Text('Add name', style: Themes.textStyle.headline3),
+                  onPressed: () {
+                    gameSession.player
+                        .setPlayerName(nameController.text); // Set player name
+                    Provider.of<Highscore>(context, listen: false).addNewScore(
+                        // Add data to highscore database
+                        name: gameSession.player.name,
+                        score: gameSession.player.score,
+                        difficulty: gameSession.settings.difficulty,
+                        longestStreak: gameSession.player.longestStreak,
+                        numberOfQuestions:
+                            gameSession.settings.numberOfQuestions,
+                        timePerQuestion: gameSession.settings.timePerQuestion,
+                        categories: gameSession.settings.categories);
+                    /*
+                      Provider.of<Highscore>(context, listen: false)
+                          .setDifficultyToView(
+                              Provider.of<GameSession>(context, listen: false)
+                                  .chosenDifficulty);
+                                  */ // KOMMER MED NÄSTA PULL
+                    /*
+                      Navigator.of(context).pushAndRemoveUntil(
+                PageRouteBuilder(
+                    pageBuilder: (context, _, __) => HighScoreView(),
+                    transitionDuration: Duration.zero,
+                    reverseTransitionDuration: Duration.zero),
+                ((route) => false));
+                */ // KOMMER MED NÄSTA PULL
+                  },
+                  width: 100,
+                  height: 30,
+                  color: Themes.colors.blueDark);
+            }),
             const Spacer(),
             NavigationButton(
                 text: Text('Cancel', style: Themes.textStyle.headline3),

@@ -58,7 +58,7 @@ class Settings {
   void checkSettings() {
     if ((_numberOfQuestions == 10) &
         (_timePerQuestion == 20) &
-        (_selectedCategories.length == 8)) {
+        (_selectedCategories.length == 10)) {
       _standardSettings = true;
     } else {
       _standardSettings = false;

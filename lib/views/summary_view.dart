@@ -33,6 +33,10 @@ class SummaryView extends StatelessWidget {
                 const SizedBox(height: 15),
                 ScoreTable(),
                 const SizedBox(height: 30),
+                Text(
+                  '${Provider.of<GameSession>(context, listen: false).chosenDifficulty.capitalize()} difficulty',
+                  style: Themes.textStyle.headline2,
+                ),
                 SummaryTable(),
                 const SizedBox(height: 30),
                 Column(
@@ -112,17 +116,7 @@ class SummaryTable extends StatelessWidget {
     return Expanded(
       child: Column(
         children: [
-          /*Text(
-            "Summary",
-            style: Themes.textStyle.headline2,
-          ),*/
           const SizedBox(height: 5),
-          Text(
-            Provider.of<GameSession>(context, listen: false)
-                .chosenDifficulty
-                .capitalize(),
-            style: Themes.textStyle.headline2,
-          ),
           Container(
             height: 10,
           ),

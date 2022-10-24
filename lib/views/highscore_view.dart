@@ -182,6 +182,11 @@ class CustomListTile extends StatelessWidget {
       style = Themes.textStyle.highscoreTextBold;
       tileColor = Themes.colors.yellowLight;
       tileHeight = 35;
+      if (index == 0 &&
+          Provider.of<Highscore>(context, listen: false).showPlayAgain ==
+              true) {
+        Themes.soundeffect.firstPlace();
+      }
     }
     return Padding(
       padding: const EdgeInsets.only(top: 4),

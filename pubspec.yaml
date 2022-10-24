@@ -71,7 +71,7 @@ flutter:
     - assets/correct.mp3
     - assets/incorrect.mp3
     - assets/timeout.mp3
-
+    - assets/firstplace.mp3
 
 
   # The following line ensures that the Material Icons font is

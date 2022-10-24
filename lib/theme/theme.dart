@@ -230,6 +230,7 @@ class Soundeffect {
   String _correctSound = 'correct.mp3';
   String _incorrectSound = 'incorrect.mp3';
   String _timeoutSound = 'timeout.mp3';
+  String _firstPlaceSound = 'firstplace.mp3';
 
   correct() {
     return player.play(AssetSource(_correctSound));
@@ -241,5 +242,9 @@ class Soundeffect {
 
   timeout() {
     return player.play(AssetSource(_timeoutSound));
+  }
+
+  firstPlace() {
+    return player.play(AssetSource(_firstPlaceSound));
   }
 }

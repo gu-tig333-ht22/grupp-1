@@ -5,6 +5,7 @@
 //
 import 'package:flutter/material.dart';
 import 'package:flutter_octicons/flutter_octicons.dart';
+import 'package:template/components/displayCard.dart';
 import 'package:template/data/http_request.dart';
 import 'package:template/data/player.dart';
 import 'package:template/data/question.dart';
@@ -25,10 +26,13 @@ class GameSession extends ChangeNotifier {
 
   late List<Question> gameQuestions;
   late Question currentQuestion;
+  late Question nextQuestion;
   late Player player;
   late int questionCounter;
 
   late List ballsDataList;
+
+  //late List<Question> cardStackList;
 
   List get chosenCategories => settings.categories;
   String get chosenDifficulty => settings.difficulty;
@@ -44,6 +48,7 @@ class GameSession extends ChangeNotifier {
     ballsDataList =
         gameQuestions.map((question) => question.index + 1).toList();
     loading = false;
+    setNextQuestion();
     notifyListeners();
   }
 
@@ -69,6 +74,12 @@ class GameSession extends ChangeNotifier {
     questionCounter++;
     if (questionCounter < gameQuestions.length) {
       currentQuestion = gameQuestions[questionCounter];
+    }
+  }
+
+  void setNextQuestion() {
+    if (questionCounter + 1 < gameQuestions.length) {
+      nextQuestion = gameQuestions[questionCounter + 1];
     }
   }
 

@@ -32,6 +32,7 @@ dependencies:
   simple_gradient_text: 1.2.4
   flutter_octicons: ^0.14.0
   http: ^0.13.5
+  appinio_swiper: ^1.1.1
   flutter:
 
     sdk: flutter

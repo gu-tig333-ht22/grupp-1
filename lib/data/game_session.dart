@@ -21,7 +21,6 @@ class GameSession extends ChangeNotifier {
   Settings settings = Settings();
   HttpConection httpConection = HttpConection();
   bool blured = false;
-  bool loading = false;
   int indexSummaryView = 0;
 
   late List<Question> gameQuestions;
@@ -32,24 +31,18 @@ class GameSession extends ChangeNotifier {
 
   late List ballsDataList;
 
-  //late List<Question> cardStackList;
-
   List get chosenCategories => settings.categories;
   String get chosenDifficulty => settings.difficulty;
   List<Question> get getGameQuestions => gameQuestions;
 
   Future startGame() async {
-    loading = true;
     player = Player();
-    notifyListeners();
     questionCounter = 0;
     gameQuestions = await httpConection.getQuestions(settings: settings);
     currentQuestion = gameQuestions[questionCounter];
     ballsDataList =
         gameQuestions.map((question) => question.index + 1).toList();
-    loading = false;
     setNextQuestion();
-    notifyListeners();
   }
 
   void calculatePlayerScore({required String answer}) {

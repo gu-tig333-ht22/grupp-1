@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:deta/deta.dart';
 import 'package:http_client_deta_api/http_client_deta_api.dart';
 import 'package:http/http.dart' as http;
+import 'package:template/auth/secrets.dart';
 
 /// Koppling till Databas för Highscore. Tre listor med Highscores.
 /// highscoreEasy, highscoreMedium, highscoreHard.
 /// Listorna innehåller Maps(dictionarys) med name, score, difficulty,
 /// numberOfQuestions, timePerQuestion, categories(Lista med String).
 class Highscore extends ChangeNotifier {
-  String projectKey = "a0msltlh_csKQTzS5AtuzqzqkrMNhTyZ79LiCZC8E";
   late var deta;
   late var detabase;
 
@@ -22,7 +22,8 @@ class Highscore extends ChangeNotifier {
   // Öppnar kopplingen till databasen.
   Highscore() {
     deta = Deta(
-        projectKey: projectKey, client: HttpClientDetaApi(http: http.Client()));
+        projectKey: databaseKey,
+        client: HttpClientDetaApi(http: http.Client()));
     detabase = deta.base("highscores-1");
   }
 

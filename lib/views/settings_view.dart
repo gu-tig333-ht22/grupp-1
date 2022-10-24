@@ -36,26 +36,26 @@ class SettingsView extends StatelessWidget {
               const SizedBox(
                 height: 40,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  MaterialButton(
-                    onPressed: () {
-                      Provider.of<GameSession>(context, listen: false)
-                          .resetSettings();
-                    },
-                    color: Themes.colors.backgroundDark,
-                    textColor: Themes.colors.white,
-                    child: Icon(
-                      Themes.icons.reset,
-                      size: 24,
-                    ),
-                    padding: EdgeInsets.all(0),
-                    minWidth: 0,
-                    shape: CircleBorder(),
-                  ),
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.end,
+              //   children: [
+              //     MaterialButton(
+              //       onPressed: () {
+              //         Provider.of<GameSession>(context, listen: false)
+              //             .resetSettings();
+              //       },
+              //       color: Themes.colors.backgroundDark,
+              //       textColor: Themes.colors.white,
+              //       child: Icon(
+              //         Themes.icons.reset,
+              //         size: 24,
+              //       ),
+              //       padding: EdgeInsets.all(0),
+              //       minWidth: 0,
+              //       shape: CircleBorder(),
+              //     ),
+              //   ],
+              // ),
               CategoryRow(),
               const SizedBox(
                 height: 20,
@@ -106,6 +106,52 @@ class SettingsView extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
+//
+
+//
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 45,
+                    width: 190,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        gradient:
+                            Themes.functions.applyGradient(Themes.colors.grey)),
+                    child: TextButton(
+                      onPressed: () {
+                        Provider.of<GameSession>(context, listen: false)
+                            .resetSettings();
+                      },
+                      child: Text(
+                        "Use highscore settings",
+                        style: Themes.textStyle.headline3,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 30),
+                  IconButton(
+                    padding: EdgeInsets.all(0),
+                    icon: Icon(Icons.info_outline_rounded,
+                        size: 30, color: Themes.colors.white),
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: ((BuildContext context) =>
+                              GameRulesDialog()));
+                    },
+                  ),
+                ],
+              ),
+
+              Spacer(),
+
+//
+
+//
+
               NavigationButton(
                 text: Text(
                   "Start",
@@ -270,6 +316,46 @@ class DifficultyRow extends StatelessWidget {
         onPressed: () => Provider.of<GameSession>(context, listen: false)
             .updateDifficulty(newDifficulty.toLowerCase()),
       ),
+    );
+  }
+}
+
+//ALERTDIALOG MED INFO FÖR ATT KUNNA FÅ RESULTAT PÅ HIGHSCORE-LISTAN
+class GameRulesDialog extends StatelessWidget {
+  final HighscoreRules =
+      ''' To be able to get your result on the highscore list you must use default settings.
+  
+  Default settings are:
+  All categories
+  25 questions
+  20 sec time limit
+
+  You can change the difficulty.
+   ''';
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      contentPadding: const EdgeInsets.all(15),
+      actionsPadding: const EdgeInsets.all(15),
+      title: Text('Highscore info'),
+      content: Text(HighscoreRules),
+      actions: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            NavigationButton(
+                text: Text('Return', style: Themes.textStyle.headline3),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                width: 100,
+                height: 30,
+                color: Themes.colors.blueDark),
+          ],
+        ),
+      ],
     );
   }
 }

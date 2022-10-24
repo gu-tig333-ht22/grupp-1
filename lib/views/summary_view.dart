@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:template/components/gradient_circle.dart';
 import 'package:template/data/game_session.dart';
+import 'package:template/data/highscore.dart';
+//import 'package:template/data/highscore.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/test/test_file.dart';
 import 'package:template/components/card.dart';
@@ -26,15 +28,21 @@ class SummaryView extends StatelessWidget {
             padding: EdgeInsets.all(35),
             child: Column(
               children: [
-                Text("Scorescreen", style: Themes.textStyle.headline1),
-                Container(height: 15),
+                Text("Summary", style: Themes.textStyle.headline1),
+                const SizedBox(height: 15),
                 ScoreTable(),
-                Container(height: 30),
+                const SizedBox(height: 30),
                 SummaryTable(),
-                Container(
-                  height: 30,
-                ),
-                NewGameButton(),
+                const SizedBox(height: 30),
+                Column(
+                  children: [
+                    NewGameButton(),
+                    const SizedBox(height: 15),
+                    gameSession.settings.standardSettings
+                        ? AddNameButton()
+                        : const SizedBox(),
+                  ],
+                )
               ],
             ),
           ),
@@ -103,10 +111,10 @@ class SummaryTable extends StatelessWidget {
     return Expanded(
       child: Column(
         children: [
-          Text(
+          /*Text(
             "Summary",
             style: Themes.textStyle.headline2,
-          ),
+          ),*/
           const SizedBox(height: 5),
           Text(
             Provider.of<GameSession>(context, listen: false)
@@ -283,7 +291,7 @@ class NewGameButton extends StatelessWidget {
         "New game",
         style: Themes.textStyle.headline1,
       ),
-      width: 250,
+      width: 280,
       height: 50,
       color: Themes.colors.blueDark,
       onPressed: () {
@@ -294,6 +302,93 @@ class NewGameButton extends StatelessWidget {
                 reverseTransitionDuration: Duration.zero),
             ((route) => false));
       },
+    );
+  }
+}
+
+class AddNameButton extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return NavigationButton(
+        text: Text(
+          'Add to highscore',
+          style: Themes.textStyle.headline1,
+        ),
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: ((BuildContext context) =>
+                  AddNameDialog() /*_buildAddNameDialog(context)*/));
+        },
+        width: 280,
+        height: 50,
+        color: Themes.colors.blueDark);
+  }
+}
+
+class AddNameDialog extends StatelessWidget {
+  TextEditingController nameController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      contentPadding: const EdgeInsets.all(15),
+      actionsPadding: const EdgeInsets.all(15),
+      title: Text('Add your player name.'),
+      content: TextField(
+        controller: nameController,
+        maxLength: 25,
+      ),
+      actions: [
+        Row(
+          children: [
+            Consumer<GameSession>(
+                builder: (BuildContext context, gameSession, child) {
+              return NavigationButton(
+                  text: Text('Add name', style: Themes.textStyle.headline3),
+                  onPressed: () {
+                    gameSession.player
+                        .setPlayerName(nameController.text); // Set player name
+                    Provider.of<Highscore>(context, listen: false).addNewScore(
+                        // Add data to highscore database
+                        name: gameSession.player.name,
+                        score: gameSession.player.score,
+                        difficulty: gameSession.settings.difficulty,
+                        longestStreak: gameSession.player.longestStreak,
+                        numberOfQuestions:
+                            gameSession.settings.numberOfQuestions,
+                        timePerQuestion: gameSession.settings.timePerQuestion,
+                        categories: gameSession.settings.categories);
+                    /*
+                      Provider.of<Highscore>(context, listen: false)
+                          .setDifficultyToView(
+                              Provider.of<GameSession>(context, listen: false)
+                                  .chosenDifficulty);
+                                  */ // KOMMER MED NÄSTA PULL
+                    /*
+                      Navigator.of(context).pushAndRemoveUntil(
+                PageRouteBuilder(
+                    pageBuilder: (context, _, __) => HighScoreView(),
+                    transitionDuration: Duration.zero,
+                    reverseTransitionDuration: Duration.zero),
+                ((route) => false));
+                */ // KOMMER MED NÄSTA PULL
+                  },
+                  width: 100,
+                  height: 30,
+                  color: Themes.colors.blueDark);
+            }),
+            const Spacer(),
+            NavigationButton(
+                text: Text('Cancel', style: Themes.textStyle.headline3),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                width: 100,
+                height: 30,
+                color: Themes.colors.blueDark),
+          ],
+        ),
+      ],
     );
   }
 }

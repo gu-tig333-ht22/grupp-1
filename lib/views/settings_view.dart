@@ -112,6 +112,9 @@ class SettingsView extends StatelessWidget {
                   style: Themes.textStyle.headline1,
                 ),
                 onPressed: () {
+                  Provider.of<GameSession>(context, listen: false)
+                      .settings
+                      .checkSettings();
                   Navigator.push(
                       context,
                       PageRouteBuilder(

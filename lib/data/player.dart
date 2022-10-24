@@ -23,6 +23,8 @@ class Player {
 
   Player({this.name = ""});
 
+  int get longestStreak => _longestStreak;
+
   /// Returns score as int.
   int get score => _score;
 

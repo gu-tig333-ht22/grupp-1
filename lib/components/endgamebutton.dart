@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:template/components/end_game_dialog.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/views/start_view.dart';
 
@@ -9,12 +10,9 @@ class EndGameButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       onPressed: () {
-        Navigator.of(context).pushAndRemoveUntil(
-            PageRouteBuilder(
-                pageBuilder: (context, _, __) => SettingsView(),
-                transitionDuration: Duration.zero,
-                reverseTransitionDuration: Duration.zero),
-            ((route) => false));
+        showDialog(
+            context: context,
+            builder: ((BuildContext context) => EndGameDialog()));
       },
       color: Themes.colors.backgroundMiddle,
       textColor: Colors.white,

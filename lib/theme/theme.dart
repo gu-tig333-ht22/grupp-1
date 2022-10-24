@@ -150,6 +150,10 @@ class ThemeTextStyles {
       TextStyle(fontSize: 15, color: Themes.colors.white);
   final TextStyle questionText =
       TextStyle(fontSize: 16, color: Themes.colors.textGrey);
+  final TextStyle highscoreText =
+      TextStyle(fontSize: 16, color: Themes.colors.textGrey);
+  final TextStyle highscoreTextBold = TextStyle(
+      fontSize: 20, color: Themes.colors.textGrey, fontWeight: FontWeight.bold);
   final TextStyle answerText =
       TextStyle(fontSize: 12, color: Themes.colors.textGrey);
   GradientText headlineGradient(

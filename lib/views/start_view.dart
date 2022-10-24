@@ -76,25 +76,24 @@ class StartView extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-            Opacity(
-              opacity: 0.4,
-              child: NavigationButton(
-                text: Text(
-                  "Highscore",
-                  style: Themes.textStyle.headline1,
-                ),
-                width: 250,
-                height: 50,
-                color: Themes.colors.blueDark,
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                          pageBuilder: (context, _, __) => HighscoreView(),
-                          transitionDuration: Duration.zero,
-                          reverseTransitionDuration: Duration.zero));
-                },
+            NavigationButton(
+              text: Text(
+                "Highscore",
+                style: Themes.textStyle.headline1,
               ),
+              width: 250,
+              height: 50,
+              color: Themes.colors.blueDark,
+              onPressed: () {
+                Provider.of<Highscore>(context, listen: false)
+                    .setShowPlayAgain(false);
+                Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                        pageBuilder: (context, _, __) => HighscoreView(),
+                        transitionDuration: Duration.zero,
+                        reverseTransitionDuration: Duration.zero));
+              },
             ),
             SizedBox(height: 70),
           ],

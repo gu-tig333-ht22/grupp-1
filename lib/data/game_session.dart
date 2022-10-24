@@ -54,8 +54,10 @@ class GameSession extends ChangeNotifier {
 
   void calculatePlayerScore({required String answer}) {
     if (answer == currentQuestion.correctAnswer) {
+      Themes.soundeffect.correct();
       player.correctAnswer(answer);
     } else {
+      Themes.soundeffect.incorrect();
       player.incorrectAnswer(newAnswer: answer);
     }
   }

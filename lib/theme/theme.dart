@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 /// Themes.category(name)
 /// Returns the first category object with that name
@@ -24,6 +25,8 @@ class Themes {
   static ThemeIcons icons = ThemeIcons();
 
   static ThemeFunctions functions = ThemeFunctions();
+
+  static Soundeffect soundeffect = Soundeffect();
 }
 
 class ThemeColors {
@@ -214,5 +217,20 @@ class ThemeFunctions {
         0.9,
       ],
     );
+  }
+}
+
+//Klass med funktioner för att kalla på ljudeffekter vid rätt/fel svar.
+class Soundeffect {
+  final player = AudioPlayer();
+  String correctSound = 'correct.mp3';
+  String incorrectSound = 'incorrect.mp3';
+
+  correct() {
+    return player.play(AssetSource(correctSound));
+  }
+
+  incorrect() {
+    return player.play(AssetSource(incorrectSound));
   }
 }

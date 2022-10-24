@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:deta/deta.dart';
-import 'package:template/data/game_session.dart';
 import 'package:http_client_deta_api/http_client_deta_api.dart';
 import 'package:http/http.dart' as http;
 
@@ -10,19 +8,21 @@ import 'package:http/http.dart' as http;
 /// Listorna innehåller Maps(dictionarys) med name, score, difficulty,
 /// numberOfQuestions, timePerQuestion, categories(Lista med String).
 class Highscore extends ChangeNotifier {
-  String project_key = "a0msltlh_csKQTzS5AtuzqzqkrMNhTyZ79LiCZC8E";
+  String projectKey = "a0msltlh_csKQTzS5AtuzqzqkrMNhTyZ79LiCZC8E";
   late var deta;
   late var detabase;
 
   late List _scoresEasy;
   late List _scoresMedium;
   late List _scoresHard;
+  String _difficultyToView = "medium";
+  late bool _showPlayAgain = false;
+  String _lastKey = ""; // set to empty string
 
   // Öppnar kopplingen till databasen.
   Highscore() {
     deta = Deta(
-        projectKey: project_key,
-        client: HttpClientDetaApi(http: http.Client()));
+        projectKey: projectKey, client: HttpClientDetaApi(http: http.Client()));
     detabase = deta.base("highscores-1");
   }
 
@@ -30,6 +30,31 @@ class Highscore extends ChangeNotifier {
   List get highscoreEasy => _scoresEasy;
   List get highscoreMedium => _scoresMedium;
   List get highscoreHart => _scoresHard;
+  String get difficultyToView => _difficultyToView;
+  bool get showPlayAgain => _showPlayAgain;
+  String get lastKey => _lastKey;
+
+  /// Använd för att visa den listan för vald svårighetsgrad.
+  List getChosenHighscores() {
+    if (difficultyToView == "easy") {
+      return _scoresEasy;
+    } else if (difficultyToView == "medium") {
+      return _scoresMedium;
+    } else if (difficultyToView == "hard") {
+      return _scoresHard;
+    }
+    return _scoresMedium;
+  }
+
+  /// Används för att byta vilken lista man vill visa.
+  void setDifficultyToView(String newDifficultyToView) {
+    _difficultyToView = newDifficultyToView;
+    notifyListeners();
+  }
+
+  void setShowPlayAgain(bool newValue) {
+    _showPlayAgain = newValue;
+  }
 
   /// Använd för att skapa ett nytt objekt i databasen.
   void addNewScore({
@@ -42,7 +67,7 @@ class Highscore extends ChangeNotifier {
     required List<String> categories,
   }) async {
     // Själva insättningen i databasen.
-    await detabase.put({
+    Map tempLastKey = await detabase.put({
       "name": name,
       "score": score,
       "difficulty": difficulty,
@@ -51,28 +76,34 @@ class Highscore extends ChangeNotifier {
       "timePerQuestion": timePerQuestion,
       "categories": categories,
     });
+    _lastKey = tempLastKey["key"];
   }
 
-  /// Hämtar alla Highscore och använder sortTopTen för att sätta
+  /// Hämtar alla Highscore och använder sortList för att sätta
   /// _scoresEasy-Medium-Hard till nya sorterade listor.
-  void fetchScores() async {
-    final easy =
-        await detabase.fetch(query: [DetaQuery("difficulty").equalTo("easy")]);
-    final medium = await detabase
-        .fetch(query: [DetaQuery("difficulty").equalTo("medium")]);
-    final hard =
-        await detabase.fetch(query: [DetaQuery("difficulty").equalTo("hard")]);
-    _scoresEasy = sortTopTen(easy["items"]);
-    _scoresMedium = sortTopTen(medium["items"]);
-    _scoresHard = sortTopTen(hard["items"]);
+  void fetchScores({String difficulty = "All"}) async {
+    if (difficulty == "All" || difficulty == "Easy") {
+      final easy = await detabase
+          .fetch(query: [DetaQuery("difficulty").equalTo("easy")]);
+      _scoresEasy = sortList(easy["items"]);
+    }
+    if (difficulty == "All" || difficulty == "Medium") {
+      final medium = await detabase
+          .fetch(query: [DetaQuery("difficulty").equalTo("medium")]);
+      _scoresMedium = sortList(medium["items"]);
+    }
+    if (difficulty == "All" || difficulty == "Hard") {
+      final hard = await detabase
+          .fetch(query: [DetaQuery("difficulty").equalTo("hard")]);
+      _scoresHard = sortList(hard["items"]);
+    }
+    notifyListeners();
   }
 
   /// Lämnar tillbaka top tio lista sorterad från störst till lägst.
-  List<dynamic> sortTopTen(List<dynamic> scores) {
+  List<dynamic> sortList(List<dynamic> scores) {
     List<dynamic> sortedList = [];
-    int topTen = 0;
-    while (scores.isNotEmpty && topTen <= 10) {
-      topTen++;
+    while (scores.isNotEmpty) {
       Map largest = scores.first;
       for (Map score in scores) {
         if (score["score"] > largest["score"]) {

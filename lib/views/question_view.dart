@@ -90,7 +90,7 @@ class _CountDownTimerState extends State<CountDownTimer> {
         Provider.of<GameSession>(context, listen: true).getTimePerQuestion();
     if (_duration == 61) {
       return Row(
-        children: [Text("No time limit")],
+        children: [],
       );
     } else {
       return Column(

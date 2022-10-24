@@ -57,7 +57,11 @@ class GameSession extends ChangeNotifier {
       Themes.soundeffect.correct();
       player.correctAnswer(answer);
     } else {
-      Themes.soundeffect.incorrect();
+      if (answer == "No answer") {
+        Themes.soundeffect.timeout();
+      } else {
+        Themes.soundeffect.incorrect();
+      }
       player.incorrectAnswer(newAnswer: answer);
     }
   }

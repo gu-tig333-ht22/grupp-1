@@ -70,6 +70,7 @@ flutter:
     - assets/backgroundimage.jpg
     - assets/correct.mp3
     - assets/incorrect.mp3
+    - assets/timeout.mp3
 
 
 

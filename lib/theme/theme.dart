@@ -227,14 +227,19 @@ class ThemeFunctions {
 //Klass med funktioner för att kalla på ljudeffekter vid rätt/fel svar.
 class Soundeffect {
   final player = AudioPlayer();
-  String correctSound = 'correct.mp3';
-  String incorrectSound = 'incorrect.mp3';
+  String _correctSound = 'correct.mp3';
+  String _incorrectSound = 'incorrect.mp3';
+  String _timeoutSound = 'timeout.mp3';
 
   correct() {
-    return player.play(AssetSource(correctSound));
+    return player.play(AssetSource(_correctSound));
   }
 
   incorrect() {
-    return player.play(AssetSource(incorrectSound));
+    return player.play(AssetSource(_incorrectSound));
+  }
+
+  timeout() {
+    return player.play(AssetSource(_timeoutSound));
   }
 }

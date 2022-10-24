@@ -10,6 +10,7 @@ import 'package:template/theme/theme.dart';
 import 'package:template/test/test_file.dart';
 import 'package:template/components/card.dart';
 import 'package:template/components/nav_button.dart';
+import 'package:template/views/highscore_view.dart';
 import 'package:template/views/settings_view.dart';
 import 'package:template/views/start_view.dart';
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
@@ -347,6 +348,9 @@ class AddNameDialog extends StatelessWidget {
                   onPressed: () {
                     gameSession.player
                         .setPlayerName(nameController.text); // Set player name
+                    Provider.of<Highscore>(context, listen: false)
+                        .setShowPlayAgain(
+                            true); // För att visa "spela-igen"-knapp
                     Provider.of<Highscore>(context, listen: false).addNewScore(
                         // Add data to highscore database
                         name: gameSession.player.name,
@@ -357,20 +361,18 @@ class AddNameDialog extends StatelessWidget {
                             gameSession.settings.numberOfQuestions,
                         timePerQuestion: gameSession.settings.timePerQuestion,
                         categories: gameSession.settings.categories);
-                    /*
-                      Provider.of<Highscore>(context, listen: false)
-                          .setDifficultyToView(
-                              Provider.of<GameSession>(context, listen: false)
-                                  .chosenDifficulty);
-                                  */ // KOMMER MED NÄSTA PULL
-                    /*
-                      Navigator.of(context).pushAndRemoveUntil(
-                PageRouteBuilder(
-                    pageBuilder: (context, _, __) => HighScoreView(),
-                    transitionDuration: Duration.zero,
-                    reverseTransitionDuration: Duration.zero),
-                ((route) => false));
-                */ // KOMMER MED NÄSTA PULL
+
+                    Provider.of<Highscore>(context, listen: false)
+                        .setDifficultyToView(Provider.of<GameSession>(context,
+                                listen: false)
+                            .chosenDifficulty); // Visa vilken svårighet som ska visas direkt i highscore
+
+                    Navigator.of(context).pushAndRemoveUntil(
+                        PageRouteBuilder(
+                            pageBuilder: (context, _, __) => HighscoreView(),
+                            transitionDuration: Duration.zero,
+                            reverseTransitionDuration: Duration.zero),
+                        ((route) => false));
                   },
                   width: 100,
                   height: 30,

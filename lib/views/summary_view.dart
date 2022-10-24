@@ -316,8 +316,7 @@ class AddNameButton extends StatelessWidget {
         onPressed: () {
           showDialog(
               context: context,
-              builder: ((BuildContext context) =>
-                  AddNameDialog() /*_buildAddNameDialog(context)*/));
+              builder: ((BuildContext context) => AddNameDialog()));
         },
         width: 280,
         height: 50,

@@ -14,7 +14,10 @@ class Settings {
       .map((category) => category.name)
       .toList();
   String _difficulty = "medium";
-  int _timePerQuestion = 30;
+  int _timePerQuestion = 20;
+  bool _standardSettings = true;
+
+  bool get standardSettings => _standardSettings;
 
   /// Returns number of questions.
   int get numberOfQuestions => _numberOfQuestions;
@@ -27,6 +30,10 @@ class Settings {
 
   /// Returns time per question,
   int get timePerQuestion => _timePerQuestion;
+
+  set standardSettings(bool value) {
+    _standardSettings = value;
+  }
 
   void setDifficulty(String newDifficulty) {
     _difficulty = newDifficulty;
@@ -45,6 +52,16 @@ class Settings {
       _selectedCategories.remove(category);
     } else {
       _selectedCategories.add(category);
+    }
+  }
+
+  void checkSettings() {
+    if ((_numberOfQuestions == 10) &
+        (_timePerQuestion == 20) &
+        (_selectedCategories.length == 8)) {
+      _standardSettings = true;
+    } else {
+      _standardSettings = false;
     }
   }
 }

@@ -1,18 +1,14 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:template/components/gradient_circle.dart';
 import 'package:template/data/game_session.dart';
 import 'package:template/data/highscore.dart';
-//import 'package:template/data/highscore.dart';
 import 'package:template/theme/theme.dart';
-import 'package:template/test/test_file.dart';
 import 'package:template/components/card.dart';
 import 'package:template/components/nav_button.dart';
 import 'package:template/views/highscore_view.dart';
 import 'package:template/views/settings_view.dart';
-import 'package:template/views/start_view.dart';
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 import 'package:template/data/string_extension.dart';
 import 'package:template/views/loading_screen.dart';
@@ -35,29 +31,18 @@ class SummaryView extends StatelessWidget {
                 ScoreTable(),
                 const SizedBox(height: 30),
                 Text(
-                  '${Provider.of<GameSession>(context, listen: false).chosenDifficulty.capitalize()} difficulty',
+                  '${gameSession.chosenDifficulty.capitalize()} difficulty',
                   style: Themes.textStyle.headline2,
                 ),
                 SummaryTable(),
+                const SizedBox(height: 30),
                 Column(
                   children: [
-                    const SizedBox(height: 30),
+                    NewGameButton(),
+                    const SizedBox(height: 15),
                     gameSession.settings.standardSettings
                         ? AddNameButton()
                         : const SizedBox(),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        NewGameButton(),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        ToMenu()
-                      ],
-                    ),
                   ],
                 )
               ],
@@ -296,38 +281,15 @@ class NewGameButton extends StatelessWidget {
     return NavigationButton(
       text: Text(
         "New game",
-        style: Themes.textStyle.headline2,
+        style: Themes.textStyle.headline1,
       ),
-      width: 135,
-      height: 70,
-      color: Themes.colors.blueDark,
-      onPressed: () {
-        Navigator.push(
-            context,
-            PageRouteBuilder(
-                pageBuilder: (context, _, __) => LoadingView(),
-                transitionDuration: Duration.zero,
-                reverseTransitionDuration: Duration.zero));
-      },
-    );
-  }
-}
-
-class ToMenu extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return NavigationButton(
-      text: Text(
-        "To menu",
-        style: Themes.textStyle.headline2,
-      ),
-      width: 135,
-      height: 70,
+      width: 280,
+      height: 50,
       color: Themes.colors.blueDark,
       onPressed: () {
         Navigator.of(context).pushAndRemoveUntil(
             PageRouteBuilder(
-                pageBuilder: (context, _, __) => StartView(),
+                pageBuilder: (context, _, __) => SettingsView(),
                 transitionDuration: Duration.zero,
                 reverseTransitionDuration: Duration.zero),
             ((route) => false));
@@ -349,7 +311,7 @@ class AddNameButton extends StatelessWidget {
               builder: ((BuildContext context) => AddNameDialog()));
         },
         width: 280,
-        height: 70,
+        height: 50,
         color: Themes.colors.blueDark);
   }
 }

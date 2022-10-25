@@ -5,6 +5,7 @@ import 'package:template/data/highscore.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/views/settings_view.dart';
 import 'package:template/views/start_view.dart';
+import 'package:template/views/loading_screen.dart';
 
 import '../components/nav_button.dart';
 
@@ -50,10 +51,10 @@ class HighscoreView extends StatelessWidget {
           height: 50,
           color: Themes.colors.blueDark,
           onPressed: () {
-            Navigator.pushReplacement(
+            Navigator.push(
                 context,
                 PageRouteBuilder(
-                    pageBuilder: (context, _, __) => SettingsView(),
+                    pageBuilder: (context, _, __) => LoadingView(),
                     transitionDuration: Duration.zero,
                     reverseTransitionDuration: Duration.zero));
           },

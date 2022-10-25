@@ -11,6 +11,8 @@ import 'package:template/views/highscore_view.dart';
 import 'package:template/views/settings_view.dart';
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 import 'package:template/data/string_extension.dart';
+import 'package:template/views/loading_screen.dart';
+
 import '../data/question.dart';
 
 class SummaryView extends StatelessWidget {

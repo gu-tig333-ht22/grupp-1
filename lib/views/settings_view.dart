@@ -163,7 +163,7 @@ class SettingsView extends StatelessWidget {
         color: Themes.colors.white,
       );
     } else {
-      return Text(number.toString(),
+      return Text(number.round().toString(),
           style: TextStyle(color: Themes.colors.white));
     }
   }

@@ -51,19 +51,34 @@ class QuestionCard extends StatelessWidget {
               ),
             ],
           ),
-          Column(children: [
-            Text(
-              style: Themes.textStyle.questionText,
-              '${question.question}',
-            ),
-            const Spacer(),
-            Column(children: [
-              OptionsRow('A', options[0], categoryColor, question, answerable),
-              OptionsRow('B', options[1], categoryColor, question, answerable),
-              OptionsRow('C', options[2], categoryColor, question, answerable),
-              OptionsRow('D', options[3], categoryColor, question, answerable),
-            ])
-          ])
+          LayoutBuilder(builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                child: IntrinsicHeight(
+                  child: Column(mainAxisSize: MainAxisSize.min, children: [
+                    Text(
+                      style: Themes.textStyle.questionText,
+                      '${question.question}',
+                    ),
+                    Spacer(),
+                    Column(
+                      children: [
+                        OptionsRow('A', options[0], categoryColor, question,
+                            answerable),
+                        OptionsRow('B', options[1], categoryColor, question,
+                            answerable),
+                        OptionsRow('C', options[2], categoryColor, question,
+                            answerable),
+                        OptionsRow('D', options[3], categoryColor, question,
+                            answerable),
+                      ],
+                    )
+                  ]),
+                ),
+              ),
+            );
+          })
         ],
       ),
     );

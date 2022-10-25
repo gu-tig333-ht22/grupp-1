@@ -299,7 +299,7 @@ class NewGameButton extends StatelessWidget {
       height: 50,
       color: Themes.colors.blueDark,
       onPressed: () {
-        Navigator.push(
+        Navigator.pushAndRemoveUntil(
             context,
             PageRouteBuilder(
                 pageBuilder: (context, _, __) => LoadingView(),

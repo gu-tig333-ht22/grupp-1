@@ -332,8 +332,9 @@ class HighscoreRulesRow extends StatelessWidget {
 class GameRulesDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    int questions = Settings().numberOfQuestions;
-    int time = Settings().timePerQuestion;
+    Settings newSettings = Settings();
+    int questions = newSettings.numberOfQuestions;
+    int time = newSettings.timePerQuestion;
     final HighscoreRules =
         '''To be able to get your result on the highscore list you must use default settings.
   

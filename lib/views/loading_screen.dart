@@ -44,7 +44,7 @@ class LoadingView extends StatelessWidget {
                           style: Themes.textStyle.headline1,
                         )
                       : Text(
-                          time.toString(),
+                          time.round().toString(),
                           style: Themes.textStyle.headline1,
                         ),
               onFinished: () {

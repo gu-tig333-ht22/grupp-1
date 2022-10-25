@@ -83,51 +83,8 @@ class SettingsView extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-//
-
-//
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: 45,
-                        width: 190,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            gradient: Themes.functions
-                                .applyGradient(Themes.colors.grey)),
-                        child: TextButton(
-                          onPressed: () {
-                            gameSession.resetSettings();
-                          },
-                          child: Text(
-                            "Use highscore settings",
-                            style: Themes.textStyle.headline3,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 30),
-                      IconButton(
-                        padding: EdgeInsets.all(0),
-                        icon: Icon(Icons.info_outline_rounded,
-                            size: 30, color: Themes.colors.white),
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: ((BuildContext context) =>
-                                  GameRulesDialog()));
-                        },
-                      ),
-                    ],
-                  ),
-
+                  HighscoreRulesRow(),
                   Spacer(),
-
-//
-
-//
-
                   NavigationButton(
                     text: Text(
                       "Start",
@@ -245,6 +202,9 @@ class CategoryButton extends StatelessWidget {
       onTap: () {
         Provider.of<GameSession>(context, listen: false)
             .updateCategory(category.name);
+        Provider.of<GameSession>(context, listen: false)
+            .settings
+            .checkSettings();
       },
     );
   }
@@ -313,10 +273,64 @@ class DifficultyRow extends StatelessWidget {
   }
 }
 
+class HighscoreRulesRow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<GameSession>(
+        builder: (context, gameSession, child) => Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Opacity(
+                    opacity: opacityCheck(context),
+                    child: Container(
+                      height: 45,
+                      width: 190,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          gradient: Themes.functions
+                              .applyGradient(Themes.colors.blueDark)),
+                      child: TextButton(
+                        onPressed: () {
+                          Provider.of<GameSession>(context, listen: false)
+                              .resetSettings();
+                        },
+                        child: Text(
+                          "Use highscore settings",
+                          style: Themes.textStyle.headline3,
+                        ),
+                      ),
+                    )),
+                const SizedBox(width: 30),
+                IconButton(
+                  padding: EdgeInsets.all(0),
+                  icon: Icon(Icons.info_outline_rounded,
+                      size: 30, color: Themes.colors.white),
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: ((BuildContext context) => GameRulesDialog()));
+                  },
+                ),
+              ],
+            ));
+  }
+
+  double opacityCheck(context) {
+    if (Provider.of<GameSession>(context, listen: false)
+            .settings
+            .standardSettings ==
+        false) {
+      return 1;
+    } else {
+      return 0.4;
+    }
+  }
+}
+
 //ALERTDIALOG MED INFO FÖR ATT KUNNA FÅ RESULTAT PÅ HIGHSCORE-LISTAN
 class GameRulesDialog extends StatelessWidget {
   final HighscoreRules =
-      ''' To be able to get your result on the highscore list you must use default settings.
+      '''To be able to get your result on the highscore list you must use default settings.
   
   Default settings are:
   All categories

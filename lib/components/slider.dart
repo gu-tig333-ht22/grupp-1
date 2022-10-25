@@ -49,6 +49,9 @@ class SliderModel extends StatelessWidget {
                             onChanged: (value) {
                               numberOfQuestions = value;
                               onchanged(value);
+                              Provider.of<GameSession>(context, listen: false)
+                                  .settings
+                                  .checkSettings();
                             },
                             min: 1,
                             max: max),

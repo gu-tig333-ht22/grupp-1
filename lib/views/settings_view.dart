@@ -9,6 +9,7 @@ import 'package:template/views/question_view.dart';
 import '../data/game_session.dart';
 import 'package:template/components/backbutton.dart';
 import 'package:template/components/slider.dart';
+import 'package:template/data/settings.dart';
 
 class SettingsView extends StatelessWidget {
   @override
@@ -329,19 +330,21 @@ class HighscoreRulesRow extends StatelessWidget {
 
 //ALERTDIALOG MED INFO FÖR ATT KUNNA FÅ RESULTAT PÅ HIGHSCORE-LISTAN
 class GameRulesDialog extends StatelessWidget {
-  final HighscoreRules =
-      '''To be able to get your result on the highscore list you must use default settings.
+  @override
+  Widget build(BuildContext context) {
+    Settings newSettings = Settings();
+    int questions = newSettings.numberOfQuestions;
+    int time = newSettings.timePerQuestion;
+    final HighscoreRules =
+        '''To be able to get your result on the highscore list you must use default settings.
   
   Default settings are:
   All categories
-  25 questions
-  20 sec time limit
+  $questions questions
+  $time sec time limit
 
   You can change the difficulty.
    ''';
-
-  @override
-  Widget build(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       contentPadding: const EdgeInsets.all(15),

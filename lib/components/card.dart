@@ -23,6 +23,9 @@ class QuestionCard extends StatelessWidget {
     IconData categoryIcon = Themes.category(question.category).icon;
 
     return Container(
+      constraints: BoxConstraints(
+        minHeight: deviceHeight * 0.65,
+      ),
       padding: const EdgeInsets.only(top: 30, bottom: 30, left: 12, right: 12),
       decoration: BoxDecoration(
           boxShadow: [
@@ -35,7 +38,6 @@ class QuestionCard extends StatelessWidget {
           color: backgroundColor,
           borderRadius: BorderRadius.circular(35),
           border: Border.all(width: 10, color: categoryColor)),
-      height: deviceHeight * 0.65,
       width: deviceWidth * 0.85,
       child: Stack(
         children: [
@@ -49,19 +51,34 @@ class QuestionCard extends StatelessWidget {
               ),
             ],
           ),
-          Column(children: [
-            Text(
-              style: Themes.textStyle.questionText,
-              '${question.question}',
-            ),
-            const Spacer(),
-            Column(children: [
-              OptionsRow('A', options[0], categoryColor, question, answerable),
-              OptionsRow('B', options[1], categoryColor, question, answerable),
-              OptionsRow('C', options[2], categoryColor, question, answerable),
-              OptionsRow('D', options[3], categoryColor, question, answerable),
-            ])
-          ])
+          LayoutBuilder(builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                child: IntrinsicHeight(
+                  child: Column(mainAxisSize: MainAxisSize.min, children: [
+                    Text(
+                      style: Themes.textStyle.questionText,
+                      '${question.question}',
+                    ),
+                    Spacer(),
+                    Column(
+                      children: [
+                        OptionsRow('A', options[0], categoryColor, question,
+                            answerable),
+                        OptionsRow('B', options[1], categoryColor, question,
+                            answerable),
+                        OptionsRow('C', options[2], categoryColor, question,
+                            answerable),
+                        OptionsRow('D', options[3], categoryColor, question,
+                            answerable),
+                      ],
+                    )
+                  ]),
+                ),
+              ),
+            );
+          })
         ],
       ),
     );

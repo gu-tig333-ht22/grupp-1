@@ -60,7 +60,11 @@ class GameSession extends ChangeNotifier {
   }
 
   void resetSettings() {
-    settings = Settings();
+    Settings newSettings = Settings();
+    settings.setNumberOfQuestions(newSettings.numberOfQuestions);
+    settings.setTimePerQuestion(newSettings.timePerQuestion);
+    settings.resetCategories();
+    settings.checkSettings();
     notifyListeners();
   }
 

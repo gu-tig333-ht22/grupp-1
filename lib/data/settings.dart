@@ -55,10 +55,17 @@ class Settings {
     }
   }
 
+  void resetCategories() {
+    _selectedCategories = Themes.categories.listCategories
+        .map((category) => category.name)
+        .toList();
+  }
+
   void checkSettings() {
-    if ((_numberOfQuestions == 25) &
-        (_timePerQuestion == 20) &
-        (_selectedCategories.length == 10)) {
+    Settings newSettings = Settings();
+    if ((_numberOfQuestions == newSettings.numberOfQuestions) &
+        (_timePerQuestion == newSettings.timePerQuestion) &
+        (_selectedCategories.length == newSettings.categories.length)) {
       _standardSettings = true;
     } else {
       _standardSettings = false;

@@ -24,7 +24,7 @@ class Highscore extends ChangeNotifier {
     deta = Deta(
         projectKey: databaseKey,
         client: HttpClientDetaApi(http: http.Client()));
-    detabase = deta.base("highscores-1");
+    detabase = deta.base("highscores");
   }
 
   // Getters för de olika score

@@ -23,6 +23,9 @@ class QuestionCard extends StatelessWidget {
     IconData categoryIcon = Themes.category(question.category).icon;
 
     return Container(
+      constraints: BoxConstraints(
+        minHeight: deviceHeight * 0.65,
+      ),
       padding: const EdgeInsets.only(top: 30, bottom: 30, left: 12, right: 12),
       decoration: BoxDecoration(
           boxShadow: [
@@ -35,7 +38,6 @@ class QuestionCard extends StatelessWidget {
           color: backgroundColor,
           borderRadius: BorderRadius.circular(35),
           border: Border.all(width: 10, color: categoryColor)),
-      height: deviceHeight * 0.65,
       width: deviceWidth * 0.85,
       child: Stack(
         children: [

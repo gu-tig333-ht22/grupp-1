@@ -15,6 +15,7 @@ import 'package:template/views/settings_view.dart';
 import 'package:template/views/start_view.dart';
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 import 'package:template/data/string_extension.dart';
+import 'package:template/views/loading_screen.dart';
 
 import '../data/question.dart';
 
@@ -38,14 +39,25 @@ class SummaryView extends StatelessWidget {
                   style: Themes.textStyle.headline2,
                 ),
                 SummaryTable(),
-                const SizedBox(height: 30),
                 Column(
                   children: [
-                    NewGameButton(),
-                    const SizedBox(height: 15),
+                    const SizedBox(height: 30),
                     gameSession.settings.standardSettings
                         ? AddNameButton()
                         : const SizedBox(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        NewGameButton(),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        ToMenu()
+                      ],
+                    ),
                   ],
                 )
               ],
@@ -284,15 +296,38 @@ class NewGameButton extends StatelessWidget {
     return NavigationButton(
       text: Text(
         "New game",
-        style: Themes.textStyle.headline1,
+        style: Themes.textStyle.headline2,
       ),
-      width: 280,
-      height: 50,
+      width: 135,
+      height: 70,
+      color: Themes.colors.blueDark,
+      onPressed: () {
+        Navigator.push(
+            context,
+            PageRouteBuilder(
+                pageBuilder: (context, _, __) => LoadingView(),
+                transitionDuration: Duration.zero,
+                reverseTransitionDuration: Duration.zero));
+      },
+    );
+  }
+}
+
+class ToMenu extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return NavigationButton(
+      text: Text(
+        "To menu",
+        style: Themes.textStyle.headline2,
+      ),
+      width: 135,
+      height: 70,
       color: Themes.colors.blueDark,
       onPressed: () {
         Navigator.of(context).pushAndRemoveUntil(
             PageRouteBuilder(
-                pageBuilder: (context, _, __) => SettingsView(),
+                pageBuilder: (context, _, __) => StartView(),
                 transitionDuration: Duration.zero,
                 reverseTransitionDuration: Duration.zero),
             ((route) => false));
@@ -314,7 +349,7 @@ class AddNameButton extends StatelessWidget {
               builder: ((BuildContext context) => AddNameDialog()));
         },
         width: 280,
-        height: 50,
+        height: 70,
         color: Themes.colors.blueDark);
   }
 }

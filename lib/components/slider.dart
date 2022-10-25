@@ -8,7 +8,7 @@ import '../data/game_session.dart';
 
 class SliderModel extends StatelessWidget {
   late Function onchanged;
-  late Function getWidget;
+  late Widget displayInCircle;
   late Function getValue;
   late double max;
 
@@ -16,7 +16,7 @@ class SliderModel extends StatelessWidget {
       {required this.onchanged,
       required this.getValue,
       required this.max,
-      required this.getWidget});
+      required this.displayInCircle});
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +74,7 @@ class SliderModel extends StatelessWidget {
                       border: Border.all(color: Colors.transparent, width: 1),
                       borderRadius: BorderRadius.circular(50)),
                   child: Center(
-                    child: getWidget(),
+                    child: displayInCircle,
                   ),
                 ),
               ),

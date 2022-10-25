@@ -1,21 +1,16 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:template/components/gradient_circle.dart';
 import 'package:template/data/game_session.dart';
 import 'package:template/data/highscore.dart';
-//import 'package:template/data/highscore.dart';
 import 'package:template/theme/theme.dart';
-import 'package:template/test/test_file.dart';
 import 'package:template/components/card.dart';
 import 'package:template/components/nav_button.dart';
 import 'package:template/views/highscore_view.dart';
 import 'package:template/views/settings_view.dart';
-import 'package:template/views/start_view.dart';
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 import 'package:template/data/string_extension.dart';
-
 import '../data/question.dart';
 
 class SummaryView extends StatelessWidget {
@@ -34,7 +29,7 @@ class SummaryView extends StatelessWidget {
                 ScoreTable(),
                 const SizedBox(height: 30),
                 Text(
-                  '${Provider.of<GameSession>(context, listen: false).chosenDifficulty.capitalize()} difficulty',
+                  '${gameSession.chosenDifficulty.capitalize()} difficulty',
                   style: Themes.textStyle.headline2,
                 ),
                 SummaryTable(),

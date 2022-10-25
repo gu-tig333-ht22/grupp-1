@@ -158,7 +158,7 @@ class ThemeTextStyles {
   final TextStyle highscoreTextBold = TextStyle(
       fontSize: 20, color: Themes.colors.textGrey, fontWeight: FontWeight.bold);
   final TextStyle answerText =
-      TextStyle(fontSize: 12, color: Themes.colors.textGrey);
+      TextStyle(fontSize: 14, color: Themes.colors.textGrey);
   GradientText headlineGradient(
       {required String text, required double fontSize}) {
     return GradientText(

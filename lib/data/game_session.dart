@@ -60,7 +60,11 @@ class GameSession extends ChangeNotifier {
   }
 
   void resetSettings() {
-    settings = Settings();
+    Settings newSettings = Settings();
+    settings.setNumberOfQuestions(newSettings.numberOfQuestions);
+    settings.setTimePerQuestion(newSettings.timePerQuestion);
+    settings.resetCategories();
+    settings.checkSettings();
     notifyListeners();
   }
 
@@ -87,11 +91,6 @@ class GameSession extends ChangeNotifier {
     notifyListeners(); // skall det vara det
   }
 
-  Widget getNumberOfQuestionSlider() {
-    return Text(getNumberOfQuestion().toString(),
-        style: TextStyle(color: Themes.colors.white));
-  }
-
   double getNumberOfQuestion() {
     return settings.numberOfQuestions.toDouble();
   }
@@ -103,20 +102,6 @@ class GameSession extends ChangeNotifier {
 
   double getTimePerQuestion() {
     return settings.timePerQuestion.toDouble();
-  }
-
-  Widget getTimePerQuestionSlider() {
-    double number = getTimePerQuestion();
-    if (number == 61) {
-      return Icon(
-        OctIcons.infinity_16,
-        size: 15,
-        color: Themes.colors.white,
-      );
-    } else {
-      return Text(number.toString(),
-          style: TextStyle(color: Themes.colors.white));
-    }
   }
 
   void updateDifficulty(String newDifficulty) {

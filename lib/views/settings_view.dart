@@ -21,6 +21,9 @@ class SettingsView extends StatelessWidget {
             child: Consumer<GameSession>(
               builder: (BuildContext context, gameSession, child) => Column(
                 children: [
+                  SizedBox(
+                    height: 20,
+                  ),
                   Row(
                     children: [
                       SizedBox(width: 20, child: BackToFirstViewButton()),

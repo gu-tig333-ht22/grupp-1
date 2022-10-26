@@ -20,6 +20,9 @@ class StartView extends StatelessWidget {
       child: Center(
         child: Column(
           children: [
+            SizedBox(
+              height: 20,
+            ),
             Row(
               children: [
                 const SizedBox(height: 50),

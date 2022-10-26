@@ -22,6 +22,9 @@ class HighscoreView extends StatelessWidget {
         padding: const EdgeInsets.all(35.0),
         child: Column(
           children: [
+            SizedBox(
+              height: 20,
+            ),
             Row(
               children: [
                 SizedBox(width: 20, child: _backToMenu(context)),

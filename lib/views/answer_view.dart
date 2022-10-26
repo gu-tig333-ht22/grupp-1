@@ -19,6 +19,9 @@ class AnswerView extends StatelessWidget {
       builder: (context, gameSession, child) => Center(
         child: Column(
           children: [
+            const SizedBox(
+              height: 20,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -69,7 +72,12 @@ class AnswerView extends StatelessWidget {
                           gameSession.gameQuestions.length
                       ? [
                           DisplayCard(
-                              category: gameSession.nextQuestion.category,
+                              iconData: Themes.category(
+                                      gameSession.nextQuestion.category)
+                                  .icon,
+                              color: Themes.category(
+                                      gameSession.nextQuestion.category)
+                                  .color,
                               headline: Text(''),
                               body: Text('')),
                           QuestionCard(

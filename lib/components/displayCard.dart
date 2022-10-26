@@ -3,22 +3,19 @@ import 'package:template/theme/theme.dart';
 
 class DisplayCard extends StatelessWidget {
   Color backgroundColor = Themes.colors.white;
-
-  late String _category;
-  late Text _headline;
-  late Text _body;
+  late Text headline;
+  late Text body;
+  late IconData iconData;
+  late Color color;
 
   DisplayCard(
-      {required String category, required Text headline, required Text body}) {
-    _category = category;
-    _headline = headline;
-    _body = body;
-  }
+      {required IconData this.iconData,
+      required Color this.color,
+      required Text this.body,
+      required Text this.headline}) {}
 
   @override
   Widget build(BuildContext context) {
-    Color categoryColor = Themes.category(_category).color;
-    IconData categoryIcon = Themes.category(_category).icon;
     var deviceWidth = MediaQuery.of(context).size.width;
     var deviceHeight = MediaQuery.of(context).size.height;
     return Container(
@@ -26,7 +23,7 @@ class DisplayCard extends StatelessWidget {
       decoration: BoxDecoration(
           color: backgroundColor,
           borderRadius: BorderRadius.circular(35),
-          border: Border.all(width: 10, color: categoryColor)),
+          border: Border.all(width: 10, color: color)),
       height: deviceHeight * 0.65,
       width: deviceWidth * 0.85,
       child: Stack(
@@ -35,16 +32,16 @@ class DisplayCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
-                categoryIcon,
-                color: categoryColor.withOpacity(0.2),
+                iconData,
+                color: color.withOpacity(0.2),
                 size: 120,
               ),
             ],
           ),
           Column(children: [
-            _headline,
+            headline,
             const Spacer(),
-            _body,
+            body,
             const Spacer(),
           ])
         ],

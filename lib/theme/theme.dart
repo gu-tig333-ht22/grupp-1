@@ -186,6 +186,8 @@ class ThemeIcons {
   final IconData reset = Icons.manage_history;
   final IconData timeout = Icons.timer_off_outlined;
   final IconData backarrow = Icons.arrow_back_ios_new;
+  final IconData info = Icons.info_outline_rounded;
+  final IconData favorite = Icons.favorite_border_outlined;
 }
 
 class ThemeFunctions {

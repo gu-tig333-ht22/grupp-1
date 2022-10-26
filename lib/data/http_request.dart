@@ -62,4 +62,11 @@ class HttpConection {
     }
     return '&limit=10';
   }
+
+  Future getMetadata() async {
+    http.Response response =
+        await http.get(Uri.parse('https://the-trivia-api.com/api/metadata'));
+    Map map = jsonDecode(response.body);
+    return map;
+  }
 }

@@ -23,14 +23,11 @@ class AboutView extends StatelessWidget {
                         padding: const EdgeInsets.all(0),
                         icon: Icon(Themes.icons.backarrow,
                             color: Themes.colors.white),
-                        onPressed: () => Navigator.of(context)
-                            .pushAndRemoveUntil(
-                                PageRouteBuilder(
-                                    pageBuilder: (context, _, __) =>
-                                        StartView(),
-                                    transitionDuration: Duration.zero,
-                                    reverseTransitionDuration: Duration.zero),
-                                ((route) => false))),
+                        onPressed: () => Navigator.of(context).pop(
+                            PageRouteBuilder(
+                                pageBuilder: (context, _, __) => StartView(),
+                                transitionDuration: Duration.zero,
+                                reverseTransitionDuration: Duration.zero))),
                   ),
                   Expanded(
                       child: Center(

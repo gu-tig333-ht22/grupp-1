@@ -1,6 +1,7 @@
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:template/components/backbutton.dart';
 import 'package:template/data/highscore.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/views/settings_view.dart';
@@ -21,9 +22,18 @@ class HighscoreView extends StatelessWidget {
         padding: const EdgeInsets.all(35.0),
         child: Column(
           children: [
-            Text(
-              "Highscore",
-              style: Themes.textStyle.headline1,
+            Row(
+              children: [
+                SizedBox(width: 20, child: _backToMenu(context)),
+                Expanded(
+                  child: Text(
+                    'Highscore',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Themes.colors.white, fontSize: 35),
+                  ),
+                ),
+                SizedBox(width: 20)
+              ],
             ),
             const SizedBox(height: 15),
             DifficultyRow(),
@@ -36,6 +46,13 @@ class HighscoreView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _backToMenu(context) {
+    if (!Provider.of<Highscore>(context, listen: false).showPlayAgain) {
+      return BackToFirstViewButton();
+    }
+    return Container();
   }
 
   Widget _playAgainButton(context) {
@@ -66,23 +83,26 @@ class HighscoreView extends StatelessWidget {
   }
 
   Widget _backToMenuButton(context) {
-    return NavigationButton(
-      text: Text(
-        "Back to menu",
-        style: Themes.textStyle.headline1,
-      ),
-      width: 250,
-      height: 50,
-      color: Themes.colors.blueDark,
-      onPressed: () {
-        Navigator.pushReplacement(
-            context,
-            PageRouteBuilder(
-                pageBuilder: (context, _, __) => StartView(),
-                transitionDuration: Duration.zero,
-                reverseTransitionDuration: Duration.zero));
-      },
-    );
+    if (Provider.of<Highscore>(context, listen: false).showPlayAgain) {
+      return NavigationButton(
+        text: Text(
+          "Back to menu",
+          style: Themes.textStyle.headline1,
+        ),
+        width: 250,
+        height: 50,
+        color: Themes.colors.blueDark,
+        onPressed: () {
+          Navigator.pushReplacement(
+              context,
+              PageRouteBuilder(
+                  pageBuilder: (context, _, __) => StartView(),
+                  transitionDuration: Duration.zero,
+                  reverseTransitionDuration: Duration.zero));
+        },
+      );
+    }
+    return Container();
   }
 
   Widget _highscoreListBuilder(context) {

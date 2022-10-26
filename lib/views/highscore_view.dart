@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:template/components/backbutton.dart';
 import 'package:template/data/highscore.dart';
 import 'package:template/theme/theme.dart';
-import 'package:template/views/settings_view.dart';
 import 'package:template/views/start_view.dart';
 import 'package:template/views/loading_screen.dart';
 
@@ -16,27 +15,22 @@ class HighscoreView extends StatelessWidget {
   HighscoreView({super.key});
   @override
   Widget build(BuildContext context) {
-    Provider.of<Highscore>(context, listen: true).fetchScores();
+    //Provider.of<Highscore>(context, listen: true).fetchScores(); // AUGUST!!
     return ScaffoldWithBackground(
       child: Padding(
-        padding: const EdgeInsets.all(35.0),
+        padding: const EdgeInsets.only(left: 30, right: 30, top: 50),
         child: Column(
           children: [
-            const SizedBox(
-              height: 20,
-            ),
             Row(
               children: [
                 SizedBox(width: 20, child: _backToMenu(context)),
-                Expanded(
-                  child: Text(
-                    'Highscore',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Themes.colors.white, fontSize: 35),
-                  ),
-                ),
-                SizedBox(width: 20)
+                const Spacer()
               ],
+            ),
+            Text(
+              'Highscore',
+              textAlign: TextAlign.center,
+              style: Themes.textStyle.headline1,
             ),
             const SizedBox(height: 15),
             DifficultyRow(),
@@ -235,12 +229,10 @@ class CustomListTile extends StatelessWidget {
               player["name"],
               style: style,
             ), // skall visa spelaren namn
-            //_categoryIconLeft(categoryIcon, categoryColor), // lägg till valda kategorier?
             Expanded(
               child: Align(
                 alignment: Alignment.centerRight,
-                child: Text(
-                    "${player["score"]} / ${player["numberOfQuestions"]}",
+                child: Text("${player["score"]}",
                     style: style), // skall visa highscore
               ),
             ),

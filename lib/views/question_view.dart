@@ -88,15 +88,12 @@ class CountDownTimer extends StatefulWidget {
 }
 
 class _CountDownTimerState extends State<CountDownTimer> {
-  final CountDownController _controller = CountDownController();
   @override
   Widget build(BuildContext context) {
     double _duration =
-        Provider.of<GameSession>(context, listen: true).getTimePerQuestion();
+        Provider.of<GameSession>(context, listen: false).getTimePerQuestion();
     if (_duration == 61) {
-      return Row(
-        children: [],
-      );
+      return Container();
     } else {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -104,7 +101,6 @@ class _CountDownTimerState extends State<CountDownTimer> {
           Text('Time left', style: Themes.textStyle.headline3),
           const SizedBox(height: 15),
           CircularCountDownTimer(
-            controller: _controller,
             duration: _duration.toInt(),
             initialDuration: 0,
 
@@ -114,8 +110,12 @@ class _CountDownTimerState extends State<CountDownTimer> {
             ringGradient: null,
             fillColor:
                 Colors.transparent, //Måste finnas med men används inte...
-            fillGradient: const SweepGradient(
-              colors: [Colors.red, Colors.yellow, Colors.green],
+            fillGradient: SweepGradient(
+              colors: [
+                Themes.colors.red,
+                Themes.colors.yellow,
+                Themes.colors.green
+              ],
               stops: [
                 0.1,
                 0.3,
@@ -126,11 +126,10 @@ class _CountDownTimerState extends State<CountDownTimer> {
               tileMode: TileMode.repeated,
             ),
             backgroundColor: Themes.colors.blueDark,
-            backgroundGradient: null,
             strokeWidth: 20.0,
-            textStyle: const TextStyle(
+            textStyle: TextStyle(
                 fontSize: 33.0,
-                color: Color(0xffEAEAEA),
+                color: Themes.colors.white,
                 fontWeight: FontWeight.bold,
                 inherit: false),
             isReverse: true,

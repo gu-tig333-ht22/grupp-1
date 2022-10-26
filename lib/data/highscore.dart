@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:deta/deta.dart';
 import 'package:http_client_deta_api/http_client_deta_api.dart';
 import 'package:http/http.dart' as http;
-import 'package:template/auth/secrets.dart';
+import 'package:template/auth/top_secret.dart';
 
 /// Koppling till Databas för Highscore. Tre listor med Highscores.
 /// highscoreEasy, highscoreMedium, highscoreHard.
@@ -11,6 +11,7 @@ import 'package:template/auth/secrets.dart';
 class Highscore extends ChangeNotifier {
   late var deta;
   late var detabase;
+  final String dbName = "highscores"; // under testning "highscore-1"
 
   late List _scoresEasy;
   late List _scoresMedium;
@@ -24,7 +25,7 @@ class Highscore extends ChangeNotifier {
     deta = Deta(
         projectKey: databaseKey,
         client: HttpClientDetaApi(http: http.Client()));
-    detabase = deta.base("highscores-1");
+    detabase = deta.base(dbName);
   }
 
   // Getters för de olika score

@@ -13,6 +13,9 @@ class AboutView extends StatelessWidget {
       child: Consumer<About>(
         builder: (context, aboutData, child) => Column(
           children: [
+            SizedBox(
+              height: 20,
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 30, left: 30, right: 30),
               child: Row(

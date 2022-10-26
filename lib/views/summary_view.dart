@@ -23,7 +23,7 @@ class SummaryView extends StatelessWidget {
       builder: (context, gameSession, child) => Stack(
         children: [
           Padding(
-            padding: EdgeInsets.all(35),
+            padding: EdgeInsets.only(left: 35, right: 35, bottom: 35, top: 50),
             child: Column(
               children: [
                 Text("Summary", style: Themes.textStyle.headline1),
@@ -292,7 +292,7 @@ class NewGameButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return NavigationButton(
       text: Text(
-        "New game",
+        "Play again",
         style: Themes.textStyle.headline2,
       ),
       width: 135,

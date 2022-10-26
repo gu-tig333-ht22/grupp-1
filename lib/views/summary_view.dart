@@ -275,10 +275,15 @@ class ShowBluredAndCard extends StatelessWidget {
             ),
           ),
           Center(
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.65,
+              width: MediaQuery.of(context).size.width * 0.85,
               child: QuestionCard(
-            question: question,
-            answerable: false,
-          ))
+                question: question,
+                answerable: false,
+              ),
+            ),
+          )
         ],
       );
     } else {

@@ -55,7 +55,7 @@ class AboutView extends StatelessWidget {
                         style: Themes.textStyle.headline3,
                       ),
                       onPressed: () => aboutData.aboutCardCredits(),
-                      width: 70,
+                      width: 100,
                       height: 45,
                       color: Themes.colors.blueDark),
                 ),
@@ -68,14 +68,15 @@ class AboutView extends StatelessWidget {
                         style: Themes.textStyle.headline3,
                       ),
                       onPressed: () => aboutData.aboutCardWill(),
-                      width: 70,
+                      width: 100,
                       height: 45,
                       color: Themes.colors.blueDark),
                 )
               ],
             ),
             DisplayCard(
-                category: aboutData.category,
+                iconData: aboutData.iconData,
+                color: aboutData.color,
                 headline: Text(
                     textAlign: TextAlign.center,
                     style:

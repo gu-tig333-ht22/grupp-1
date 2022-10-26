@@ -7,7 +7,7 @@ import '../views/settings_view.dart';
 class BackToFirstViewButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
+    return IconButton(
       onPressed: () {
         Navigator.of(context).pushAndRemoveUntil(
             PageRouteBuilder(
@@ -16,11 +16,9 @@ class BackToFirstViewButton extends StatelessWidget {
                 reverseTransitionDuration: Duration.zero),
             ((route) => false));
       },
-      color: Colors.transparent,
-      textColor: Themes.colors.white,
+      color: Themes.colors.white,
       padding: EdgeInsets.all(0),
-      minWidth: 0,
-      child: Icon(
+      icon: Icon(
         Themes.icons.backarrow,
         size: 24,
       ),

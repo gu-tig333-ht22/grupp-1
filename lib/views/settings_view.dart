@@ -21,7 +21,7 @@ class SettingsView extends StatelessWidget {
             child: Consumer<GameSession>(
               builder: (BuildContext context, gameSession, child) => Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Row(

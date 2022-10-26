@@ -19,7 +19,7 @@ class AnswerView extends StatelessWidget {
       builder: (context, gameSession, child) => Center(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(

@@ -13,7 +13,7 @@ class AboutView extends StatelessWidget {
       child: Consumer<About>(
         builder: (context, aboutData, child) => Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Padding(

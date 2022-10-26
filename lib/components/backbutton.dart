@@ -5,6 +5,8 @@ import 'package:template/views/start_view.dart';
 import '../views/settings_view.dart';
 
 class BackToFirstViewButton extends StatelessWidget {
+  const BackToFirstViewButton({super.key});
+
   @override
   Widget build(BuildContext context) {
     return IconButton(
@@ -17,7 +19,6 @@ class BackToFirstViewButton extends StatelessWidget {
             ((route) => false));
       },
       color: Themes.colors.white,
-      padding: EdgeInsets.all(0),
       icon: Icon(
         Themes.icons.backarrow,
         size: 24,

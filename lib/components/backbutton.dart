@@ -5,9 +5,11 @@ import 'package:template/views/start_view.dart';
 import '../views/settings_view.dart';
 
 class BackToFirstViewButton extends StatelessWidget {
+  const BackToFirstViewButton({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
+    return IconButton(
       onPressed: () {
         Navigator.of(context).pushAndRemoveUntil(
             PageRouteBuilder(
@@ -16,11 +18,8 @@ class BackToFirstViewButton extends StatelessWidget {
                 reverseTransitionDuration: Duration.zero),
             ((route) => false));
       },
-      color: Colors.transparent,
-      textColor: Themes.colors.white,
-      padding: EdgeInsets.all(0),
-      minWidth: 0,
-      child: Icon(
+      color: Themes.colors.white,
+      icon: Icon(
         Themes.icons.backarrow,
         size: 24,
       ),

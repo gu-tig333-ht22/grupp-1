@@ -21,7 +21,7 @@ class QuestionView extends StatelessWidget {
         builder: (context, gameSession, child) => Column(
           children: [
             const SizedBox(
-              height: 30,
+              height: 50,
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,

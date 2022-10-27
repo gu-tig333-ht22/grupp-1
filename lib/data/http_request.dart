@@ -6,7 +6,6 @@ import 'question.dart';
 
 class HttpConection {
   late Settings settings;
-  late List listaMedQuestion = [];
   final String url = 'https://the-trivia-api.com/api/questions';
   // Huge thanks to Will Fry who created this open API!
   Map<String, String> listCategories = {

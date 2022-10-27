@@ -9,9 +9,9 @@
 /// * Player.correctAnswer(newAnswer) updates the score and streak.
 ///   Also add answer to playerAnswer.
 /// * Player.incorrectAnswer(newAnswer). Also add answer to playerAnswer.
-/// * Player.boolAnswerList returns a list of bools.
+/// * Player.checkedAnswerList returns a list of corrected answers.
 class Player {
-  late String name;
+  String name = '';
   int _score = 0;
   int _streakCounter = 0; // if we deside to implement streakCounter
   int _longestStreak = 0; // or change score per question we also
@@ -19,9 +19,7 @@ class Player {
 
   final List<String> _playerAnswers =
       []; // if string = "No answer" => player out of time
-  List<dynamic> _boolAnswers = [];
-
-  Player({this.name = ""});
+  List<dynamic> _checkedAnswers = [];
 
   int get longestStreak => _longestStreak;
 
@@ -29,7 +27,7 @@ class Player {
   int get score => _score;
 
   /// Returns player answers as bool list
-  List<dynamic> get boolAnswerList => _boolAnswers;
+  List<dynamic> get checkedAnswerList => _checkedAnswers;
 
   /// Returns number of correctAnswer as int.
   int get correctAnswers => _correctAnswers;
@@ -58,7 +56,7 @@ class Player {
       _score += 1;
     }
     _correctAnswers += 1;
-    _boolAnswers.add(true);
+    _checkedAnswers.add(true);
   }
 
   /// Call if player answers incorectly, we update the longest streak if
@@ -72,9 +70,9 @@ class Player {
     _streakCounter = 0;
     _playerAnswers.add(newAnswer);
     if (newAnswer == 'No answer') {
-      _boolAnswers.add(newAnswer);
+      _checkedAnswers.add(newAnswer);
     } else {
-      _boolAnswers.add(false);
+      _checkedAnswers.add(false);
     }
   }
 }

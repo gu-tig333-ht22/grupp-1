@@ -16,7 +16,7 @@ class About extends ChangeNotifier {
   void aboutCardCredits() {
     headline = 'We who have made this app are:';
     body =
-        'August Aublet\nLudwig Boström\nAndreas Fredriksson\nJosef Gunnarsson\nGustaf Hasselgren\nMårten Jonsson';
+        'August Aublet\nLudwig Boström\nAndreas Fredrikson\nJosef Gunnarsson\nGustaf Hasselgren\nMårten Jonsson';
     iconData = Themes.icons.info;
     color = Themes.colors.blueDark;
     notifyListeners();

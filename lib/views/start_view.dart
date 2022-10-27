@@ -19,16 +19,22 @@ class StartView extends StatelessWidget {
       child: Center(
         child: Column(
           children: [
-            const SizedBox(
-              height: 20,
-            ),
             Row(
               children: [
                 const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.only(top: 50, right: 30),
-                  child: InformationButton(),
-                )
+                IconButton(
+                  icon: Icon(Icons.info_outline_rounded,
+                      color: Themes.colors.white),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                            pageBuilder: (context, _, __) => AboutView(),
+                            transitionDuration: Duration.zero,
+                            reverseTransitionDuration: Duration.zero));
+                  },
+                ),
+
               ],
             ),
             Themes.textStyle.headlineGradient(text: 'Quizter', fontSize: 44),

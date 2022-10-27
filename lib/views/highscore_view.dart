@@ -17,30 +17,30 @@ class HighscoreView extends StatelessWidget {
   Widget build(BuildContext context) {
     Provider.of<Highscore>(context, listen: true).fetchScores();
     return ScaffoldWithBackground(
-      child: Padding(
-        padding: const EdgeInsets.only(left: 30, right: 30, top: 50),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                SizedBox(width: 20, child: _backToMenu(context)),
-                const Spacer()
-              ],
-            ),
-            Text(
-              'Highscore',
-              textAlign: TextAlign.center,
-              style: Themes.textStyle.headline1,
-            ),
-            const SizedBox(height: 15),
-            DifficultyRow(),
-            const SizedBox(height: 15),
-            _highscoreListBuilder(context),
-            _playAgainButton(context),
-            const SizedBox(height: 15),
-            _backToMenuButton(context),
-          ],
-        ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              SizedBox(width: 20, child: _backToMenu(context)),
+              Expanded(
+                child: Text(
+                  'Highscore',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Themes.colors.white, fontSize: 35),
+                ),
+              ),
+              SizedBox(width: 20)
+            ],
+          ),
+          const SizedBox(height: 15),
+          DifficultyRow(),
+          const SizedBox(height: 15),
+          _highscoreListBuilder(context),
+          _playAgainButton(context),
+          const SizedBox(height: 15),
+          _backToMenuButton(context),
+        ],
+
       ),
     );
   }

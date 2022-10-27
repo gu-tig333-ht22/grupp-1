@@ -13,22 +13,19 @@ class AboutView extends StatelessWidget {
       child: Consumer<About>(
         builder: (context, aboutData, child) => Column(
           children: [
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 50, left: 30, right: 30),
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 30,
-                    child: BackButton(),
-                  ),
-                  const SizedBox(
-                    width: 30,
-                  )
-                ],
-              ),
+            Row(
+              children: [
+                SizedBox(
+                  width: 30,
+                  child: BackButton(),
+                Expanded(
+                    child: Center(
+                        child:
+                            Text(style: Themes.textStyle.headline1, 'About'))),
+                const SizedBox(
+                  width: 30,
+                )
+              ],
             ),
             Expanded(
                 child: Center(

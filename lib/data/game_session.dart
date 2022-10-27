@@ -17,6 +17,7 @@ class GameSession extends ChangeNotifier {
   bool blured = false;
   int indexSummaryView = 0;
 
+  late bool httpFetchComplete;
   late List<Question> gameQuestions;
   late Question currentQuestion;
   late Question nextQuestion;
@@ -37,14 +38,22 @@ class GameSession extends ChangeNotifier {
   }
 
   Future startGame() async {
-    player = Player();
-    questionCounter = 0;
     gameQuestions = await httpConection.getQuestions(settings: settings);
-    currentQuestion =
-        gameQuestions[questionCounter]; // Om hämtning misslyckas, crash!
-    ballsDataList =
-        gameQuestions.map((question) => question.index + 1).toList();
-    setNextQuestion();
+
+
+    if (gameQuestions.isEmpty) {
+      httpFetchComplete = false;
+    } else {
+      httpFetchComplete = true;
+      player = Player();
+      questionCounter = 0;
+      currentQuestion = gameQuestions[questionCounter];
+      ballsDataList =
+          gameQuestions.map((question) => question.index + 1).toList();
+      setNextQuestion();
+    }
+
+
   }
 
   void calculatePlayerScore({required String answer}) {

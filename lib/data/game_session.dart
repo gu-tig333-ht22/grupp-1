@@ -115,7 +115,7 @@ class GameSession extends ChangeNotifier {
   }
 
   void addAnswerToBalls() {
-    ballsDataList[questionCounter] = player.boolAnswerList[questionCounter];
+    ballsDataList[questionCounter] = player.checkedAnswerList[questionCounter];
   }
 
   void setIndexSummaryView({required int index}) {

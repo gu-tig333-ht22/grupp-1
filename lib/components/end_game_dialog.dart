@@ -8,6 +8,7 @@ import '../views/start_view.dart';
 class EndGameDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
+        backgroundColor: Themes.colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         contentPadding: const EdgeInsets.all(15),
         actionsPadding: const EdgeInsets.all(15),

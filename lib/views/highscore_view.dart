@@ -15,7 +15,7 @@ class HighscoreView extends StatelessWidget {
   HighscoreView({super.key});
   @override
   Widget build(BuildContext context) {
-    //Provider.of<Highscore>(context, listen: true).fetchScores(); // AUGUST!!
+    Provider.of<Highscore>(context, listen: true).fetchScores();
     return ScaffoldWithBackground(
       child: Padding(
         padding: const EdgeInsets.only(left: 30, right: 30, top: 50),

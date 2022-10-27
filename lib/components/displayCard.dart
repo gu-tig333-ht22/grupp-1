@@ -38,12 +38,14 @@ class DisplayCard extends StatelessWidget {
               ),
             ],
           ),
-          Column(children: [
-            headline,
-            const Spacer(),
-            body,
-            const Spacer(),
-          ])
+          Center(
+            child: Column(children: [
+              headline,
+              const Spacer(),
+              body,
+              const Spacer(),
+            ]),
+          )
         ],
       ),
     );

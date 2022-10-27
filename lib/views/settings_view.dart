@@ -408,8 +408,9 @@ class InfoAboutCategories extends StatelessWidget {
 
   _categoryinfoBuilder(context) {
     List<ThemeCategory> ListlistCategories = Themes.categories.listCategories;
-    return Container(
+    return SizedBox(
       height: 350,
+      width: 100,
       child: ListView.builder(
           padding: const EdgeInsets.all(8),
           itemCount: ListlistCategories.length,

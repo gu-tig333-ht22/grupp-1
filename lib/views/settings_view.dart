@@ -79,7 +79,7 @@ class SettingsView extends StatelessWidget {
             ),
             HighscoreRulesRow(),
             Spacer(),
-            NavigationButton(
+            CustomButton(
               text: Text(
                 "Start",
                 style: Themes.textStyle.headline1,
@@ -140,7 +140,7 @@ class CategoryRow extends StatelessWidget {
               style: TextStyle(color: Themes.colors.white, fontSize: 15),
             ),
             IconButton(
-              padding: EdgeInsets.all(0),
+              padding: const EdgeInsets.all(0),
               icon: Icon(Icons.info_outline_rounded,
                   size: 30, color: Themes.colors.white),
               onPressed: () {

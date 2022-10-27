@@ -144,9 +144,23 @@ class CategoryRow extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Categories',
-          style: TextStyle(color: Themes.colors.white, fontSize: 15),
+        Row(
+          children: [
+            Text(
+              'Categories',
+              style: TextStyle(color: Themes.colors.white, fontSize: 15),
+            ),
+            IconButton(
+              padding: EdgeInsets.all(0),
+              icon: Icon(Icons.info_outline_rounded,
+                  size: 30, color: Themes.colors.white),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: ((BuildContext context) => InfoAboutCategories()));
+              },
+            ),
+          ],
         ),
         GridView.count(
           shrinkWrap: true,
@@ -369,6 +383,61 @@ class GameRulesDialog extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+}
+
+class InfoAboutCategories extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: Themes.colors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      contentPadding: const EdgeInsets.all(15),
+      actionsPadding: const EdgeInsets.all(15),
+      title: Text('Category info:'),
+      content: _categoryinfoBuilder(context),
+      actions: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            NavigationButton(
+                text: Text('Return', style: Themes.textStyle.headline3),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                width: 100,
+                height: 30,
+                color: Themes.colors.blueDark),
+          ],
+        ),
+      ],
+    );
+  }
+
+  _categoryinfoBuilder(context) {
+    List<ThemeCategory> ListlistCategories = Themes.categories.listCategories;
+    return Container(
+      height: 350,
+      child: ListView.builder(
+          padding: const EdgeInsets.all(8),
+          itemCount: ListlistCategories.length,
+          itemBuilder: (BuildContext context, index) {
+            return _categoryRow(ListlistCategories[index]);
+          }),
+    );
+  }
+
+  _categoryRow(ThemeCategory themeCategory) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Row(
+        children: [
+          Icon(themeCategory.icon, color: themeCategory.color),
+          SizedBox(width: 10),
+          Text(themeCategory.name)
+        ],
+      ),
     );
   }
 }

@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:template/theme/theme.dart';
-import 'package:template/views/settings_view.dart';
 
-/// # NavigationButton
-/// En knapp för
-class NavigationButton extends StatelessWidget {
+class CustomButton extends StatelessWidget {
   late Widget text;
   late VoidCallback onPressed;
   late double width;
   late double height;
   late Color color;
 
-  NavigationButton({
+  CustomButton({
+    super.key,
     required this.text,
     required this.onPressed,
     required this.width,
@@ -19,7 +17,6 @@ class NavigationButton extends StatelessWidget {
     required this.color,
   });
 
-  // ignore: empty_constructor_bodies
   @override
   Widget build(BuildContext context) {
     return Center(

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_octicons/flutter_octicons.dart';
 import 'package:provider/provider.dart';
-import 'package:template/components/endgamebutton.dart';
-import 'package:template/components/nav_button.dart';
+import 'package:template/components/custom_button.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/views/loading_screen.dart';
-import 'package:template/views/question_view.dart';
 import '../data/game_session.dart';
 import 'package:template/components/backbutton.dart';
 import 'package:template/components/slider.dart';
@@ -26,7 +24,7 @@ class SettingsView extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      SizedBox(width: 20, child: BackToFirstViewButton()),
+                      const SizedBox(width: 20, child: BackToFirstViewButton()),
                       Expanded(
                         child: Text(
                           'Singleplayer',
@@ -35,7 +33,7 @@ class SettingsView extends StatelessWidget {
                               color: Themes.colors.white, fontSize: 35),
                         ),
                       ),
-                      SizedBox(width: 20)
+                      const SizedBox(width: 20)
                     ],
                   ),
                   const SizedBox(
@@ -88,8 +86,8 @@ class SettingsView extends StatelessWidget {
                     height: 20,
                   ),
                   HighscoreRulesRow(),
-                  Spacer(),
-                  NavigationButton(
+                  const Spacer(),
+                  CustomButton(
                     text: Text(
                       "Start",
                       style: Themes.textStyle.headline1,
@@ -168,7 +166,7 @@ class CategoryRow extends StatelessWidget {
 /// # Categorybutton
 /// Builds a button for categories. Updates the categories selected in settings
 class CategoryButton extends StatelessWidget {
-  var category;
+  ThemeCategory category;
   CategoryButton(this.category, {super.key});
 
   // ignore: empty_constructor_bodies
@@ -197,7 +195,7 @@ class CategoryButton extends StatelessWidget {
               child: Center(
                   child: Icon(
                 category.icon,
-                color: iconColor, // vad skall det vara för färg?
+                color: iconColor,
               )),
             ),
           ),
@@ -227,7 +225,7 @@ class DifficultyRow extends StatelessWidget {
           'Difficulty',
           style: TextStyle(color: Themes.colors.white, fontSize: 15),
         ),
-        SizedBox(height: 5),
+        const SizedBox(height: 5),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -237,14 +235,14 @@ class DifficultyRow extends StatelessWidget {
               difficulty,
               Themes.colors.green,
             ),
-            SizedBox(width: 20),
+            const SizedBox(width: 20),
             _Difficultybutton(
               context,
               "Medium",
               difficulty,
               Themes.colors.yellow,
             ),
-            SizedBox(width: 20),
+            const SizedBox(width: 20),
             _Difficultybutton(
               context,
               "Hard",
@@ -265,7 +263,7 @@ class DifficultyRow extends StatelessWidget {
     }
     return Opacity(
       opacity: opacity,
-      child: NavigationButton(
+      child: CustomButton(
         text: Text(newDifficulty, style: Themes.textStyle.headline3),
         width: 80,
         height: 40,
@@ -278,47 +276,6 @@ class DifficultyRow extends StatelessWidget {
 }
 
 class HighscoreRulesRow extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<GameSession>(
-        builder: (context, gameSession, child) => Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Opacity(
-                    opacity: opacityCheck(context),
-                    child: Container(
-                      height: 45,
-                      width: 190,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          gradient: Themes.functions
-                              .applyGradient(Themes.colors.blueDark)),
-                      child: TextButton(
-                        onPressed: () {
-                          Provider.of<GameSession>(context, listen: false)
-                              .resetSettings();
-                        },
-                        child: Text(
-                          "Use highscore settings",
-                          style: Themes.textStyle.headline3,
-                        ),
-                      ),
-                    )),
-                const SizedBox(width: 30),
-                IconButton(
-                  padding: EdgeInsets.all(0),
-                  icon: Icon(Icons.info_outline_rounded,
-                      size: 30, color: Themes.colors.white),
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: ((BuildContext context) => GameRulesDialog()));
-                  },
-                ),
-              ],
-            ));
-  }
-
   double opacityCheck(context) {
     if (Provider.of<GameSession>(context, listen: false)
             .settings
@@ -329,6 +286,48 @@ class HighscoreRulesRow extends StatelessWidget {
       return 0.4;
     }
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<GameSession>(
+      builder: (context, gameSession, child) => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Opacity(
+              opacity: opacityCheck(context),
+              child: Container(
+                height: 45,
+                width: 190,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    gradient:
+                        Themes.functions.applyGradient(Themes.colors.blueDark)),
+                child: TextButton(
+                  onPressed: () {
+                    Provider.of<GameSession>(context, listen: false)
+                        .resetSettings();
+                  },
+                  child: Text(
+                    "Use highscore settings",
+                    style: Themes.textStyle.headline3,
+                  ),
+                ),
+              )),
+          const SizedBox(width: 30),
+          IconButton(
+            padding: const EdgeInsets.all(0),
+            icon: Icon(Icons.info_outline_rounded,
+                size: 30, color: Themes.colors.white),
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: ((BuildContext context) => GameRulesDialog()));
+            },
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 //ALERTDIALOG MED INFO FÖR ATT KUNNA FÅ RESULTAT PÅ HIGHSCORE-LISTAN
@@ -338,27 +337,28 @@ class GameRulesDialog extends StatelessWidget {
     Settings newSettings = Settings();
     int questions = newSettings.numberOfQuestions;
     int time = newSettings.timePerQuestion;
-    final HighscoreRules =
+    final highscoreRules =
         '''To be able to get your result on the highscore list you must use default settings.
   
-  Default settings are:
-  All categories
-  $questions questions
-  $time sec time limit
+Default settings are:
+All categories
+$questions questions
+$time sec time limit
 
-  You can change the difficulty.
+You can change the difficulty.
    ''';
     return AlertDialog(
+      backgroundColor: Themes.colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       contentPadding: const EdgeInsets.all(15),
       actionsPadding: const EdgeInsets.all(15),
-      title: Text('Highscore info'),
-      content: Text(HighscoreRules),
+      title: const Text('Highscore info'),
+      content: Text(highscoreRules),
       actions: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            NavigationButton(
+            CustomButton(
                 text: Text('Return', style: Themes.textStyle.headline3),
                 onPressed: () {
                   Navigator.of(context).pop();

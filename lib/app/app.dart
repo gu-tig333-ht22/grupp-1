@@ -13,7 +13,7 @@ class App extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => GameSession()),
         ChangeNotifierProvider(create: (context) => Highscore()),
-        ChangeNotifierProvider(create: ((context) => About())),
+        ChangeNotifierProvider(create: (context) => About()),
       ],
       child: MaterialApp(
         home: StartView(),

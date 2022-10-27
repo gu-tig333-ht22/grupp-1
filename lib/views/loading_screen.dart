@@ -7,7 +7,7 @@ import 'package:template/views/start_view.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
-import '../components/nav_button.dart';
+import '../components/custom_button.dart';
 
 class LoadingView extends StatelessWidget {
   final CountdownController _controller = CountdownController(autoStart: false);
@@ -88,7 +88,7 @@ class NoApiDataDialog extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            NavigationButton(
+            CustomButton(
                 text: Text('Return', style: Themes.textStyle.headline3),
                 onPressed: () {
                   Navigator.pushReplacement(

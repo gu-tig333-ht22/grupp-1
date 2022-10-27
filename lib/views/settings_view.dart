@@ -395,13 +395,13 @@ class InfoAboutCategories extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       contentPadding: const EdgeInsets.all(15),
       actionsPadding: const EdgeInsets.all(15),
-      title: Text('Category info:'),
+      title: const Text('Category info:'),
       content: _categoryinfoBuilder(context),
       actions: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            NavigationButton(
+            CustomButton(
                 text: Text('Return', style: Themes.textStyle.headline3),
                 onPressed: () {
                   Navigator.of(context).pop();

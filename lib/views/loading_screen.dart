@@ -26,7 +26,6 @@ class LoadingView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            //const SizedBox(height: 20),
             Themes.textStyle.headlineGradient(text: 'Quizter', fontSize: 44),
             Themes.textStyle.headlineGradient(text: 'Pettersson', fontSize: 44),
             const SizedBox(height: 200),

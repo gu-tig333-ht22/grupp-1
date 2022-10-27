@@ -16,102 +16,93 @@ class SettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldWithBackground(
       child: (Center(
-        child: Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: Consumer<GameSession>(
-              builder: (BuildContext context, gameSession, child) => Column(
-                children: [
-                  const SizedBox(
-                    height: 20,
+          child: Consumer<GameSession>(
+        builder: (BuildContext context, gameSession, child) => Column(
+          children: [
+            Row(
+              children: [
+                SizedBox(width: 20, child: BackToFirstViewButton()),
+                Expanded(
+                  child: Text(
+                    'Singleplayer',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Themes.colors.white, fontSize: 35),
                   ),
-                  Row(
-                    children: [
-                      SizedBox(width: 20, child: BackToFirstViewButton()),
-                      Expanded(
-                        child: Text(
-                          'Singleplayer',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Themes.colors.white, fontSize: 35),
-                        ),
-                      ),
-                      SizedBox(width: 20)
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  CategoryRow(),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Text(
-                      'Number of questions',
-                      style:
-                          TextStyle(color: Themes.colors.white, fontSize: 15),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  SliderModel(
-                      onchanged: gameSession.updateNumberOfQuestion,
-                      getValue: gameSession.getNumberOfQuestion,
-                      displayInCircle: getNumberOfQuestionSlider(gameSession),
-                      max: 50),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Text(
-                      'Time per question',
-                      style:
-                          TextStyle(color: Themes.colors.white, fontSize: 15),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  SliderModel(
-                      onchanged: gameSession.updateTimePerQuestion,
-                      getValue: gameSession.getTimePerQuestion,
-                      displayInCircle: getTimePerQuestionSlider(gameSession),
-                      max: 61),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  DifficultyRow(),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  HighscoreRulesRow(),
-                  Spacer(),
-                  NavigationButton(
-                    text: Text(
-                      "Start",
-                      style: Themes.textStyle.headline1,
-                    ),
-                    onPressed: () {
-                      gameSession.settings.checkSettings();
-                      Navigator.push(
-                          context,
-                          PageRouteBuilder(
-                              pageBuilder: (context, _, __) => LoadingView(),
-                              transitionDuration: Duration.zero,
-                              reverseTransitionDuration: Duration.zero));
-                    },
-                    width: 250,
-                    height: 50,
-                    color: Themes.colors.blueDark,
-                  ),
-                  const Spacer(),
-                ],
+                ),
+                SizedBox(width: 20)
+              ],
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            CategoryRow(),
+            const SizedBox(
+              height: 20,
+            ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Text(
+                'Number of questions',
+                style: TextStyle(color: Themes.colors.white, fontSize: 15),
               ),
-            )),
-      )),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            SliderModel(
+                onchanged: gameSession.updateNumberOfQuestion,
+                getValue: gameSession.getNumberOfQuestion,
+                displayInCircle: getNumberOfQuestionSlider(gameSession),
+                max: 50),
+            const SizedBox(
+              height: 20,
+            ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Text(
+                'Time per question',
+                style: TextStyle(color: Themes.colors.white, fontSize: 15),
+              ),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            SliderModel(
+                onchanged: gameSession.updateTimePerQuestion,
+                getValue: gameSession.getTimePerQuestion,
+                displayInCircle: getTimePerQuestionSlider(gameSession),
+                max: 61),
+            const SizedBox(
+              height: 20,
+            ),
+            DifficultyRow(),
+            const SizedBox(
+              height: 20,
+            ),
+            HighscoreRulesRow(),
+            Spacer(),
+            NavigationButton(
+              text: Text(
+                "Start",
+                style: Themes.textStyle.headline1,
+              ),
+              onPressed: () {
+                gameSession.settings.checkSettings();
+                Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                        pageBuilder: (context, _, __) => LoadingView(),
+                        transitionDuration: Duration.zero,
+                        reverseTransitionDuration: Duration.zero));
+              },
+              width: 250,
+              height: 50,
+              color: Themes.colors.blueDark,
+            ),
+            const Spacer(),
+          ],
+        ),
+      ))),
     );
   }
 

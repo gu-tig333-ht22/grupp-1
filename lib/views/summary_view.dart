@@ -22,43 +22,40 @@ class SummaryView extends StatelessWidget {
         child: Consumer<GameSession>(
       builder: (context, gameSession, child) => Stack(
         children: [
-          Padding(
-            padding: EdgeInsets.only(left: 35, right: 35, bottom: 35, top: 50),
-            child: Column(
-              children: [
-                Text("Summary", style: Themes.textStyle.headline1),
-                const SizedBox(height: 15),
-                ScoreTable(),
-                const SizedBox(height: 30),
-                Text(
-                  '${gameSession.chosenDifficulty.capitalize()} difficulty',
-                  style: Themes.textStyle.headline2,
-                ),
-                SummaryTable(),
-                const SizedBox(height: 15),
-                Column(
-                  children: [
-                    const SizedBox(height: 10),
-                    gameSession.settings.standardSettings
-                        ? AddNameButton()
-                        : const SizedBox(
-                            height: 10,
-                          ),
-                    Container(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        NewGameButton(),
-                        Container(
-                          width: 10,
+          Column(
+            children: [
+              Text("Summary", style: Themes.textStyle.headline1),
+              const SizedBox(height: 15),
+              ScoreTable(),
+              const SizedBox(height: 30),
+              Text(
+                '${gameSession.chosenDifficulty.capitalize()} difficulty',
+                style: Themes.textStyle.headline2,
+              ),
+              SummaryTable(),
+              const SizedBox(height: 15),
+              Column(
+                children: [
+                  const SizedBox(height: 10),
+                  gameSession.settings.standardSettings
+                      ? AddNameButton()
+                      : const SizedBox(
+                          height: 10,
                         ),
-                        ToMenuButton(),
-                      ],
-                    )
-                  ],
-                )
-              ],
-            ),
+                  Container(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      NewGameButton(),
+                      Container(
+                        width: 10,
+                      ),
+                      ToMenuButton(),
+                    ],
+                  )
+                ],
+              )
+            ],
           ),
           ShowBluredAndCard()
         ],

@@ -12,6 +12,9 @@ import 'package:template/views/settings_view.dart';
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 import 'package:template/data/string_extension.dart';
 import 'package:template/views/loading_screen.dart';
+import 'package:template/views/start_view.dart';
+import '../data/game_session.dart';
+
 import '../data/question.dart';
 
 class SummaryView extends StatelessWidget {
@@ -329,7 +332,7 @@ class ToMenuButton extends StatelessWidget {
       onPressed: () {
         Navigator.of(context).pushAndRemoveUntil(
             PageRouteBuilder(
-                pageBuilder: (context, _, __) => SettingsView(),
+                pageBuilder: (context, _, __) => StartView(),
                 transitionDuration: Duration.zero,
                 reverseTransitionDuration: Duration.zero),
             ((route) => false));

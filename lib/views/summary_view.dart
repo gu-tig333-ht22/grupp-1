@@ -6,13 +6,12 @@ import 'package:template/data/game_session.dart';
 import 'package:template/data/highscore.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/components/card.dart';
-import 'package:template/components/nav_button.dart';
+import 'package:template/components/custom_button.dart';
 import 'package:template/views/highscore_view.dart';
 import 'package:template/views/settings_view.dart';
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 import 'package:template/data/string_extension.dart';
 import 'package:template/views/loading_screen.dart';
-import '../data/game_session.dart';
 import '../data/question.dart';
 
 class SummaryView extends StatelessWidget {
@@ -23,7 +22,8 @@ class SummaryView extends StatelessWidget {
       builder: (context, gameSession, child) => Stack(
         children: [
           Padding(
-            padding: EdgeInsets.only(left: 35, right: 35, bottom: 35, top: 50),
+            padding:
+                const EdgeInsets.only(left: 35, right: 35, bottom: 35, top: 50),
             child: Column(
               children: [
                 Text("Summary", style: Themes.textStyle.headline1),
@@ -49,7 +49,7 @@ class SummaryView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         NewGameButton(),
-                        Container(
+                        const SizedBox(
                           width: 10,
                         ),
                         ToMenuButton(),
@@ -295,7 +295,7 @@ class ShowBluredAndCard extends StatelessWidget {
 class NewGameButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return NavigationButton(
+    return CustomButton(
       text: Text(
         "Play again",
         style: Themes.textStyle.headline2,
@@ -304,7 +304,7 @@ class NewGameButton extends StatelessWidget {
       height: 50,
       color: Themes.colors.blueDark,
       onPressed: () {
-        Navigator.push(
+        Navigator.pushReplacement(
             context,
             PageRouteBuilder(
                 pageBuilder: (context, _, __) => LoadingView(),
@@ -318,7 +318,7 @@ class NewGameButton extends StatelessWidget {
 class ToMenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return NavigationButton(
+    return CustomButton(
       text: Text(
         "Menu",
         style: Themes.textStyle.headline2,
@@ -340,7 +340,7 @@ class ToMenuButton extends StatelessWidget {
 
 class AddNameButton extends StatelessWidget {
   Widget build(BuildContext context) {
-    return NavigationButton(
+    return CustomButton(
         text: Text(
           'Add to highscore',
           style: Themes.textStyle.headline1,
@@ -361,10 +361,11 @@ class AddNameDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: Themes.colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       contentPadding: const EdgeInsets.all(15),
       actionsPadding: const EdgeInsets.all(15),
-      title: Text('Add your player name.'),
+      title: Text('Add your name:'),
       content: TextField(
         controller: nameController,
         maxLength: 25,
@@ -372,17 +373,16 @@ class AddNameDialog extends StatelessWidget {
       actions: [
         Row(
           children: [
-            Consumer<GameSession>(
-                builder: (BuildContext context, gameSession, child) {
-              return NavigationButton(
+            Consumer2<GameSession, Highscore>(
+                builder: (BuildContext context, gameSession, highscore, child) {
+              return CustomButton(
                   text: Text('Add name', style: Themes.textStyle.headline3),
                   onPressed: () {
                     gameSession.player
                         .setPlayerName(nameController.text); // Set player name
-                    Provider.of<Highscore>(context, listen: false)
-                        .setShowPlayAgain(
-                            true); // För att visa "spela-igen"-knapp
-                    Provider.of<Highscore>(context, listen: false).addNewScore(
+                    highscore.setShowPlayAgain(
+                        true); // För att visa "spela-igen"-knapp
+                    highscore.addNewScore(
                         // Add data to highscore database
                         name: gameSession.player.name,
                         score: gameSession.player.score,
@@ -393,10 +393,10 @@ class AddNameDialog extends StatelessWidget {
                         timePerQuestion: gameSession.settings.timePerQuestion,
                         categories: gameSession.settings.categories);
 
-                    Provider.of<Highscore>(context, listen: false)
-                        .setDifficultyToView(Provider.of<GameSession>(context,
-                                listen: false)
-                            .chosenDifficulty); // Visa vilken svårighet som ska visas direkt i highscore
+                    highscore.setDifficultyToView(Provider.of<GameSession>(
+                            context,
+                            listen: false)
+                        .chosenDifficulty); // Visa vilken svårighet som ska visas direkt i highscore
 
                     Navigator.of(context).pushAndRemoveUntil(
                         PageRouteBuilder(
@@ -410,7 +410,7 @@ class AddNameDialog extends StatelessWidget {
                   color: Themes.colors.blueDark);
             }),
             const Spacer(),
-            NavigationButton(
+            CustomButton(
                 text: Text('Cancel', style: Themes.textStyle.headline3),
                 onPressed: () {
                   Navigator.of(context).pop();

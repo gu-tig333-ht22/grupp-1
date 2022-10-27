@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:template/data/question.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/views/answer_view.dart';
-import 'package:template/test/test_file.dart';
 
 import '../data/game_session.dart';
 
@@ -11,7 +10,7 @@ class QuestionCard extends StatelessWidget {
   Question question;
   bool answerable; // Avgör om det är ett klickbart kort eller inte.
 
-  QuestionCard({required this.question, required this.answerable});
+  QuestionCard({super.key, required this.question, required this.answerable});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,7 @@ class QuestionCard extends StatelessWidget {
       decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Themes.colors.grey.withOpacity(0.5),
+              color: Themes.colors.greyDark.withOpacity(0.5),
               spreadRadius: 3,
               blurRadius: 3,
             )
@@ -61,7 +60,7 @@ class QuestionCard extends StatelessWidget {
                       style: Themes.textStyle.questionText,
                       '${question.question}',
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Column(
                       children: [
                         OptionsRow('A', options[0], categoryColor, question,
@@ -86,18 +85,18 @@ class QuestionCard extends StatelessWidget {
 }
 
 class OptionsRow extends StatelessWidget {
-  String option = 'Option is missing.';
+  String optionText = 'Option is missing.';
   String leadingLetter;
   Color categoryColor;
   Color borderColor = Themes.colors.grey;
-  Color tileColor = Themes.colors.white;
+  Color tileColor = Colors.transparent;
   Color circleColor = Themes.colors.white;
   Question question;
   bool answerable;
   var icon = null;
 
-  OptionsRow(this.leadingLetter, this.option, this.categoryColor, this.question,
-      this.answerable);
+  OptionsRow(this.leadingLetter, this.optionText, this.categoryColor,
+      this.question, this.answerable);
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +107,7 @@ class OptionsRow extends StatelessWidget {
           .playerAnswers[question.index];
       String correctAnswer = question.correctAnswer;
       // 1 Om spelarens svar är samma som radens värde
-      if (playerAnswer == option) {
+      if (playerAnswer == optionText) {
         // 1.1 Om spelarens svar också är det rätta svaret så skall raden bli grön och en grön ikon ritas ut
         if (playerAnswer == correctAnswer) {
           borderColor = Themes.colors.green;
@@ -126,7 +125,7 @@ class OptionsRow extends StatelessWidget {
           );
         }
         // 2 Om raden inte är spelarens svar men det är det rätta svaret så skall raden ritas ut som grön
-      } else if (option == correctAnswer) {
+      } else if (optionText == correctAnswer) {
         borderColor = Themes.colors.green;
         tileColor = Themes.colors.greenLight;
         circleColor = Themes.colors.greenLight;
@@ -166,7 +165,7 @@ class OptionsRow extends StatelessWidget {
             Expanded(
               child: Text(
                 style: Themes.textStyle.answerText,
-                option,
+                optionText,
               ),
             ),
           ]),
@@ -183,7 +182,7 @@ class OptionsRow extends StatelessWidget {
           onTap: (answerable == true)
               ? (() {
                   Provider.of<GameSession>(context, listen: false)
-                      .calculatePlayerScore(answer: option);
+                      .calculatePlayerScore(answer: optionText);
                   Provider.of<GameSession>(context, listen: false)
                       .addAnswerToBalls();
                   Navigator.of(context).pushAndRemoveUntil(

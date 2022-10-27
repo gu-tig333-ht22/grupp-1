@@ -6,7 +6,7 @@ import 'package:template/data/game_session.dart';
 import 'package:template/data/highscore.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/components/card.dart';
-import 'package:template/components/nav_button.dart';
+import 'package:template/components/custom_button.dart';
 import 'package:template/views/highscore_view.dart';
 import 'package:template/views/settings_view.dart';
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
@@ -295,7 +295,7 @@ class ShowBluredAndCard extends StatelessWidget {
 class NewGameButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return NavigationButton(
+    return CustomButton(
       text: Text(
         "Play again",
         style: Themes.textStyle.headline2,
@@ -318,7 +318,7 @@ class NewGameButton extends StatelessWidget {
 class ToMenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return NavigationButton(
+    return CustomButton(
       text: Text(
         "Menu",
         style: Themes.textStyle.headline2,
@@ -340,7 +340,7 @@ class ToMenuButton extends StatelessWidget {
 
 class AddNameButton extends StatelessWidget {
   Widget build(BuildContext context) {
-    return NavigationButton(
+    return CustomButton(
         text: Text(
           'Add to highscore',
           style: Themes.textStyle.headline1,
@@ -375,7 +375,7 @@ class AddNameDialog extends StatelessWidget {
           children: [
             Consumer2<GameSession, Highscore>(
                 builder: (BuildContext context, gameSession, highscore, child) {
-              return NavigationButton(
+              return CustomButton(
                   text: Text('Add name', style: Themes.textStyle.headline3),
                   onPressed: () {
                     gameSession.player
@@ -410,7 +410,7 @@ class AddNameDialog extends StatelessWidget {
                   color: Themes.colors.blueDark);
             }),
             const Spacer(),
-            NavigationButton(
+            CustomButton(
                 text: Text('Cancel', style: Themes.textStyle.headline3),
                 onPressed: () {
                   Navigator.of(context).pop();

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:template/components/nav_button.dart';
+import 'package:template/components/custom_button.dart';
 import 'package:template/data/highscore.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/views/about_view.dart';
@@ -53,7 +53,7 @@ class StartView extends StatelessWidget {
 class HighscoreButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return NavigationButton(
+    return CustomButton(
       text: Text(
         "Highscore",
         style: Themes.textStyle.headline1,
@@ -77,7 +77,7 @@ class HighscoreButton extends StatelessWidget {
 class MultiPlayerButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return NavigationButton(
+    return CustomButton(
       text: Text(
         "Multiplayer",
         style: Themes.textStyle.headline1,
@@ -93,7 +93,7 @@ class MultiPlayerButton extends StatelessWidget {
 class SinglePlayerButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return NavigationButton(
+    return CustomButton(
       text: Text(
         "Singleplayer",
         style: Themes.textStyle.headline1,

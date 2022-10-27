@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_octicons/flutter_octicons.dart';
 import 'package:provider/provider.dart';
-import 'package:template/components/nav_button.dart';
+import 'package:template/components/custom_button.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/views/loading_screen.dart';
 import '../data/game_session.dart';
@@ -87,7 +87,7 @@ class SettingsView extends StatelessWidget {
                   ),
                   HighscoreRulesRow(),
                   const Spacer(),
-                  NavigationButton(
+                  CustomButton(
                     text: Text(
                       "Start",
                       style: Themes.textStyle.headline1,
@@ -263,7 +263,7 @@ class DifficultyRow extends StatelessWidget {
     }
     return Opacity(
       opacity: opacity,
-      child: NavigationButton(
+      child: CustomButton(
         text: Text(newDifficulty, style: Themes.textStyle.headline3),
         width: 80,
         height: 40,
@@ -358,7 +358,7 @@ You can change the difficulty.
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            NavigationButton(
+            CustomButton(
                 text: Text('Return', style: Themes.textStyle.headline3),
                 onPressed: () {
                   Navigator.of(context).pop();

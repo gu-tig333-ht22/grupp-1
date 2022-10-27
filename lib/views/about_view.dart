@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:template/components/displayCard.dart';
-import 'package:template/components/nav_button.dart';
+import 'package:template/components/custom_button.dart';
 import 'package:template/data/about.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/views/start_view.dart';
@@ -78,7 +78,7 @@ class InfoCard extends StatelessWidget {
 class ThanksButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return NavigationButton(
+    return CustomButton(
         text: Text(
           'Thanks to',
           textAlign: TextAlign.center,
@@ -95,7 +95,7 @@ class ThanksButton extends StatelessWidget {
 class AboutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return NavigationButton(
+    return CustomButton(
         text: Text(
           'About us',
           textAlign: TextAlign.center,

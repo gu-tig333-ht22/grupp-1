@@ -9,10 +9,11 @@ class DisplayCard extends StatelessWidget {
   late Color color;
 
   DisplayCard(
-      {required IconData this.iconData,
-      required Color this.color,
-      required Text this.body,
-      required Text this.headline}) {}
+      {super.key,
+      required this.iconData,
+      required this.color,
+      required this.body,
+      required this.headline});
 
   @override
   Widget build(BuildContext context) {

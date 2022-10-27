@@ -18,18 +18,17 @@ class AboutView extends StatelessWidget {
                 SizedBox(
                   width: 30,
                   child: BackButton(),
+                ),
                 Expanded(
-                    child: Center(
-                        child:
-                            Text(style: Themes.textStyle.headline1, 'About'))),
+                  child: Center(
+                    child: Text('About', style: Themes.textStyle.headline1),
+                  ),
+                ),
                 const SizedBox(
                   width: 30,
-                )
+                ),
               ],
             ),
-            Expanded(
-                child: Center(
-                    child: Text(style: Themes.textStyle.headline1, 'About'))),
             const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

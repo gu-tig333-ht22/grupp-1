@@ -4,18 +4,12 @@
 
 //
 import 'package:flutter/material.dart';
-import 'package:flutter_octicons/flutter_octicons.dart';
-import 'package:template/components/displayCard.dart';
 import 'package:template/data/http_request.dart';
 import 'package:template/data/player.dart';
 import 'package:template/data/question.dart';
 import 'package:template/data/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:template/theme/theme.dart';
-import 'package:provider/provider.dart';
-
-import '../views/answer_view.dart';
-import '../views/summary_view.dart';
 
 class GameSession extends ChangeNotifier {
   Settings settings = Settings();
@@ -34,12 +28,20 @@ class GameSession extends ChangeNotifier {
   List get chosenCategories => settings.categories;
   String get chosenDifficulty => settings.difficulty;
   List<Question> get getGameQuestions => gameQuestions;
+  double getNumberOfQuestion() {
+    return settings.numberOfQuestions.toDouble();
+  }
+
+  double getTimePerQuestion() {
+    return settings.timePerQuestion.toDouble();
+  }
 
   Future startGame() async {
     player = Player();
     questionCounter = 0;
     gameQuestions = await httpConection.getQuestions(settings: settings);
-    currentQuestion = gameQuestions[questionCounter];
+    currentQuestion =
+        gameQuestions[questionCounter]; // Om hämtning misslyckas, crash!
     ballsDataList =
         gameQuestions.map((question) => question.index + 1).toList();
     setNextQuestion();
@@ -60,9 +62,9 @@ class GameSession extends ChangeNotifier {
   }
 
   void resetSettings() {
-    Settings newSettings = Settings();
-    settings.setNumberOfQuestions(newSettings.numberOfQuestions);
-    settings.setTimePerQuestion(newSettings.timePerQuestion);
+    Settings standardSettings = Settings();
+    settings.setNumberOfQuestions(standardSettings.numberOfQuestions);
+    settings.setTimePerQuestion(standardSettings.timePerQuestion);
     settings.resetCategories();
     settings.checkSettings();
     notifyListeners();
@@ -88,20 +90,12 @@ class GameSession extends ChangeNotifier {
 
   void updateNumberOfQuestion(double numberOfQuestions) {
     settings.setNumberOfQuestions(numberOfQuestions.round());
-    notifyListeners(); // skall det vara det
-  }
-
-  double getNumberOfQuestion() {
-    return settings.numberOfQuestions.toDouble();
+    notifyListeners();
   }
 
   void updateTimePerQuestion(double newTime) {
     settings.setTimePerQuestion(newTime.round());
-    notifyListeners(); // skall det vara det
-  }
-
-  double getTimePerQuestion() {
-    return settings.timePerQuestion.toDouble();
+    notifyListeners();
   }
 
   void updateDifficulty(String newDifficulty) {

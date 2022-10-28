@@ -29,7 +29,7 @@ class QuestionView extends StatelessWidget {
                   width: 60,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: [EndGameButton(), Container(width: 12)],
+                    children: [EndGameButton()],
                   ),
                 ),
               ],

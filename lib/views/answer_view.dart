@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:template/components/card.dart';
 import 'package:template/components/displayCard.dart';
 import 'package:template/components/gradient_circle.dart';
-import 'package:template/test/test_file.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/data/game_session.dart';
 import 'package:template/views/question_view.dart';
@@ -23,17 +22,20 @@ class AnswerView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(right: 12, top: 30),
+                  padding: const EdgeInsets.only(right: 12),
                   child: EndGameButton(),
                 ),
               ],
             ),
-            const SizedBox(height: 40),
             Text('Score: ${gameSession.player.score}',
                 style: Themes.textStyle.headline1),
-            const Spacer(),
+            SizedBox(
+              height: 15,
+            ),
             SideScrollBalls(),
-            const Spacer(),
+            SizedBox(
+              height: 15,
+            ),
             Text(
               "Question ${gameSession.questionCounter + 1}/${gameSession.gameQuestions.length}",
               style: Themes.textStyle.headline2,

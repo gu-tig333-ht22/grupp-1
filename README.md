@@ -13,3 +13,11 @@ För att highscore skall fungera behövs en nyckel till databasen.
 - Gör en kopia på samma plats. 
 - Döp om till lib/auth<top_secret.dart>. 
 - Använd demonyckel som databasKey för att testa spelet med Highscore.
+
+## Vi som gjort detta projekt är:
+ - August Aublet
+ - Gustaf Hasselgren
+ - Mårten Jonsson
+ - Ludvig Boström
+ - Andreas Fredrison
+ - Josef Gunnarsson

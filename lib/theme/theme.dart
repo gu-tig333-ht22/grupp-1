@@ -141,7 +141,7 @@ class ScaffoldWithBackground extends StatelessWidget {
       ),
       Padding(
           padding:
-              const EdgeInsets.only(top: 55, left: 35, right: 35, bottom: 35),
+              const EdgeInsets.only(top: 55, left: 35, right: 35, bottom: 30),
           child: child)
     ]));
   }
@@ -149,7 +149,7 @@ class ScaffoldWithBackground extends StatelessWidget {
 
 class ThemeTextStyles {
   final TextStyle headline1 =
-      TextStyle(fontSize: 30, color: Themes.colors.white);
+      TextStyle(fontSize: 28, color: Themes.colors.white);
   final TextStyle headline2 =
       TextStyle(fontSize: 20, color: Themes.colors.white);
   final TextStyle headline3 =

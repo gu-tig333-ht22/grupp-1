@@ -40,7 +40,6 @@ class HighscoreView extends StatelessWidget {
           const SizedBox(height: 15),
           _backToMenuButton(context),
         ],
-
       ),
     );
   }
@@ -59,7 +58,7 @@ class HighscoreView extends StatelessWidget {
         child: CustomButton(
           text: Text(
             "Play again",
-            style: Themes.textStyle.headline1,
+            style: Themes.textStyle.headline2,
           ),
           width: 250,
           height: 50,
@@ -84,7 +83,7 @@ class HighscoreView extends StatelessWidget {
       return CustomButton(
         text: Text(
           "Back to menu",
-          style: Themes.textStyle.headline1,
+          style: Themes.textStyle.headline2,
         ),
         width: 250,
         height: 50,

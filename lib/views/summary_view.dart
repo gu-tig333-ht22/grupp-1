@@ -291,7 +291,7 @@ class AddNameButton extends StatelessWidget {
     return CustomButton(
         text: Text(
           'Add to highscore',
-          style: Themes.textStyle.headline1,
+          style: Themes.textStyle.headline2,
         ),
         onPressed: () {
           showDialog(

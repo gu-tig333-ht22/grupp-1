@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_octicons/flutter_octicons.dart';
+
 import 'package:provider/provider.dart';
-import 'package:template/components/nav_button.dart';
+
 import 'package:template/theme/theme.dart';
-import 'package:template/views/question_view.dart';
+
 import '../data/game_session.dart';
 
 class SliderModel extends StatelessWidget {
-  late Function onchanged;
+  late Function onchanged; //
   late Widget displayInCircle;
   late Function getValue;
   late double max;
@@ -20,7 +20,7 @@ class SliderModel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double numberOfQuestions = getValue();
+    double newValue = getValue();
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
       Expanded(
         child: Stack(
@@ -40,14 +40,14 @@ class SliderModel extends StatelessWidget {
                             Themes.functions.applyGradient(Themes.colors.grey)),
                     child: Center(
                       child: SliderTheme(
-                        data: SliderThemeData(trackHeight: 6),
+                        data: const SliderThemeData(trackHeight: 6),
                         child: Slider(
                             activeColor: Themes.colors.blueLight,
                             inactiveColor: Themes.colors.blueDark,
-                            value: numberOfQuestions,
+                            value: newValue,
                             divisions: (max - 1).toInt(),
                             onChanged: (value) {
-                              numberOfQuestions = value;
+                              newValue = value;
                               onchanged(value);
                               Provider.of<GameSession>(context, listen: false)
                                   .settings

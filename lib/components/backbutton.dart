@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/views/start_view.dart';
 
-import '../views/settings_view.dart';
-
 class BackToFirstViewButton extends StatelessWidget {
   const BackToFirstViewButton({super.key});
 

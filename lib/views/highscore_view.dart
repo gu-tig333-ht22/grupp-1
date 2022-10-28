@@ -4,11 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:template/components/backbutton.dart';
 import 'package:template/data/highscore.dart';
 import 'package:template/theme/theme.dart';
-import 'package:template/views/settings_view.dart';
 import 'package:template/views/start_view.dart';
 import 'package:template/views/loading_screen.dart';
 
-import '../components/nav_button.dart';
+import '../components/custom_button.dart';
 
 class HighscoreView extends StatelessWidget {
   final _controller = ScrollController();
@@ -18,35 +17,30 @@ class HighscoreView extends StatelessWidget {
   Widget build(BuildContext context) {
     Provider.of<Highscore>(context, listen: true).fetchScores();
     return ScaffoldWithBackground(
-      child: Padding(
-        padding: const EdgeInsets.all(35.0),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                SizedBox(width: 20, child: _backToMenu(context)),
-                Expanded(
-                  child: Text(
-                    'Highscore',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Themes.colors.white, fontSize: 35),
-                  ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              SizedBox(width: 20, child: _backToMenu(context)),
+              Expanded(
+                child: Text(
+                  'Highscore',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Themes.colors.white, fontSize: 35),
                 ),
-                SizedBox(width: 20)
-              ],
-            ),
-            const SizedBox(height: 15),
-            DifficultyRow(),
-            const SizedBox(height: 15),
-            _highscoreListBuilder(context),
-            _playAgainButton(context),
-            const SizedBox(height: 15),
-            _backToMenuButton(context),
-          ],
-        ),
+              ),
+              SizedBox(width: 20)
+            ],
+          ),
+          const SizedBox(height: 15),
+          DifficultyRow(),
+          const SizedBox(height: 15),
+          _highscoreListBuilder(context),
+          _playAgainButton(context),
+          const SizedBox(height: 15),
+          _backToMenuButton(context),
+        ],
+
       ),
     );
   }
@@ -62,7 +56,7 @@ class HighscoreView extends StatelessWidget {
     if (Provider.of<Highscore>(context, listen: false).showPlayAgain) {
       return Padding(
         padding: const EdgeInsets.only(top: 15),
-        child: NavigationButton(
+        child: CustomButton(
           text: Text(
             "Play again",
             style: Themes.textStyle.headline1,
@@ -87,7 +81,7 @@ class HighscoreView extends StatelessWidget {
 
   Widget _backToMenuButton(context) {
     if (Provider.of<Highscore>(context, listen: false).showPlayAgain) {
-      return NavigationButton(
+      return CustomButton(
         text: Text(
           "Back to menu",
           style: Themes.textStyle.headline1,
@@ -174,7 +168,7 @@ class DifficultyRow extends StatelessWidget {
     }
     return Opacity(
       opacity: opacity,
-      child: NavigationButton(
+      child: CustomButton(
         text: Text(newDifficulty, style: Themes.textStyle.headline3),
         width: 80,
         height: 40,
@@ -235,12 +229,10 @@ class CustomListTile extends StatelessWidget {
               player["name"],
               style: style,
             ), // skall visa spelaren namn
-            //_categoryIconLeft(categoryIcon, categoryColor), // lägg till valda kategorier?
             Expanded(
               child: Align(
                 alignment: Alignment.centerRight,
-                child: Text(
-                    "${player["score"]} / ${player["numberOfQuestions"]}",
+                child: Text("${player["score"]}",
                     style: style), // skall visa highscore
               ),
             ),

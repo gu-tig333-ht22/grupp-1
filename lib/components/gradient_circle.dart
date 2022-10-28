@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:template/theme/theme.dart';
 
-/// # NavigationButton
+/// # CustomButton
 /// En knapp för
 class GradientCircle extends StatelessWidget {
-  var child;
-  late Color color;
-  late double size;
+  Widget child;
+  Color color;
+  double size;
   GradientCircle(
-      {this.child = null,
-      required Color this.color,
-      required double this.size});
+      {super.key,
+      required this.child,
+      required this.color,
+      required this.size});
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(child: child),
       width: size,
       height: size,
       decoration: BoxDecoration(
@@ -27,11 +27,12 @@ class GradientCircle extends StatelessWidget {
                 color,
                 Themes.functions.darkenColor(color, 60)
               ],
-              stops: [
+              stops: const [
                 0,
                 0.2,
                 0.9,
               ])),
+      child: Center(child: child),
     );
   }
 }

@@ -154,6 +154,8 @@ class ThemeTextStyles {
       TextStyle(fontSize: 20, color: Themes.colors.white);
   final TextStyle headline3 =
       TextStyle(fontSize: 15, color: Themes.colors.white);
+  final TextStyle headline4 =
+      TextStyle(fontSize: 12, color: Themes.colors.white);
   final TextStyle questionText =
       TextStyle(fontSize: 16, color: Themes.colors.textGrey);
   final TextStyle highscoreText =

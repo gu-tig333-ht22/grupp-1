@@ -299,26 +299,18 @@ class HighscoreRulesRow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Opacity(
-              opacity: opacityCheck(context),
-              child: Container(
-                height: 45,
-                width: 190,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    gradient:
-                        Themes.functions.applyGradient(Themes.colors.blueDark)),
-                child: TextButton(
-                  onPressed: () {
-                    Provider.of<GameSession>(context, listen: false)
-                        .resetSettings();
-                  },
-                  child: Text(
+              opacity: gameSession.settings.standardSettings ? 0.4 : 1,
+              child: CustomButton(
+                  text: Text(
                     "Use highscore settings",
-                    style: Themes.textStyle.headline3,
+                    style: Themes.textStyle.headline4,
                   ),
-                ),
-              )),
-          const SizedBox(width: 30),
+                  onPressed: gameSession.resetSettings,
+                  width: 180,
+                  height: 40,
+                  color: Themes.colors.blueDark)),
+
+          //const SizedBox(width: 30),
           IconButton(
             padding: const EdgeInsets.all(0),
             icon: Icon(Icons.info_outline_rounded,

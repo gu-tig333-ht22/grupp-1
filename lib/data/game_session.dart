@@ -14,8 +14,6 @@ import 'package:template/theme/theme.dart';
 class GameSession extends ChangeNotifier {
   Settings settings = Settings();
   HttpConection httpConection = HttpConection();
-  bool blured = false;
-  int indexSummaryView = 0;
 
   late bool httpFetchComplete;
   late List<Question> gameQuestions;
@@ -40,7 +38,6 @@ class GameSession extends ChangeNotifier {
   Future startGame() async {
     gameQuestions = await httpConection.getQuestions(settings: settings);
 
-
     if (gameQuestions.isEmpty) {
       httpFetchComplete = false;
     } else {
@@ -52,8 +49,6 @@ class GameSession extends ChangeNotifier {
           gameQuestions.map((question) => question.index + 1).toList();
       setNextQuestion();
     }
-
-
   }
 
   void calculatePlayerScore({required String answer}) {
@@ -112,21 +107,8 @@ class GameSession extends ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleBluredSummaryView() {
-    blured = !blured;
-    notifyListeners();
-  }
-
   void addAnswerToBalls() {
     ballsDataList[questionCounter] = player.checkedAnswerList[questionCounter];
-  }
-
-  void setIndexSummaryView({required int index}) {
-    indexSummaryView = index;
-  }
-
-  int getIndexSummaryView() {
-    return indexSummaryView;
   }
 
   String getPlayerAnswerSummaryView({required int index}) {

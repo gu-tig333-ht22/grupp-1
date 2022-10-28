@@ -20,44 +20,39 @@ class SummaryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldWithBackground(
         child: Consumer<GameSession>(
-      builder: (context, gameSession, child) => Stack(
+      builder: (context, gameSession, child) => Column(
         children: [
+          Text("Summary", style: Themes.textStyle.headline1),
+          const SizedBox(height: 15),
+          ScoreTable(),
+          const SizedBox(height: 30),
+          Text(
+            '${gameSession.chosenDifficulty.capitalize()} difficulty',
+            style: Themes.textStyle.headline2,
+          ),
+          SummaryTable(),
+          const SizedBox(height: 15),
           Column(
             children: [
-              Text("Summary", style: Themes.textStyle.headline1),
-              const SizedBox(height: 15),
-              ScoreTable(),
-              const SizedBox(height: 30),
-              Text(
-                '${gameSession.chosenDifficulty.capitalize()} difficulty',
-                style: Themes.textStyle.headline2,
-              ),
-              SummaryTable(),
-              const SizedBox(height: 15),
-              Column(
+              const SizedBox(height: 10),
+              gameSession.settings.standardSettings
+                  ? AddNameButton()
+                  : const SizedBox(
+                      height: 10,
+                    ),
+              Container(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 10),
-                  gameSession.settings.standardSettings
-                      ? AddNameButton()
-                      : const SizedBox(
-                          height: 10,
-                        ),
-                  Container(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      NewGameButton(),
-                      Container(
-                        width: 10,
-                      ),
-                      ToMenuButton(),
-                    ],
-                  )
+                  NewGameButton(),
+                  Container(
+                    width: 10,
+                  ),
+                  ToMenuButton(),
                 ],
               )
             ],
-          ),
-          ShowBluredAndCard()
+          )
         ],
       ),
     ));
@@ -182,10 +177,9 @@ class CustomListTile extends StatelessWidget {
     }
     return InkWell(
       onTap: () {
-        Provider.of<GameSession>(context, listen: false)
-            .toggleBluredSummaryView();
-        Provider.of<GameSession>(context, listen: false)
-            .setIndexSummaryView(index: index);
+        showDialog(
+            context: context,
+            builder: ((BuildContext context) => ShowCard(index)));
       },
       child: Padding(
         padding: const EdgeInsets.only(top: 4),
@@ -243,49 +237,6 @@ class CustomListTile extends StatelessWidget {
           decoration: BoxDecoration(shape: BoxShape.circle, color: color),
           child: Icon(tileIcon, size: 12, color: Themes.colors.white)),
     );
-  }
-}
-
-class ShowBluredAndCard extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    bool showBLuredAndCard =
-        Provider.of<GameSession>(context, listen: false).blured;
-    if (showBLuredAndCard == true) {
-      int index = Provider.of<GameSession>(context, listen: false)
-          .getIndexSummaryView();
-      Question question =
-          Provider.of<GameSession>(context, listen: false).gameQuestions[index];
-
-      return Stack(
-        children: [
-          GestureDetector(
-            onTap: () {
-              Provider.of<GameSession>(context, listen: false)
-                  .toggleBluredSummaryView();
-            },
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-              child: Container(
-                color: Color.fromARGB(255, 0, 0, 0).withOpacity(0.1),
-              ),
-            ),
-          ),
-          Center(
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.65,
-              width: MediaQuery.of(context).size.width * 0.85,
-              child: QuestionCard(
-                question: question,
-                answerable: false,
-              ),
-            ),
-          )
-        ],
-      );
-    } else {
-      return Container(); // Returnerar en "osynlig/tom" container
-    }
   }
 }
 
@@ -418,6 +369,27 @@ class AddNameDialog extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+}
+
+class ShowCard extends StatelessWidget {
+  int index;
+  ShowCard(this.index);
+  @override
+  Widget build(BuildContext context) {
+    Question question =
+        Provider.of<GameSession>(context, listen: false).gameQuestions[index];
+    return AlertDialog(
+      contentPadding: EdgeInsets.zero,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
+      content: SizedBox(
+          height: MediaQuery.of(context).size.height * 0.65,
+          width: MediaQuery.of(context).size.width * 0.85,
+          child: QuestionCard(
+            question: question,
+            answerable: false,
+          )),
     );
   }
 }

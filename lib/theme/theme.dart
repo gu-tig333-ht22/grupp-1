@@ -162,8 +162,16 @@ class ThemeTextStyles {
       fontSize: 20, color: Themes.colors.textGrey, fontWeight: FontWeight.bold);
   final TextStyle answerText =
       TextStyle(fontSize: 14, color: Themes.colors.textGrey);
-  GradientText headlineGradient(
-      {required String text, required double fontSize}) {
+}
+
+class HeadlineText extends StatelessWidget {
+  late final String text;
+  late final double fontSize;
+
+  HeadlineText({required String text, required double fontSize});
+
+  @override
+  Widget build(BuildContext context) {
     return GradientText(
       text,
       style: TextStyle(fontSize: fontSize),

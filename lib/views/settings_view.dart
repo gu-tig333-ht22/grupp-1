@@ -15,7 +15,8 @@ class SettingsView extends StatelessWidget {
     return ScaffoldWithBackground(
       child: (Center(
           child: Consumer<GameSession>(
-        builder: (BuildContext context, gameSession, child) => Column(
+        builder: (BuildContext context, GameSession gameSession, child) =>
+            Column(
           children: [
             Row(
               children: [

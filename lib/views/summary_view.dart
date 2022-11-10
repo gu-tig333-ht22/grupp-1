@@ -328,8 +328,6 @@ class AddNameDialog extends StatelessWidget {
                   onPressed: () {
                     gameSession.player
                         .setPlayerName(nameController.text); // Set player name
-                    highscore.setShowPlayAgain(
-                        true); // För att visa "spela-igen"-knapp
                     highscore.addNewScore(
                         // Add data to highscore database
                         name: gameSession.player.name,
@@ -348,7 +346,8 @@ class AddNameDialog extends StatelessWidget {
 
                     Navigator.of(context).pushAndRemoveUntil(
                         PageRouteBuilder(
-                            pageBuilder: (context, _, __) => HighscoreView(),
+                            pageBuilder: (context, _, __) =>
+                                HighscoreView(showPlayAgain: true),
                             transitionDuration: Duration.zero,
                             reverseTransitionDuration: Duration.zero),
                         ((route) => false));

@@ -17,7 +17,6 @@ class Highscore extends ChangeNotifier {
   late List _scoresMedium;
   late List _scoresHard;
   String _difficultyToView = "medium";
-  late bool _showPlayAgain = false;
   String _lastKey = ""; // set to empty string
 
   // Öppnar kopplingen till databasen.
@@ -33,7 +32,6 @@ class Highscore extends ChangeNotifier {
   List get highscoreMedium => _scoresMedium;
   List get highscoreHart => _scoresHard;
   String get difficultyToView => _difficultyToView;
-  bool get showPlayAgain => _showPlayAgain;
   String get lastKey => _lastKey;
 
   /// Använd för att visa den listan för vald svårighetsgrad.
@@ -52,10 +50,6 @@ class Highscore extends ChangeNotifier {
   void setDifficultyToView(String newDifficultyToView) {
     _difficultyToView = newDifficultyToView;
     notifyListeners();
-  }
-
-  void setShowPlayAgain(bool newValue) {
-    _showPlayAgain = newValue;
   }
 
   /// Använd för att skapa ett nytt objekt i databasen.

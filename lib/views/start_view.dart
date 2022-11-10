@@ -11,36 +11,27 @@ import 'highscore_view.dart';
 // Startskärm med knappar för singleplayer och highscore. Multiplayer är ej implemnterad än
 
 class StartView extends StatelessWidget {
+  const StartView({super.key});
+
   @override
   Widget build(BuildContext context) {
-    //Fetching data for highscore at start.
-    Provider.of<Highscore>(context, listen: false).fetchScores();
     return ScaffoldWithBackground(
       child: Center(
         child: Column(
           children: [
-            Row(
-              children: [
-                const Spacer(),
-                IconButton(
-                  icon: Icon(Icons.info_outline_rounded,
-                      color: Themes.colors.white),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                            pageBuilder: (context, _, __) => AboutView(),
-                            transitionDuration: Duration.zero,
-                            reverseTransitionDuration: Duration.zero));
-                  },
-                ),
-
-              ],
-            ),
-            Themes.textStyle.headlineGradient(text: 'Quizter', fontSize: 44),
-            Themes.textStyle.headlineGradient(text: 'Pettersson', fontSize: 44),
+            _aboutIconRow(context),
+            HeadlineText(text: 'Quizter', fontSize: 44),
+            HeadlineText(text: 'Pettersson', fontSize: 44),
             const Spacer(),
-            SinglePlayerButton(),
+            _button(
+                context,
+                'Singleplayer',
+                (
+                  context,
+                  a,
+                  b,
+                ) =>
+                    SettingsView()),
             const SizedBox(height: 20),
             Opacity(
               opacity: 0.4,
@@ -52,6 +43,47 @@ class StartView extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _aboutIconRow(context) {
+    return Row(
+      children: [
+        const Spacer(),
+        IconButton(
+          icon: Icon(Icons.info_outline_rounded, color: Themes.colors.white),
+          onPressed: () {
+            Navigator.push(
+              context,
+              PageRouteBuilder(
+                  pageBuilder: (context, _, __) => AboutView(),
+                  transitionDuration: Duration.zero,
+                  reverseTransitionDuration: Duration.zero),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _button(BuildContext context, String text,
+      Widget Function(BuildContext, Animation, Animation) createView) {
+    return CustomButton(
+      text: Text(
+        text,
+        style: Themes.textStyle.headline1,
+      ),
+      width: 250,
+      height: 50,
+      color: Themes.colors.blueDark,
+      onPressed: () {
+        Navigator.push(
+            context,
+            PageRouteBuilder(
+                pageBuilder: createView,
+                transitionDuration: Duration.zero,
+                reverseTransitionDuration: Duration.zero));
+      },
     );
   }
 }
@@ -68,13 +100,14 @@ class HighscoreButton extends StatelessWidget {
       height: 50,
       color: Themes.colors.blueDark,
       onPressed: () {
-        Provider.of<Highscore>(context, listen: false).setShowPlayAgain(false);
         Navigator.push(
-            context,
-            PageRouteBuilder(
-                pageBuilder: (context, _, __) => HighscoreView(),
-                transitionDuration: Duration.zero,
-                reverseTransitionDuration: Duration.zero));
+          context,
+          PageRouteBuilder(
+              pageBuilder: (context, _, __) =>
+                  HighscoreView(showPlayAgain: false),
+              transitionDuration: Duration.zero,
+              reverseTransitionDuration: Duration.zero),
+        );
       },
     );
   }
@@ -92,29 +125,6 @@ class MultiPlayerButton extends StatelessWidget {
       height: 50,
       color: Themes.colors.blueDark,
       onPressed: () {},
-    );
-  }
-}
-
-class SinglePlayerButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return CustomButton(
-      text: Text(
-        "Singleplayer",
-        style: Themes.textStyle.headline1,
-      ),
-      width: 250,
-      height: 50,
-      color: Themes.colors.blueDark,
-      onPressed: () {
-        Navigator.push(
-            context,
-            PageRouteBuilder(
-                pageBuilder: (context, _, __) => SettingsView(),
-                transitionDuration: Duration.zero,
-                reverseTransitionDuration: Duration.zero));
-      },
     );
   }
 }

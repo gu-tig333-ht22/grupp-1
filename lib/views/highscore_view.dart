@@ -11,8 +11,10 @@ import '../components/custom_button.dart';
 
 class HighscoreView extends StatelessWidget {
   final _controller = ScrollController();
+  late bool showPlayAgain = false;
 
-  HighscoreView({super.key});
+  HighscoreView({super.key, required this.showPlayAgain});
+
   @override
   Widget build(BuildContext context) {
     Provider.of<Highscore>(context, listen: true).fetchScores();
@@ -45,14 +47,11 @@ class HighscoreView extends StatelessWidget {
   }
 
   Widget _backToMenu(context) {
-    if (!Provider.of<Highscore>(context, listen: false).showPlayAgain) {
-      return BackToFirstViewButton();
-    }
-    return Container();
+    return showPlayAgain ? BackToFirstViewButton() : Container();
   }
 
   Widget _playAgainButton(context) {
-    if (Provider.of<Highscore>(context, listen: false).showPlayAgain) {
+    if (showPlayAgain) {
       return Padding(
         padding: const EdgeInsets.only(top: 15),
         child: CustomButton(
@@ -73,13 +72,12 @@ class HighscoreView extends StatelessWidget {
           },
         ),
       );
-    } else {
-      return Container();
     }
+    return Container();
   }
 
   Widget _backToMenuButton(context) {
-    if (Provider.of<Highscore>(context, listen: false).showPlayAgain) {
+    if (showPlayAgain) {
       return CustomButton(
         text: Text(
           "Back to menu",

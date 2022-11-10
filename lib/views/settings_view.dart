@@ -3,7 +3,7 @@ import 'package:flutter_octicons/flutter_octicons.dart';
 import 'package:provider/provider.dart';
 import 'package:template/components/custom_button.dart';
 import 'package:template/theme/theme.dart';
-import 'package:template/views/loading_screen.dart';
+import 'package:template/views/loading_view.dart';
 import '../data/game_session.dart';
 import 'package:template/components/backbutton.dart';
 import 'package:template/components/slider.dart';

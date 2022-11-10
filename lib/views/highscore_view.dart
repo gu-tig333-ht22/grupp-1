@@ -5,7 +5,7 @@ import 'package:template/components/backbutton.dart';
 import 'package:template/data/highscore.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/views/start_view.dart';
-import 'package:template/views/loading_screen.dart';
+import 'package:template/views/loading_view.dart';
 
 import '../components/custom_button.dart';
 

@@ -77,6 +77,7 @@ class HighscoreView extends StatelessWidget {
     }
   }
 
+  // Uses HigscoreListTile to produce a nice looking highscore list.
   Widget _highscoreListBuilder(context) {
     List currentList =
         Provider.of<Highscore>(context, listen: true).getChosenHighscores();

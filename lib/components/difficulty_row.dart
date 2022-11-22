@@ -5,6 +5,9 @@ import 'package:template/data/game_session.dart';
 import 'package:template/data/highscore.dart';
 import 'package:template/theme/theme.dart';
 
+/// To make this work both for Settings view and HighscoreView the bool isSettingsView must be used.
+/// If used in settingsView set to True. If in HighscoreView set to False. It is to change de functionality
+/// of the buttons and will only work for settings and highscore as is.
 class DifficultyRow extends StatelessWidget {
   late bool isSettingsView = true;
 
@@ -55,11 +58,14 @@ class DifficultyRow extends StatelessWidget {
           height: 40,
           color: color,
           onPressed: () {
+            // If isSettingsView makes the function update the selected difficulty
             if (isSettingsView) {
               Provider.of<GameSession>(context, listen: false).updateDifficulty(
                 newDifficulty.toLowerCase(),
               );
-            } else {
+            }
+            // If not isSettingsView makes the function change the viewed difficulty in the highscoreview.
+            else {
               Provider.of<Highscore>(context, listen: false)
                   .setDifficultyToView(newDifficulty.toLowerCase());
               Provider.of<Highscore>(context, listen: false)

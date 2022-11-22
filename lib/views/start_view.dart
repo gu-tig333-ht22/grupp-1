@@ -3,7 +3,7 @@ import 'package:template/components/custom_button.dart';
 import 'package:template/data/highscore.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/views/about_view.dart';
-import 'package:template/views/settings_view.dart';
+import 'package:template/views/settings/settings_view.dart';
 import 'package:provider/provider.dart';
 
 import 'highscore_view.dart';
@@ -34,11 +34,9 @@ class StartView extends StatelessWidget {
                             reverseTransitionDuration: Duration.zero));
                   },
                 ),
-
               ],
             ),
             Themes.textStyle.headlineGradient(text: 'Quizter', fontSize: 44),
-            Themes.textStyle.headlineGradient(text: 'Pettersson', fontSize: 44),
             const Spacer(),
             SinglePlayerButton(),
             const SizedBox(height: 20),

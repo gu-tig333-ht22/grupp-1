@@ -1,4 +1,4 @@
-import 'package:template/views/settings_view.dart';
+import 'package:template/views/settings/settings_view.dart';
 import 'package:template/theme/theme.dart';
 
 /// # Settings

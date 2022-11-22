@@ -6,7 +6,7 @@ import 'package:template/views/about_view.dart';
 import 'package:template/views/settings/settings_view.dart';
 import 'package:provider/provider.dart';
 
-import 'highscore_view.dart';
+import 'highscore/highscore_view.dart';
 
 // Startskärm med knappar för singleplayer och highscore. Multiplayer är ej implemnterad än
 
@@ -70,7 +70,9 @@ class HighscoreButton extends StatelessWidget {
         Navigator.push(
             context,
             PageRouteBuilder(
-                pageBuilder: (context, _, __) => HighscoreView(),
+                pageBuilder: (context, _, __) => HighscoreView(
+                      showPlayAgain: false,
+                    ),
                 transitionDuration: Duration.zero,
                 reverseTransitionDuration: Duration.zero));
       },

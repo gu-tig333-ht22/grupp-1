@@ -6,7 +6,7 @@ import 'package:template/data/game_session.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/views/loading_view.dart';
 import 'package:template/views/settings/widgets/category_row.dart';
-import 'package:template/views/settings/widgets/difficulty_row.dart';
+import 'package:template/components/difficulty_row.dart';
 import 'package:template/views/settings/widgets/highscore_rules_row.dart';
 import 'package:template/components/backbutton.dart';
 import 'package:template/components/slider.dart';
@@ -67,7 +67,7 @@ class SettingsView extends StatelessWidget {
             const SizedBox(
               height: 5,
             ),
-            const DifficultyRow(),
+            DifficultyRow(isSettingsView: true),
             const SizedBox(
               height: 20,
             ),
@@ -118,7 +118,8 @@ class SettingsView extends StatelessWidget {
           onPressed: () {
             showDialog(
                 context: context,
-                builder: ((BuildContext context) => InfoAboutCategories()));
+                builder: ((BuildContext context) =>
+                    const InfoAboutCategories()));
           },
         ),
       ],

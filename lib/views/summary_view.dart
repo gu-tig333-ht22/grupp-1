@@ -7,7 +7,7 @@ import 'package:template/data/highscore.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/components/card.dart';
 import 'package:template/components/custom_button.dart';
-import 'package:template/views/highscore_view.dart';
+import 'package:template/views/highscore/highscore_view.dart';
 import 'package:fading_edge_scrollview/fading_edge_scrollview.dart';
 import 'package:template/data/string_extension.dart';
 import 'package:template/views/loading_view.dart';
@@ -348,7 +348,9 @@ class AddNameDialog extends StatelessWidget {
 
                     Navigator.of(context).pushAndRemoveUntil(
                         PageRouteBuilder(
-                            pageBuilder: (context, _, __) => HighscoreView(),
+                            pageBuilder: (context, _, __) => HighscoreView(
+                                  showPlayAgain: true,
+                                ),
                             transitionDuration: Duration.zero,
                             reverseTransitionDuration: Duration.zero),
                         ((route) => false));

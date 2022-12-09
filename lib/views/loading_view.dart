@@ -30,7 +30,6 @@ class LoadingView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Themes.textStyle.headlineGradient(text: 'Quizter', fontSize: 44),
-            Themes.textStyle.headlineGradient(text: 'Pettersson', fontSize: 44),
             const SizedBox(height: 200),
             Countdown(
               controller: _controller,
